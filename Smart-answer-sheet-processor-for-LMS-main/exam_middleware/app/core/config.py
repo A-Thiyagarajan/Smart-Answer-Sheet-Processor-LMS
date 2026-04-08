@@ -95,6 +95,36 @@ class Settings(BaseSettings):
         if normalized in {"0", "false", "no", "off", "release", "prod", "production"}:
             return False
         return value
+
+    @field_validator("database_url", "redis_url", mode="before")
+    @classmethod
+    def parse_optional_urls(cls, value):
+        """Treat blank URL environment values as unset."""
+        if value is None:
+            return None
+        if isinstance(value, str) and not value.strip():
+            return None
+        return value
+
+    @field_validator("redis_port", "redis_db", mode="before")
+    @classmethod
+    def parse_optional_ints_with_defaults(cls, value, info):
+        """Allow blank environment values and fall back to field defaults."""
+        if value is None:
+            return value
+        if isinstance(value, str) and not value.strip():
+            return cls.model_fields[info.field_name].default
+        return value
+
+    @field_validator("log_file", mode="before")
+    @classmethod
+    def parse_log_file(cls, value):
+        """Use the default log file when the environment value is blank."""
+        if value is None:
+            return str(BASE_DIR / "logs" / "app.log")
+        if isinstance(value, str) and not value.strip():
+            return str(BASE_DIR / "logs" / "app.log")
+        return value
     
     class Config:
         env_file = str(ENV_FILE)
@@ -132,12 +162,34 @@ class Settings(BaseSettings):
     def log_file_path(self) -> Path:
         """Absolute application log file path."""
         return self._resolve_path(self.log_file)
+
+    @staticmethod
+    def _normalize_async_database_url(database_url: str) -> str:
+        """Ensure externally provided Postgres URLs use the async SQLAlchemy driver."""
+        if database_url.startswith("postgresql+asyncpg://") or database_url.startswith("sqlite+aiosqlite:///"):
+            return database_url
+        if database_url.startswith("postgresql://"):
+            return database_url.replace("postgresql://", "postgresql+asyncpg://", 1)
+        if database_url.startswith("postgres://"):
+            return database_url.replace("postgres://", "postgresql+asyncpg://", 1)
+        return database_url
+
+    @staticmethod
+    def _normalize_sync_database_url(database_url: str) -> str:
+        """Convert async URLs back to sync driver URLs for migrations and tooling."""
+        if database_url.startswith("sqlite+aiosqlite:///"):
+            return database_url.replace("sqlite+aiosqlite:///", "sqlite:///")
+        if database_url.startswith("postgresql+asyncpg://"):
+            return database_url.replace("postgresql+asyncpg://", "postgresql://", 1)
+        if database_url.startswith("postgres://"):
+            return database_url.replace("postgres://", "postgresql://", 1)
+        return database_url
     
     @property
     def database_url_computed(self) -> str:
         """Compute database URL if not provided"""
         if self.database_url:
-            return self.database_url
+            return self._normalize_async_database_url(self.database_url)
         if self.database_mode.lower() == "postgres":
             return f"postgresql+asyncpg://{self.postgres_user}:{self.postgres_password}@{self.postgres_host}:{self.postgres_port}/{self.postgres_db}"
         sqlite_path = self.sqlite_db_path
@@ -150,11 +202,7 @@ class Settings(BaseSettings):
     def database_url_sync(self) -> str:
         """Synchronous database URL for migrations"""
         if self.database_url:
-            if self.database_url.startswith("sqlite+aiosqlite:///"):
-                return self.database_url.replace("sqlite+aiosqlite:///", "sqlite:///")
-            if self.database_url.startswith("postgresql+asyncpg://"):
-                return self.database_url.replace("postgresql+asyncpg://", "postgresql://", 1)
-            return self.database_url
+            return self._normalize_sync_database_url(self.database_url)
         if self.database_mode.lower() != "postgres":
             sqlite_path = self.sqlite_db_path
             if not os.path.isabs(sqlite_path):
