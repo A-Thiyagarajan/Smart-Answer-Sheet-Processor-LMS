@@ -228,6 +228,11 @@ async def upload_bulk_files(
             
         except Exception as e:
             logger.error(f"Failed to process file {file.filename}: {e}")
+            try:
+                if 'file_path' in locals() and file_path:
+                    await file_processor.delete_file(file_path)
+            except Exception:
+                logger.warning("Failed to clean up saved file after upload error: %s", file.filename)
             results.append(FileUploadResponse(
                 success=False,
                 filename=file.filename,

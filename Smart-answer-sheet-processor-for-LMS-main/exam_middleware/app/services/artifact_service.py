@@ -87,7 +87,8 @@ class ArtifactService:
         exam_session: Optional[str] = None,
         file_size_bytes: Optional[int] = None,
         mime_type: Optional[str] = None,
-        uploaded_by_staff_id: Optional[int] = None
+        uploaded_by_staff_id: Optional[int] = None,
+        allow_existing_hash: bool = False,
     ) -> ExaminationArtifact:
         """
         Create a new examination artifact
@@ -106,6 +107,17 @@ class ArtifactService:
         Returns:
             Created ExaminationArtifact
         """
+        # Reject exact duplicate files that are already active in the system.
+        existing_same_hash = None if allow_existing_hash else await self.get_active_by_file_hash(file_hash)
+        if existing_same_hash:
+            existing_subject_code, existing_exam_session = split_subject_session_key(existing_same_hash.parsed_subject_code)
+            raise Exception(
+                "This file has already been uploaded "
+                f"(register={existing_same_hash.parsed_reg_no or 'unknown'}, "
+                f"subject={existing_subject_code or 'unknown'}, "
+                f"session={existing_exam_session})."
+            )
+
         # Generate transaction ID for idempotency
         transaction_id = None
         normalized_exam_session = normalize_exam_session(exam_session)
@@ -255,6 +267,18 @@ class ArtifactService:
         
         logger.info(f"Created artifact: {artifact.artifact_uuid}")
         return artifact
+
+    async def get_active_by_file_hash(self, file_hash: str) -> Optional[ExaminationArtifact]:
+        """Return an active artifact with the same file hash, if any."""
+        result = await self.db.execute(
+            select(ExaminationArtifact).where(
+                and_(
+                    ExaminationArtifact.file_hash == file_hash,
+                    ExaminationArtifact.workflow_status != WorkflowStatus.DELETED,
+                )
+            )
+        )
+        return result.scalar_one_or_none()
     
     async def get_by_uuid(self, artifact_uuid: str) -> Optional[ExaminationArtifact]:
         """Get artifact by UUID"""
@@ -627,6 +651,23 @@ class ArtifactService:
             stats[status.value.lower()] = len(result.scalars().all())
         
         return stats
+
+    async def delete_artifact_permanently(self, artifact: ExaminationArtifact) -> None:
+        """Remove an artifact and its dependent rows from the database."""
+        queue_rows = await self.db.execute(
+            select(SubmissionQueue).where(SubmissionQueue.artifact_id == artifact.id)
+        )
+        for queue_item in queue_rows.scalars().all():
+            await self.db.delete(queue_item)
+
+        audit_rows = await self.db.execute(
+            select(AuditLog).where(AuditLog.artifact_id == artifact.id)
+        )
+        for audit_log in audit_rows.scalars().all():
+            await self.db.delete(audit_log)
+
+        await self.db.delete(artifact)
+        await self.db.flush()
 
 
 class SubjectMappingService:

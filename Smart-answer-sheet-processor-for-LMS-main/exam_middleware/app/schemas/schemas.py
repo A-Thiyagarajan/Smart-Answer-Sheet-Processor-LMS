@@ -151,6 +151,12 @@ class ArtifactResponse(BaseModel):
     exam_session: Optional[str] = None
     workflow_status: WorkflowStatusEnum
     moodle_assignment_id: Optional[int]
+    grading_status: Optional[str] = None
+    grade: Optional[float] = None
+    grade_max: Optional[float] = None
+    graded_on: Optional[datetime] = None
+    graded_by: Optional[str] = None
+    feedback_pdf: Optional[str] = None
     uploaded_at: datetime
     submit_timestamp: Optional[datetime]
     
@@ -185,6 +191,12 @@ class StudentPendingPaper(BaseModel):
     workflow_status: Optional[str]
     can_submit: bool
     message: Optional[str] = None
+    grading_status: Optional[str] = None
+    grade: Optional[float] = None
+    grade_max: Optional[float] = None
+    graded_on: Optional[datetime] = None
+    graded_by: Optional[str] = None
+    feedback_pdf: Optional[str] = None
 
 
 class StudentDashboardResponse(BaseModel):

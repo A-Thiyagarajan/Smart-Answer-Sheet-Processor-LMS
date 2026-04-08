@@ -11,6 +11,7 @@ from typing import Optional
 import logging
 import os
 from pathlib import Path
+from datetime import datetime
 
 from app.db.database import get_db
 from app.db.models import StudentSession
@@ -29,6 +30,7 @@ from app.services.artifact_service import (
     split_subject_session_key,
 )
 from app.services.submission_service import SubmissionService
+from app.services.mock_lms_service import mock_lms_service
 from app.core.config import settings
 from app.api.routes.auth import get_current_student_session, get_decrypted_token
 
@@ -236,8 +238,14 @@ async def get_dashboard(
     for a in submitted_artifacts:
         subject_code, exam_session = split_subject_session_key(a.parsed_subject_code)
         mapping = None
+        submission = None
         if a.parsed_subject_code:
             mapping = await mapping_service.get_mapping(a.parsed_subject_code)
+        if settings.mock_lms_enabled:
+            submission = mock_lms_service.get_submission_by_artifact(
+                artifact_uuid=str(a.artifact_uuid),
+                exam_session=exam_session,
+            )
 
         submitted_papers.append(
             ArtifactResponse(
@@ -251,6 +259,12 @@ async def get_dashboard(
                 exam_session=exam_session,
                 workflow_status=WorkflowStatusEnum(a.workflow_status.value),
                 moodle_assignment_id=a.moodle_assignment_id,
+                grading_status=submission.get("grading_status") if submission else None,
+                grade=submission.get("grade") if submission else None,
+                grade_max=submission.get("grade_max") if submission else None,
+                graded_on=datetime.fromisoformat(submission["graded_on"]) if submission and submission.get("graded_on") else None,
+                graded_by=submission.get("graded_by") if submission else None,
+                feedback_pdf=submission.get("feedback_pdf") if submission else None,
                 uploaded_at=a.uploaded_at,
                 submit_timestamp=a.submit_timestamp
             )
@@ -780,12 +794,22 @@ async def get_submission_history(
     history = []
     
     for a in pending + submitted:
+        subject_code, exam_session = split_subject_session_key(a.parsed_subject_code)
+        submission = None
+        if settings.mock_lms_enabled:
+            submission = mock_lms_service.get_submission_by_artifact(
+                artifact_uuid=str(a.artifact_uuid),
+                exam_session=exam_session,
+            )
         history.append({
             "artifact_uuid": str(a.artifact_uuid),
             "filename": a.original_filename,
-            "subject_code": split_subject_session_key(a.parsed_subject_code)[0],
-            "exam_session": split_subject_session_key(a.parsed_subject_code)[1],
+            "subject_code": subject_code,
+            "exam_session": exam_session,
             "status": a.workflow_status.value,
+            "grading_status": submission.get("grading_status") if submission else None,
+            "grade": submission.get("grade") if submission else None,
+            "grade_max": submission.get("grade_max") if submission else None,
             "uploaded_at": a.uploaded_at.isoformat() if a.uploaded_at else None,
             "submitted_at": a.submit_timestamp.isoformat() if a.submit_timestamp else None
         })

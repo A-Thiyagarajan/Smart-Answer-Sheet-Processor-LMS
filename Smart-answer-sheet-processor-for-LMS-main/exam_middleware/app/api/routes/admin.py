@@ -11,6 +11,7 @@ from typing import Optional
 from sqlalchemy.exc import IntegrityError
 from datetime import datetime, timezone
 import logging
+import os
 
 from app.db.database import get_db
 from app.db.models import StaffUser, SubjectMapping, ExaminationArtifact
@@ -27,6 +28,7 @@ from app.api.routes.auth import get_current_staff
 from app.core.config import settings
 from app.core.security import generate_transaction_id
 from app.db.models import AuditLog
+from app.services.mock_lms_service import mock_lms_service
 
 logger = logging.getLogger(__name__)
 
@@ -511,7 +513,8 @@ async def edit_artifact_metadata(
             exam_session=current_exam_session,
             file_size_bytes=artifact.file_size_bytes,
             mime_type=artifact.mime_type,
-            uploaded_by_staff_id=current_staff.id
+            uploaded_by_staff_id=current_staff.id,
+            allow_existing_hash=True,
         )
 
         # Mark the old artifact as deleted/superseded
@@ -569,63 +572,45 @@ async def delete_artifact(
     current_staff: StaffUser = Depends(get_current_staff)
 ):
     """
-    Delete an artifact: remove physical file (if present) and mark artifact as failed/removed.
-    This keeps an audit trail while removing it from student/staff listings.
+    Permanently delete an artifact from storage, database, and mock LMS state.
     """
-    import os
-    from app.db.models import WorkflowStatus
-
     artifact_service = ArtifactService(db)
-    audit_service = AuditService(db)
 
     artifact = await artifact_service.get_by_uuid(artifact_uuid)
     if not artifact:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Artifact not found")
 
-    # Attempt to delete physical file
     try:
+        # Attempt to remove the file from local storage.
         if artifact.file_blob_path:
-            path = artifact.file_blob_path.replace('\\', '/')
+            path = artifact.file_blob_path.replace("\\", "/")
             if os.path.exists(path):
-                try:
-                    os.remove(path)
-                except Exception:
-                    # Log but continue to allow DB update
-                    pass
-    except Exception:
-        pass
+                os.remove(path)
 
-    # Ensure the DB enum contains the DELETED value (Postgres enum types must be altered)
-    # Try to set the workflow status to DELETED. If the DB enum doesn't support it
-    # (e.g. the enum type wasn't migrated), fall back to annotating the artifact
-    # error_message and leaving the status unchanged so we don't run DDL here.
-    try:
-        artifact.workflow_status = WorkflowStatus.DELETED
-        artifact.error_message = f"Deleted by staff {current_staff.username}" + (f": {reason}" if reason else "")
-        artifact.add_log_entry("admin_delete", {"deleted_by": current_staff.username, "reason": reason})
-        await db.flush()
-    except Exception as e:
-        logger.debug("Could not assign WorkflowStatus.DELETED (possibly DB enum missing): %s", e)
-        artifact.error_message = (artifact.error_message or "") + f"; Deleted by staff {current_staff.username}" + (f": {reason}" if reason else "")
-        artifact.add_log_entry("admin_delete", {"deleted_by": current_staff.username, "reason": reason, "note": "enum assignment failed"})
-        # Do not attempt DDL here; leave status as-is and continue
+        # Remove the associated submission from the mock LMS when running in demo mode.
+        if settings.mock_lms_enabled:
+            _, exam_session = split_subject_session_key(artifact.parsed_subject_code)
+            submission = mock_lms_service.get_submission_by_artifact(
+                artifact_uuid=str(artifact.artifact_uuid),
+                exam_session=exam_session,
+            )
+            if submission:
+                course_code = submission.get("course_code")
+                submission_id = submission.get("submission_id")
+                if course_code and submission_id:
+                    mock_lms_service.delete_submission(course_code=course_code, submission_id=submission_id)
 
-    await db.commit()
+        await artifact_service.delete_artifact_permanently(artifact)
+        await db.commit()
+    except Exception as exc:
+        await db.rollback()
+        logger.exception("Failed to permanently delete artifact %s", artifact_uuid)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=f"Could not permanently delete artifact: {exc}",
+        )
 
-    # Log audit entry
-    await audit_service.log_action(
-        action="admin_delete",
-        action_category="admin",
-        actor_type="staff",
-        actor_id=str(current_staff.id),
-        actor_username=current_staff.username,
-        artifact_id=artifact.id,
-        description=f"Artifact deleted by staff: {current_staff.username}",
-        request_data={"reason": reason}
-    )
-    await db.commit()
-
-    return {"message": "Artifact removed"}
+    return {"message": "Artifact permanently removed"}
 
 
 @router.post("/artifacts/{artifact_uuid}/reports/{report_id}/resolve")
