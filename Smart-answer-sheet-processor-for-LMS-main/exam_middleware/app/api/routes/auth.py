@@ -321,15 +321,8 @@ async def student_login(
         db.add(session)
         await db.commit()
         
-        # Step 4: Get pending papers count
-        artifact_service = ArtifactService(db)
-        pending_papers = await artifact_service.get_pending_for_student(
-            register_number=credentials.register_number,
-            moodle_user_id=moodle_user_id,
-            moodle_username=moodle_username
-        )
-        
-        logger.info(f"Student {moodle_username} (reg: {credentials.register_number}) logged in. Pending papers: {len(pending_papers)}")
+        # Keep login fast; the dashboard request will load the actual paper list immediately after auth.
+        logger.info(f"Student {moodle_username} (reg: {credentials.register_number}) logged in successfully")
         
         return StudentLoginResponse(
             success=True,
@@ -338,7 +331,7 @@ async def student_login(
             moodle_username=moodle_username,
             full_name=moodle_fullname,
             expires_at=expires_at,
-            pending_submissions=len(pending_papers)
+            pending_submissions=0
         )
         
     except HTTPException:

@@ -1125,8 +1125,10 @@
                 try {
                     showLoading();
                     showDashboard(name || regNo);
-                    await loadPapers();
-                    await loadReportNotifications();
+                    await Promise.allSettled([
+                        loadPapers({ silent: true }),
+                        loadReportNotifications()
+                    ]);
                     startReportPolling();
                     hideLoading();
                 } catch (error) {
@@ -1186,8 +1188,10 @@
                     localStorage.setItem('studentName', data.full_name || username);
 
                     showDashboard(data.full_name || username);
-                    await loadPapers();
-                    await loadReportNotifications();
+                    await Promise.allSettled([
+                        loadPapers({ silent: true }),
+                        loadReportNotifications()
+                    ]);
                     startReportPolling();
                 } else {
                     // Derive a friendly error message from common API shapes
@@ -1273,8 +1277,9 @@
             }
         }
         
-        async function loadPapers() {
-            showLoading();
+        async function loadPapers(options = {}) {
+            const { silent = false } = options;
+            if (!silent) showLoading();
             
             try {
                 const response = await fetch('/student/dashboard', {
@@ -1325,7 +1330,7 @@
             } catch (error) {
                 console.error('Error loading papers:', error);
             } finally {
-                hideLoading();
+                if (!silent) hideLoading();
             }
         }
         
@@ -1551,7 +1556,7 @@
                         ${data.moodle_submission_id ? `<small class="text-muted">Submission ID: ${data.moodle_submission_id}</small>` : ''}
                     `);
                     
-                    await loadPapers();
+                    await loadPapers({ silent: true });
                 } else {
                     showResult(false, 'Submission Failed', `
                         <i class="bi bi-x-circle text-danger" style="font-size: 5rem;"></i>

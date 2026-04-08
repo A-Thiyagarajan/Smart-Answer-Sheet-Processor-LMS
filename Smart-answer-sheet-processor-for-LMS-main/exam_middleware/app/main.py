@@ -20,7 +20,7 @@ from sqlalchemy import func, select
 from app.core.config import settings
 from app.core.security import get_password_hash
 from app.db.database import engine, Base, async_session_maker
-from app.db.models import StaffUser
+from app.db.models import StaffUser, SubjectMapping
 from app.api.routes import (
     auth_router,
     upload_router,
@@ -29,6 +29,7 @@ from app.api.routes import (
     health_router,
     mock_moodle_router,
 )
+from app.services.mock_lms_service import mock_lms_service
 
 # Resolve filesystem paths from the project root so the app can be started
 # from either the repository root or the exam_middleware directory.
@@ -81,6 +82,43 @@ async def ensure_bootstrap_staff_user() -> None:
         )
 
 
+async def ensure_bootstrap_subject_mappings() -> None:
+    """Seed subject mappings from the local mock LMS when running in demo mode."""
+    if not settings.mock_lms_enabled:
+        return
+
+    async with async_session_maker() as session:
+        existing_codes = set(
+            await session.scalars(select(SubjectMapping.subject_code))
+        )
+
+        created = 0
+        for course in mock_lms_service.get_courses():
+            subject_code = (course.get("course_code") or "").upper()
+            assignment_id = course.get("assignment_id")
+            course_id = course.get("course_id")
+            if not subject_code or not assignment_id or not course_id or subject_code in existing_codes:
+                continue
+
+            session.add(
+                SubjectMapping(
+                    subject_code=subject_code,
+                    subject_name=course.get("course_name"),
+                    moodle_course_id=course_id,
+                    moodle_assignment_id=assignment_id,
+                    moodle_assignment_name=course.get("assignment_name"),
+                    exam_session="CIA-I",
+                    is_active=True,
+                )
+            )
+            existing_codes.add(subject_code)
+            created += 1
+
+        if created:
+            await session.commit()
+            logger.warning("Bootstrapped %s subject mapping(s) from mock LMS.", created)
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """
@@ -97,6 +135,7 @@ async def lifespan(app: FastAPI):
 
     # Bootstrap the first admin account when the database is empty.
     await ensure_bootstrap_staff_user()
+    await ensure_bootstrap_subject_mappings()
     
     # Ensure upload and storage directories exist
     upload_path = settings.upload_dir_path
