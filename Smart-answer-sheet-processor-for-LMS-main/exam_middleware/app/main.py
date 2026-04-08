@@ -6,6 +6,7 @@ scanned examination papers with Moodle LMS for student submissions.
 """
 
 import logging
+import os
 from contextlib import asynccontextmanager
 from pathlib import Path
 
@@ -14,9 +15,12 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.responses import JSONResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
+from sqlalchemy import func, select
 
 from app.core.config import settings
-from app.db.database import engine, Base
+from app.core.security import get_password_hash
+from app.db.database import engine, Base, async_session_maker
+from app.db.models import StaffUser
 from app.api.routes import (
     auth_router,
     upload_router,
@@ -50,6 +54,33 @@ logging.getLogger("httpx").setLevel(logging.WARNING)
 logger = logging.getLogger(__name__)
 
 
+async def ensure_bootstrap_staff_user() -> None:
+    """Create an initial admin user when the database is empty."""
+    async with async_session_maker() as session:
+        staff_count = await session.scalar(select(func.count()).select_from(StaffUser))
+        if staff_count and staff_count > 0:
+            return
+
+        default_password = os.getenv("ADMIN_PASSWORD")
+        if not default_password:
+            default_password = "admin123" if settings.mock_lms_enabled else "ChangeMe@123"
+
+        admin_user = StaffUser(
+            username="admin",
+            email=os.getenv("ADMIN_EMAIL", "admin@example.com"),
+            hashed_password=get_password_hash(default_password),
+            full_name="Administrator",
+            role="admin",
+            is_active=True,
+        )
+        session.add(admin_user)
+        await session.commit()
+        logger.warning(
+            "Bootstrapped initial admin user 'admin'. "
+            "Set ADMIN_PASSWORD in the environment to control the first password."
+        )
+
+
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """
@@ -63,6 +94,9 @@ async def lifespan(app: FastAPI):
     async with engine.begin() as conn:
         await conn.run_sync(Base.metadata.create_all)
     logger.info("Database tables created/verified")
+
+    # Bootstrap the first admin account when the database is empty.
+    await ensure_bootstrap_staff_user()
     
     # Ensure upload and storage directories exist
     upload_path = settings.upload_dir_path
