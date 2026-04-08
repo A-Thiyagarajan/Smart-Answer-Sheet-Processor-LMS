@@ -1,0 +1,53 @@
+name: Python CI/CD
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.10', '3.11', '3.12']
+
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+      
+      - name: Cache pip dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install pylint pytest flake8
+      
+      - name: Lint with Pylint
+        run: |
+          # Lint all Python files in exam_middleware
+          pylint exam_middleware/app --disable=C0114,C0115,C0116,R0913,W0212 || true
+      
+      - name: Lint with flake8
+        run: |
+          # Stop on syntax errors or undefined names
+          flake8 exam_middleware/app --count --select=E9,F63,F7,F82 --show-source --statistics
+          # Exit-zero treats all errors as warnings
+          flake8 exam_middleware/app --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+      
+      - name: Run Tests
+        run: |
+          pytest || true

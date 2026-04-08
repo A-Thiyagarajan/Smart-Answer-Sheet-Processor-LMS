@@ -1,0 +1,60 @@
+# Production-optimized Dockerfile for Examination Middleware
+FROM python:3.11-slim as builder
+
+# Set environment variables
+ENV PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1 \
+    PIP_NO_CACHE_DIR=1 \
+    PIP_DISABLE_PIP_VERSION_CHECK=1
+
+# Install build dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    libpq-dev \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Install dependencies
+COPY requirements.txt .
+RUN pip install --user --no-warn-script-location -r requirements.txt
+
+# Final stage
+FROM python:3.11-slim
+
+# Create non-root user
+RUN groupadd -r appuser && useradd -r -g appuser appuser
+
+# Install runtime dependencies only
+RUN apt-get update && apt-get install -y \
+    postgresql-client \
+    libpq5 \
+    libmagic1 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+# Copy Python dependencies from builder
+COPY --from=builder /root/.local /home/appuser/.local
+
+# Copy application code
+COPY --chown=appuser:appuser . .
+
+# Create necessary directories with proper permissions
+RUN mkdir -p uploads storage migrations && \
+    chown -R appuser:appuser /app
+
+# Set PATH to include user packages
+ENV PATH=/home/appuser/.local/bin:$PATH
+
+# Switch to non-root user
+USER appuser
+
+EXPOSE 8000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=40s --retries=3 \
+    CMD python -c "from urllib.request import urlopen; urlopen('http://localhost:8000/health')" || exit 1
+
+# Production command with gunicorn
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"]

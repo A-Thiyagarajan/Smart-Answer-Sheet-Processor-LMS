@@ -1,0 +1,39 @@
+version: '3.8'
+
+# Development Override Compose Configuration
+# Usage: docker-compose -f docker-compose.yml -f docker-compose.dev.yml up
+
+services:
+  postgres:
+    environment:
+      POSTGRES_USER: exam_user
+      POSTGRES_PASSWORD: exam_password
+      POSTGRES_DB: exam_middleware
+    ports:
+      - "5432:5432"
+
+  redis:
+    command: redis-server --appendonly yes
+    ports:
+      - "6379:6379"
+
+  app:
+    build:
+      dockerfile: Dockerfile
+    environment:
+      - DEBUG=True
+      - ENVIRONMENT=development
+      - HOST=127.0.0.1
+      - LOG_LEVEL=DEBUG
+      - MOCK_LMS_ENABLED=True
+      - RELOAD=True
+      - POSTGRES_USER=exam_user
+      - POSTGRES_PASSWORD=exam_password
+      - SECRET_KEY=dev-secret-key-change-this
+    volumes:
+      - ./uploads:/app/uploads
+      - ./storage:/app/storage
+      - ./app:/app/app:cached
+    ports:
+      - "8000:8000"
+    restart: unless-stopped

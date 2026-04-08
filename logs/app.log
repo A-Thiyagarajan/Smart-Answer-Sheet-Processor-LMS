@@ -1,0 +1,901 @@
+2026-04-07 22:12:26,808 - app.main - WARNING - Mock Moodle LMS is ENABLED - Development mode only!
+2026-04-07 22:12:27,207 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs')}
+2026-04-07 22:12:27,565 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:27,924 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:28,284 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:28,644 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:28,675 - app.main - WARNING - Mock Moodle LMS is ENABLED - Development mode only!
+2026-04-07 22:12:28,696 - asyncio - DEBUG - Using selector: SelectSelector
+2026-04-07 22:12:28,747 - app.main - INFO - Starting Examination Middleware...
+2026-04-07 22:12:28,748 - aiosqlite - DEBUG - executing <function connect.<locals>.connector at 0x0000021593B7EFB0>
+2026-04-07 22:12:28,749 - aiosqlite - DEBUG - operation <function connect.<locals>.connector at 0x0000021593B7EFB0> completed
+2026-04-07 22:12:28,750 - aiosqlite - DEBUG - executing functools.partial(<built-in method create_function of sqlite3.Connection object at 0x0000021593CC49A0>, 'regexp', 2, <function SQLiteDialect_pysqlite.on_connect.<locals>.regexp at 0x00000215930F6400>, deterministic=True)
+2026-04-07 22:12:28,751 - aiosqlite - DEBUG - operation functools.partial(<built-in method create_function of sqlite3.Connection object at 0x0000021593CC49A0>, 'regexp', 2, <function SQLiteDialect_pysqlite.on_connect.<locals>.regexp at 0x00000215930F6400>, deterministic=True) completed
+2026-04-07 22:12:28,751 - aiosqlite - DEBUG - executing functools.partial(<built-in method create_function of sqlite3.Connection object at 0x0000021593CC49A0>, 'floor', 1, <built-in function floor>, deterministic=True)
+2026-04-07 22:12:28,751 - aiosqlite - DEBUG - operation functools.partial(<built-in method create_function of sqlite3.Connection object at 0x0000021593CC49A0>, 'floor', 1, <built-in function floor>, deterministic=True) completed
+2026-04-07 22:12:28,752 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,753 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,753 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB8740>, 'PRAGMA read_uncommitted', [])
+2026-04-07 22:12:28,753 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB8740>, 'PRAGMA read_uncommitted', []) completed
+2026-04-07 22:12:28,754 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB8740>)
+2026-04-07 22:12:28,754 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB8740>) completed
+2026-04-07 22:12:28,754 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB8740>)
+2026-04-07 22:12:28,755 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB8740>) completed
+2026-04-07 22:12:28,755 - aiosqlite - DEBUG - executing functools.partial(<built-in method rollback of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,755 - aiosqlite - DEBUG - operation functools.partial(<built-in method rollback of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,756 - sqlalchemy.engine.Engine - INFO - BEGIN (implicit)
+2026-04-07 22:12:28,756 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("examination_artifacts")
+2026-04-07 22:12:28,757 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 22:12:28,757 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,758 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,758 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB8CC0>, 'PRAGMA main.table_info("examination_artifacts")', ())
+2026-04-07 22:12:28,758 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB8CC0>, 'PRAGMA main.table_info("examination_artifacts")', ()) completed
+2026-04-07 22:12:28,759 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB8CC0>)
+2026-04-07 22:12:28,759 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB8CC0>) completed
+2026-04-07 22:12:28,759 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB8CC0>)
+2026-04-07 22:12:28,759 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB8CC0>) completed
+2026-04-07 22:12:28,759 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("examination_artifacts")
+2026-04-07 22:12:28,760 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 22:12:28,760 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,761 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,761 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9140>, 'PRAGMA temp.table_info("examination_artifacts")', ())
+2026-04-07 22:12:28,761 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9140>, 'PRAGMA temp.table_info("examination_artifacts")', ()) completed
+2026-04-07 22:12:28,762 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9140>)
+2026-04-07 22:12:28,762 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9140>) completed
+2026-04-07 22:12:28,762 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9140>)
+2026-04-07 22:12:28,762 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9140>) completed
+2026-04-07 22:12:28,763 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("subject_mappings")
+2026-04-07 22:12:28,763 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 22:12:28,764 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,764 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,764 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB94C0>, 'PRAGMA main.table_info("subject_mappings")', ())
+2026-04-07 22:12:28,765 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB94C0>, 'PRAGMA main.table_info("subject_mappings")', ()) completed
+2026-04-07 22:12:28,765 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB94C0>)
+2026-04-07 22:12:28,765 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB94C0>) completed
+2026-04-07 22:12:28,766 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB94C0>)
+2026-04-07 22:12:28,766 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB94C0>) completed
+2026-04-07 22:12:28,766 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("subject_mappings")
+2026-04-07 22:12:28,767 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 22:12:28,767 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,768 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,768 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB97C0>, 'PRAGMA temp.table_info("subject_mappings")', ())
+2026-04-07 22:12:28,768 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB97C0>, 'PRAGMA temp.table_info("subject_mappings")', ()) completed
+2026-04-07 22:12:28,769 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB97C0>)
+2026-04-07 22:12:28,769 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB97C0>) completed
+2026-04-07 22:12:28,769 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB97C0>)
+2026-04-07 22:12:28,770 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB97C0>) completed
+2026-04-07 22:12:28,770 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("staff_users")
+2026-04-07 22:12:28,771 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 22:12:28,771 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,771 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,772 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9B40>, 'PRAGMA main.table_info("staff_users")', ())
+2026-04-07 22:12:28,772 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9B40>, 'PRAGMA main.table_info("staff_users")', ()) completed
+2026-04-07 22:12:28,772 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9B40>)
+2026-04-07 22:12:28,773 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9B40>) completed
+2026-04-07 22:12:28,773 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9B40>)
+2026-04-07 22:12:28,773 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9B40>) completed
+2026-04-07 22:12:28,774 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("staff_users")
+2026-04-07 22:12:28,774 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 22:12:28,774 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,775 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,775 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9E40>, 'PRAGMA temp.table_info("staff_users")', ())
+2026-04-07 22:12:28,775 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9E40>, 'PRAGMA temp.table_info("staff_users")', ()) completed
+2026-04-07 22:12:28,775 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9E40>)
+2026-04-07 22:12:28,775 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9E40>) completed
+2026-04-07 22:12:28,776 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9E40>)
+2026-04-07 22:12:28,776 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9E40>) completed
+2026-04-07 22:12:28,776 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("student_sessions")
+2026-04-07 22:12:28,777 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 22:12:28,777 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,777 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,778 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9C40>, 'PRAGMA main.table_info("student_sessions")', ())
+2026-04-07 22:12:28,778 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9C40>, 'PRAGMA main.table_info("student_sessions")', ()) completed
+2026-04-07 22:12:28,778 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9C40>)
+2026-04-07 22:12:28,778 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9C40>) completed
+2026-04-07 22:12:28,778 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9C40>)
+2026-04-07 22:12:28,778 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9C40>) completed
+2026-04-07 22:12:28,779 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("student_sessions")
+2026-04-07 22:12:28,779 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 22:12:28,779 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,779 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,780 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9E40>, 'PRAGMA temp.table_info("student_sessions")', ())
+2026-04-07 22:12:28,780 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9E40>, 'PRAGMA temp.table_info("student_sessions")', ()) completed
+2026-04-07 22:12:28,780 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9E40>)
+2026-04-07 22:12:28,780 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9E40>) completed
+2026-04-07 22:12:28,781 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9E40>)
+2026-04-07 22:12:28,781 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9E40>) completed
+2026-04-07 22:12:28,781 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("audit_logs")
+2026-04-07 22:12:28,782 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 22:12:28,782 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,783 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,783 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9B40>, 'PRAGMA main.table_info("audit_logs")', ())
+2026-04-07 22:12:28,784 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9B40>, 'PRAGMA main.table_info("audit_logs")', ()) completed
+2026-04-07 22:12:28,784 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9B40>)
+2026-04-07 22:12:28,785 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9B40>) completed
+2026-04-07 22:12:28,785 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9B40>)
+2026-04-07 22:12:28,786 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9B40>) completed
+2026-04-07 22:12:28,785 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("audit_logs")
+2026-04-07 22:12:28,786 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 22:12:28,787 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,787 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,787 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9D40>, 'PRAGMA temp.table_info("audit_logs")', ())
+2026-04-07 22:12:28,788 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9D40>, 'PRAGMA temp.table_info("audit_logs")', ()) completed
+2026-04-07 22:12:28,788 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9D40>)
+2026-04-07 22:12:28,788 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9D40>) completed
+2026-04-07 22:12:28,789 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9D40>)
+2026-04-07 22:12:28,789 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9D40>) completed
+2026-04-07 22:12:28,789 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("submission_queue")
+2026-04-07 22:12:28,790 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 22:12:28,791 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,791 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,791 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9B40>, 'PRAGMA main.table_info("submission_queue")', ())
+2026-04-07 22:12:28,792 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9B40>, 'PRAGMA main.table_info("submission_queue")', ()) completed
+2026-04-07 22:12:28,792 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9B40>)
+2026-04-07 22:12:28,793 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9B40>) completed
+2026-04-07 22:12:28,793 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9B40>)
+2026-04-07 22:12:28,793 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9B40>) completed
+2026-04-07 22:12:28,794 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("submission_queue")
+2026-04-07 22:12:28,794 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 22:12:28,794 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,795 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,795 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBA040>, 'PRAGMA temp.table_info("submission_queue")', ())
+2026-04-07 22:12:28,796 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBA040>, 'PRAGMA temp.table_info("submission_queue")', ()) completed
+2026-04-07 22:12:28,796 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CBA040>)
+2026-04-07 22:12:28,797 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CBA040>) completed
+2026-04-07 22:12:28,797 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBA040>)
+2026-04-07 22:12:28,797 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBA040>) completed
+2026-04-07 22:12:28,798 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("system_config")
+2026-04-07 22:12:28,798 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 22:12:28,798 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,799 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,799 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9E40>, 'PRAGMA main.table_info("system_config")', ())
+2026-04-07 22:12:28,800 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9E40>, 'PRAGMA main.table_info("system_config")', ()) completed
+2026-04-07 22:12:28,800 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9E40>)
+2026-04-07 22:12:28,801 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9E40>) completed
+2026-04-07 22:12:28,801 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9E40>)
+2026-04-07 22:12:28,801 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9E40>) completed
+2026-04-07 22:12:28,802 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("system_config")
+2026-04-07 22:12:28,802 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 22:12:28,803 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,803 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,803 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9040>, 'PRAGMA temp.table_info("system_config")', ())
+2026-04-07 22:12:28,804 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9040>, 'PRAGMA temp.table_info("system_config")', ()) completed
+2026-04-07 22:12:28,804 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9040>)
+2026-04-07 22:12:28,805 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9040>) completed
+2026-04-07 22:12:28,805 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9040>)
+2026-04-07 22:12:28,805 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9040>) completed
+2026-04-07 22:12:28,806 - sqlalchemy.engine.Engine - INFO - PRAGMA main.table_info("student_username_register")
+2026-04-07 22:12:28,806 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 22:12:28,806 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,806 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,807 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9E40>, 'PRAGMA main.table_info("student_username_register")', ())
+2026-04-07 22:12:28,807 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9E40>, 'PRAGMA main.table_info("student_username_register")', ()) completed
+2026-04-07 22:12:28,807 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9E40>)
+2026-04-07 22:12:28,807 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9E40>) completed
+2026-04-07 22:12:28,807 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9E40>)
+2026-04-07 22:12:28,808 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9E40>) completed
+2026-04-07 22:12:28,808 - sqlalchemy.engine.Engine - INFO - PRAGMA temp.table_info("student_username_register")
+2026-04-07 22:12:28,808 - sqlalchemy.engine.Engine - INFO - [raw sql] ()
+2026-04-07 22:12:28,809 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:28,809 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:28,809 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9040>, 'PRAGMA temp.table_info("student_username_register")', ())
+2026-04-07 22:12:28,810 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9040>, 'PRAGMA temp.table_info("student_username_register")', ()) completed
+2026-04-07 22:12:28,810 - aiosqlite - DEBUG - executing functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9040>)
+2026-04-07 22:12:28,810 - aiosqlite - DEBUG - operation functools.partial(<built-in method fetchall of sqlite3.Cursor object at 0x0000021593CB9040>) completed
+2026-04-07 22:12:28,810 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9040>)
+2026-04-07 22:12:28,811 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9040>) completed
+2026-04-07 22:12:28,812 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE subject_mappings (
+	id INTEGER NOT NULL, 
+	subject_code VARCHAR(20) NOT NULL, 
+	subject_name VARCHAR(255), 
+	moodle_course_id INTEGER NOT NULL, 
+	moodle_course_idnumber VARCHAR(50), 
+	moodle_assignment_id INTEGER NOT NULL, 
+	moodle_assignment_name VARCHAR(255), 
+	exam_session VARCHAR(50), 
+	is_active BOOLEAN, 
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
+	updated_at DATETIME, 
+	last_verified_at DATETIME, 
+	PRIMARY KEY (id)
+)
+
+
+2026-04-07 22:12:28,813 - sqlalchemy.engine.Engine - INFO - [no key 0.00084s] ()
+2026-04-07 22:12:28,813 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:29,002 - watchfiles.main - DEBUG - 2 changes detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log'), (<Change.added: 1>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\exam_middleware.db')}
+2026-04-07 22:12:29,022 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:29,022 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9E40>, '\nCREATE TABLE subject_mappings (\n\tid INTEGER NOT NULL, \n\tsubject_code VARCHAR(20) NOT NULL, \n\tsubject_name VARCHAR(255), \n\tmoodle_course_id INTEGER NOT NULL, \n\tmoodle_course_idnumber VARCHAR(50), \n\tmoodle_assignment_id INTEGER NOT NULL, \n\tmoodle_assignment_name VARCHAR(255), \n\texam_session VARCHAR(50), \n\tis_active BOOLEAN, \n\tcreated_at DATETIME DEFAULT CURRENT_TIMESTAMP, \n\tupdated_at DATETIME, \n\tlast_verified_at DATETIME, \n\tPRIMARY KEY (id)\n)\n\n', ())
+2026-04-07 22:12:29,031 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9E40>, '\nCREATE TABLE subject_mappings (\n\tid INTEGER NOT NULL, \n\tsubject_code VARCHAR(20) NOT NULL, \n\tsubject_name VARCHAR(255), \n\tmoodle_course_id INTEGER NOT NULL, \n\tmoodle_course_idnumber VARCHAR(50), \n\tmoodle_assignment_id INTEGER NOT NULL, \n\tmoodle_assignment_name VARCHAR(255), \n\texam_session VARCHAR(50), \n\tis_active BOOLEAN, \n\tcreated_at DATETIME DEFAULT CURRENT_TIMESTAMP, \n\tupdated_at DATETIME, \n\tlast_verified_at DATETIME, \n\tPRIMARY KEY (id)\n)\n\n', ()) completed
+2026-04-07 22:12:29,031 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9E40>)
+2026-04-07 22:12:29,032 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9E40>) completed
+2026-04-07 22:12:29,032 - sqlalchemy.engine.Engine - INFO - CREATE UNIQUE INDEX ix_subject_mappings_subject_code ON subject_mappings (subject_code)
+2026-04-07 22:12:29,033 - sqlalchemy.engine.Engine - INFO - [no key 0.00066s] ()
+2026-04-07 22:12:29,033 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:29,034 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:29,034 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9040>, 'CREATE UNIQUE INDEX ix_subject_mappings_subject_code ON subject_mappings (subject_code)', ())
+2026-04-07 22:12:29,040 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9040>, 'CREATE UNIQUE INDEX ix_subject_mappings_subject_code ON subject_mappings (subject_code)', ()) completed
+2026-04-07 22:12:29,040 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9040>)
+2026-04-07 22:12:29,041 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9040>) completed
+2026-04-07 22:12:29,042 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE staff_users (
+	id INTEGER NOT NULL, 
+	username VARCHAR(100) NOT NULL, 
+	email VARCHAR(255) NOT NULL, 
+	hashed_password VARCHAR(255) NOT NULL, 
+	full_name VARCHAR(255), 
+	role VARCHAR(50), 
+	is_active BOOLEAN, 
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
+	last_login_at DATETIME, 
+	PRIMARY KEY (id), 
+	UNIQUE (email)
+)
+
+
+2026-04-07 22:12:29,042 - sqlalchemy.engine.Engine - INFO - [no key 0.00068s] ()
+2026-04-07 22:12:29,043 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:29,254 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:29,254 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9B40>, '\nCREATE TABLE staff_users (\n\tid INTEGER NOT NULL, \n\tusername VARCHAR(100) NOT NULL, \n\temail VARCHAR(255) NOT NULL, \n\thashed_password VARCHAR(255) NOT NULL, \n\tfull_name VARCHAR(255), \n\trole VARCHAR(50), \n\tis_active BOOLEAN, \n\tcreated_at DATETIME DEFAULT CURRENT_TIMESTAMP, \n\tlast_login_at DATETIME, \n\tPRIMARY KEY (id), \n\tUNIQUE (email)\n)\n\n', ())
+2026-04-07 22:12:29,260 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9B40>, '\nCREATE TABLE staff_users (\n\tid INTEGER NOT NULL, \n\tusername VARCHAR(100) NOT NULL, \n\temail VARCHAR(255) NOT NULL, \n\thashed_password VARCHAR(255) NOT NULL, \n\tfull_name VARCHAR(255), \n\trole VARCHAR(50), \n\tis_active BOOLEAN, \n\tcreated_at DATETIME DEFAULT CURRENT_TIMESTAMP, \n\tlast_login_at DATETIME, \n\tPRIMARY KEY (id), \n\tUNIQUE (email)\n)\n\n', ()) completed
+2026-04-07 22:12:29,260 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9B40>)
+2026-04-07 22:12:29,260 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9B40>) completed
+2026-04-07 22:12:29,261 - sqlalchemy.engine.Engine - INFO - CREATE UNIQUE INDEX ix_staff_users_username ON staff_users (username)
+2026-04-07 22:12:29,261 - sqlalchemy.engine.Engine - INFO - [no key 0.00051s] ()
+2026-04-07 22:12:29,262 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:29,262 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:29,263 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9EC0>, 'CREATE UNIQUE INDEX ix_staff_users_username ON staff_users (username)', ())
+2026-04-07 22:12:29,269 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9EC0>, 'CREATE UNIQUE INDEX ix_staff_users_username ON staff_users (username)', ()) completed
+2026-04-07 22:12:29,269 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9EC0>)
+2026-04-07 22:12:29,269 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9EC0>) completed
+2026-04-07 22:12:29,270 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE student_sessions (
+	id INTEGER NOT NULL, 
+	session_id VARCHAR(64) NOT NULL, 
+	moodle_user_id BIGINT NOT NULL, 
+	moodle_username VARCHAR(100) NOT NULL, 
+	moodle_fullname VARCHAR(255), 
+	register_number VARCHAR(20), 
+	encrypted_token TEXT NOT NULL, 
+	token_expires_at DATETIME, 
+	ip_address VARCHAR(45), 
+	user_agent VARCHAR(500), 
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
+	last_activity_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
+	expires_at DATETIME NOT NULL, 
+	PRIMARY KEY (id)
+)
+
+
+2026-04-07 22:12:29,271 - sqlalchemy.engine.Engine - INFO - [no key 0.00092s] ()
+2026-04-07 22:12:29,272 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:29,272 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:29,273 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBA540>, '\nCREATE TABLE student_sessions (\n\tid INTEGER NOT NULL, \n\tsession_id VARCHAR(64) NOT NULL, \n\tmoodle_user_id BIGINT NOT NULL, \n\tmoodle_username VARCHAR(100) NOT NULL, \n\tmoodle_fullname VARCHAR(255), \n\tregister_number VARCHAR(20), \n\tencrypted_token TEXT NOT NULL, \n\ttoken_expires_at DATETIME, \n\tip_address VARCHAR(45), \n\tuser_agent VARCHAR(500), \n\tcreated_at DATETIME DEFAULT CURRENT_TIMESTAMP, \n\tlast_activity_at DATETIME DEFAULT CURRENT_TIMESTAMP, \n\texpires_at DATETIME NOT NULL, \n\tPRIMARY KEY (id)\n)\n\n', ())
+2026-04-07 22:12:29,376 - watchfiles.main - DEBUG - 4 changes detected: {(<Change.deleted: 3>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\exam_middleware.db-journal'), (<Change.added: 1>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\exam_middleware.db-journal'), (<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\exam_middleware.db'), (<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:29,462 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBA540>, '\nCREATE TABLE student_sessions (\n\tid INTEGER NOT NULL, \n\tsession_id VARCHAR(64) NOT NULL, \n\tmoodle_user_id BIGINT NOT NULL, \n\tmoodle_username VARCHAR(100) NOT NULL, \n\tmoodle_fullname VARCHAR(255), \n\tregister_number VARCHAR(20), \n\tencrypted_token TEXT NOT NULL, \n\ttoken_expires_at DATETIME, \n\tip_address VARCHAR(45), \n\tuser_agent VARCHAR(500), \n\tcreated_at DATETIME DEFAULT CURRENT_TIMESTAMP, \n\tlast_activity_at DATETIME DEFAULT CURRENT_TIMESTAMP, \n\texpires_at DATETIME NOT NULL, \n\tPRIMARY KEY (id)\n)\n\n', ()) completed
+2026-04-07 22:12:29,462 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBA540>)
+2026-04-07 22:12:29,463 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBA540>) completed
+2026-04-07 22:12:29,463 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_session_expires ON student_sessions (expires_at)
+2026-04-07 22:12:29,464 - sqlalchemy.engine.Engine - INFO - [no key 0.00054s] ()
+2026-04-07 22:12:29,464 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:29,465 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:29,465 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBA4C0>, 'CREATE INDEX ix_session_expires ON student_sessions (expires_at)', ())
+2026-04-07 22:12:29,473 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBA4C0>, 'CREATE INDEX ix_session_expires ON student_sessions (expires_at)', ()) completed
+2026-04-07 22:12:29,474 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBA4C0>)
+2026-04-07 22:12:29,474 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBA4C0>) completed
+2026-04-07 22:12:29,474 - sqlalchemy.engine.Engine - INFO - CREATE UNIQUE INDEX ix_student_sessions_session_id ON student_sessions (session_id)
+2026-04-07 22:12:29,475 - sqlalchemy.engine.Engine - INFO - [no key 0.00042s] ()
+2026-04-07 22:12:29,475 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:29,476 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:29,476 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9040>, 'CREATE UNIQUE INDEX ix_student_sessions_session_id ON student_sessions (session_id)', ())
+2026-04-07 22:12:29,482 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9040>, 'CREATE UNIQUE INDEX ix_student_sessions_session_id ON student_sessions (session_id)', ()) completed
+2026-04-07 22:12:29,681 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9040>)
+2026-04-07 22:12:29,682 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9040>) completed
+2026-04-07 22:12:29,682 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_student_sessions_register_number ON student_sessions (register_number)
+2026-04-07 22:12:29,683 - sqlalchemy.engine.Engine - INFO - [no key 0.00066s] ()
+2026-04-07 22:12:29,683 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:29,683 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:29,684 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9D40>, 'CREATE INDEX ix_student_sessions_register_number ON student_sessions (register_number)', ())
+2026-04-07 22:12:29,689 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9D40>, 'CREATE INDEX ix_student_sessions_register_number ON student_sessions (register_number)', ()) completed
+2026-04-07 22:12:29,690 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9D40>)
+2026-04-07 22:12:29,690 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9D40>) completed
+2026-04-07 22:12:29,691 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE system_config (
+	id INTEGER NOT NULL, 
+	"key" VARCHAR(100) NOT NULL, 
+	value TEXT, 
+	value_type VARCHAR(20), 
+	description TEXT, 
+	updated_at DATETIME, 
+	PRIMARY KEY (id), 
+	UNIQUE ("key")
+)
+
+
+2026-04-07 22:12:29,691 - sqlalchemy.engine.Engine - INFO - [no key 0.00057s] ()
+2026-04-07 22:12:29,692 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:29,692 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:29,693 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBB2C0>, '\nCREATE TABLE system_config (\n\tid INTEGER NOT NULL, \n\t"key" VARCHAR(100) NOT NULL, \n\tvalue TEXT, \n\tvalue_type VARCHAR(20), \n\tdescription TEXT, \n\tupdated_at DATETIME, \n\tPRIMARY KEY (id), \n\tUNIQUE ("key")\n)\n\n', ())
+2026-04-07 22:12:29,700 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBB2C0>, '\nCREATE TABLE system_config (\n\tid INTEGER NOT NULL, \n\t"key" VARCHAR(100) NOT NULL, \n\tvalue TEXT, \n\tvalue_type VARCHAR(20), \n\tdescription TEXT, \n\tupdated_at DATETIME, \n\tPRIMARY KEY (id), \n\tUNIQUE ("key")\n)\n\n', ()) completed
+2026-04-07 22:12:29,701 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBB2C0>)
+2026-04-07 22:12:29,701 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBB2C0>) completed
+2026-04-07 22:12:29,701 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE student_username_register (
+	id INTEGER NOT NULL, 
+	moodle_username VARCHAR(100) NOT NULL, 
+	register_number VARCHAR(20) NOT NULL, 
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
+	updated_at DATETIME, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uq_username_register UNIQUE (moodle_username, register_number)
+)
+
+
+2026-04-07 22:12:29,702 - sqlalchemy.engine.Engine - INFO - [no key 0.00087s] ()
+2026-04-07 22:12:29,703 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:29,788 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:29,788 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBA540>, '\nCREATE TABLE student_username_register (\n\tid INTEGER NOT NULL, \n\tmoodle_username VARCHAR(100) NOT NULL, \n\tregister_number VARCHAR(20) NOT NULL, \n\tcreated_at DATETIME DEFAULT CURRENT_TIMESTAMP, \n\tupdated_at DATETIME, \n\tPRIMARY KEY (id), \n\tCONSTRAINT uq_username_register UNIQUE (moodle_username, register_number)\n)\n\n', ())
+2026-04-07 22:12:29,795 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBA540>, '\nCREATE TABLE student_username_register (\n\tid INTEGER NOT NULL, \n\tmoodle_username VARCHAR(100) NOT NULL, \n\tregister_number VARCHAR(20) NOT NULL, \n\tcreated_at DATETIME DEFAULT CURRENT_TIMESTAMP, \n\tupdated_at DATETIME, \n\tPRIMARY KEY (id), \n\tCONSTRAINT uq_username_register UNIQUE (moodle_username, register_number)\n)\n\n', ()) completed
+2026-04-07 22:12:29,795 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBA540>)
+2026-04-07 22:12:29,795 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBA540>) completed
+2026-04-07 22:12:29,796 - sqlalchemy.engine.Engine - INFO - CREATE UNIQUE INDEX ix_student_username_register_moodle_username ON student_username_register (moodle_username)
+2026-04-07 22:12:29,796 - sqlalchemy.engine.Engine - INFO - [no key 0.00052s] ()
+2026-04-07 22:12:29,797 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:29,797 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:29,797 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBA0C0>, 'CREATE UNIQUE INDEX ix_student_username_register_moodle_username ON student_username_register (moodle_username)', ())
+2026-04-07 22:12:29,803 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBA0C0>, 'CREATE UNIQUE INDEX ix_student_username_register_moodle_username ON student_username_register (moodle_username)', ()) completed
+2026-04-07 22:12:29,804 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBA0C0>)
+2026-04-07 22:12:29,804 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBA0C0>) completed
+2026-04-07 22:12:29,805 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_student_username_register_register_number ON student_username_register (register_number)
+2026-04-07 22:12:29,805 - sqlalchemy.engine.Engine - INFO - [no key 0.00048s] ()
+2026-04-07 22:12:29,806 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:29,806 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:29,806 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBB2C0>, 'CREATE INDEX ix_student_username_register_register_number ON student_username_register (register_number)', ())
+2026-04-07 22:12:29,812 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBB2C0>, 'CREATE INDEX ix_student_username_register_register_number ON student_username_register (register_number)', ()) completed
+2026-04-07 22:12:29,812 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBB2C0>)
+2026-04-07 22:12:29,813 - watchfiles.main - DEBUG - 3 changes detected: {(<Change.deleted: 3>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\exam_middleware.db-journal'), (<Change.added: 1>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\exam_middleware.db-journal'), (<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\exam_middleware.db')}
+2026-04-07 22:12:29,949 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBB2C0>) completed
+2026-04-07 22:12:29,951 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE examination_artifacts (
+	id INTEGER NOT NULL, 
+	artifact_uuid CHAR(32) NOT NULL, 
+	raw_filename VARCHAR(255) NOT NULL, 
+	original_filename VARCHAR(255) NOT NULL, 
+	parsed_reg_no VARCHAR(20), 
+	parsed_subject_code VARCHAR(20), 
+	file_blob_path VARCHAR(512) NOT NULL, 
+	file_hash VARCHAR(64) NOT NULL, 
+	file_size_bytes BIGINT, 
+	mime_type VARCHAR(100), 
+	moodle_user_id BIGINT, 
+	moodle_username VARCHAR(100), 
+	moodle_course_id INTEGER, 
+	moodle_assignment_id INTEGER, 
+	workflow_status VARCHAR(16) NOT NULL, 
+	moodle_draft_item_id BIGINT, 
+	moodle_submission_id VARCHAR(100), 
+	lms_transaction_id VARCHAR(100), 
+	transaction_id VARCHAR(64), 
+	uploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
+	validated_at DATETIME, 
+	submit_timestamp DATETIME, 
+	completed_at DATETIME, 
+	uploaded_by_staff_id INTEGER, 
+	submitted_by_user_id BIGINT, 
+	transaction_log JSON, 
+	error_message TEXT, 
+	retry_count INTEGER, 
+	PRIMARY KEY (id), 
+	CONSTRAINT uq_paper_submission UNIQUE (parsed_reg_no, parsed_subject_code), 
+	UNIQUE (artifact_uuid), 
+	UNIQUE (transaction_id), 
+	FOREIGN KEY(uploaded_by_staff_id) REFERENCES staff_users (id)
+)
+
+
+2026-04-07 22:12:29,952 - sqlalchemy.engine.Engine - INFO - [no key 0.00127s] ()
+2026-04-07 22:12:29,953 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:29,954 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:29,954 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBA040>, '\nCREATE TABLE examination_artifacts (\n\tid INTEGER NOT NULL, \n\tartifact_uuid CHAR(32) NOT NULL, \n\traw_filename VARCHAR(255) NOT NULL, \n\toriginal_filename VARCHAR(255) NOT NULL, \n\tparsed_reg_no VARCHAR(20), \n\tparsed_subject_code VARCHAR(20), \n\tfile_blob_path VARCHAR(512) NOT NULL, \n\tfile_hash VARCHAR(64) NOT NULL, \n\tfile_size_bytes BIGINT, \n\tmime_type VARCHAR(100), \n\tmoodle_user_id BIGINT, \n\tmoodle_username VARCHAR(100), \n\tmoodle_course_id INTEGER, \n\tmoodle_assignment_id INTEGER, \n\tworkflow_status VARCHAR(16) NOT NULL, \n\tmoodle_draft_item_id BIGINT, \n\tmoodle_submission_id VARCHAR(100), \n\tlms_transaction_id VARCHAR(100), \n\ttransaction_id VARCHAR(64), \n\tuploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP, \n\tvalidated_at DATETIME, \n\tsubmit_timestamp DATETIME, \n\tcompleted_at DATETIME, \n\tuploaded_by_staff_id INTEGER, \n\tsubmitted_by_user_id BIGINT, \n\ttransaction_log JSON, \n\terror_message TEXT, \n\tretry_count INTEGER, \n\tPRIMARY KEY (id), \n\tCONSTRAINT uq_paper_submission UNIQUE (parsed_reg_no, parsed_subject_code), \n\tUNIQUE (artifact_uuid), \n\tUNIQUE (transaction_id), \n\tFOREIGN KEY(uploaded_by_staff_id) REFERENCES staff_users (id)\n)\n\n', ())
+2026-04-07 22:12:29,962 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBA040>, '\nCREATE TABLE examination_artifacts (\n\tid INTEGER NOT NULL, \n\tartifact_uuid CHAR(32) NOT NULL, \n\traw_filename VARCHAR(255) NOT NULL, \n\toriginal_filename VARCHAR(255) NOT NULL, \n\tparsed_reg_no VARCHAR(20), \n\tparsed_subject_code VARCHAR(20), \n\tfile_blob_path VARCHAR(512) NOT NULL, \n\tfile_hash VARCHAR(64) NOT NULL, \n\tfile_size_bytes BIGINT, \n\tmime_type VARCHAR(100), \n\tmoodle_user_id BIGINT, \n\tmoodle_username VARCHAR(100), \n\tmoodle_course_id INTEGER, \n\tmoodle_assignment_id INTEGER, \n\tworkflow_status VARCHAR(16) NOT NULL, \n\tmoodle_draft_item_id BIGINT, \n\tmoodle_submission_id VARCHAR(100), \n\tlms_transaction_id VARCHAR(100), \n\ttransaction_id VARCHAR(64), \n\tuploaded_at DATETIME DEFAULT CURRENT_TIMESTAMP, \n\tvalidated_at DATETIME, \n\tsubmit_timestamp DATETIME, \n\tcompleted_at DATETIME, \n\tuploaded_by_staff_id INTEGER, \n\tsubmitted_by_user_id BIGINT, \n\ttransaction_log JSON, \n\terror_message TEXT, \n\tretry_count INTEGER, \n\tPRIMARY KEY (id), \n\tCONSTRAINT uq_paper_submission UNIQUE (parsed_reg_no, parsed_subject_code), \n\tUNIQUE (artifact_uuid), \n\tUNIQUE (transaction_id), \n\tFOREIGN KEY(uploaded_by_staff_id) REFERENCES staff_users (id)\n)\n\n', ()) completed
+2026-04-07 22:12:30,055 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBA040>)
+2026-04-07 22:12:30,056 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBA040>) completed
+2026-04-07 22:12:30,057 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_examination_artifacts_parsed_reg_no ON examination_artifacts (parsed_reg_no)
+2026-04-07 22:12:30,057 - sqlalchemy.engine.Engine - INFO - [no key 0.00060s] ()
+2026-04-07 22:12:30,058 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:30,059 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:30,059 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBB2C0>, 'CREATE INDEX ix_examination_artifacts_parsed_reg_no ON examination_artifacts (parsed_reg_no)', ())
+2026-04-07 22:12:30,068 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBB2C0>, 'CREATE INDEX ix_examination_artifacts_parsed_reg_no ON examination_artifacts (parsed_reg_no)', ()) completed
+2026-04-07 22:12:30,068 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBB2C0>)
+2026-04-07 22:12:30,069 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBB2C0>) completed
+2026-04-07 22:12:30,070 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_artifacts_status ON examination_artifacts (workflow_status)
+2026-04-07 22:12:30,070 - sqlalchemy.engine.Engine - INFO - [no key 0.00052s] ()
+2026-04-07 22:12:30,071 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:30,072 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:30,072 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBA040>, 'CREATE INDEX ix_artifacts_status ON examination_artifacts (workflow_status)', ())
+2026-04-07 22:12:30,080 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBA040>, 'CREATE INDEX ix_artifacts_status ON examination_artifacts (workflow_status)', ()) completed
+2026-04-07 22:12:30,081 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBA040>)
+2026-04-07 22:12:30,081 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBA040>) completed
+2026-04-07 22:12:30,082 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_examination_artifacts_parsed_subject_code ON examination_artifacts (parsed_subject_code)
+2026-04-07 22:12:30,201 - sqlalchemy.engine.Engine - INFO - [no key 0.11968s] ()
+2026-04-07 22:12:30,202 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:30,203 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:30,203 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBB9C0>, 'CREATE INDEX ix_examination_artifacts_parsed_subject_code ON examination_artifacts (parsed_subject_code)', ())
+2026-04-07 22:12:30,213 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBB9C0>, 'CREATE INDEX ix_examination_artifacts_parsed_subject_code ON examination_artifacts (parsed_subject_code)', ()) completed
+2026-04-07 22:12:30,213 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBB9C0>)
+2026-04-07 22:12:30,214 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBB9C0>) completed
+2026-04-07 22:12:30,215 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_artifacts_reg_subject ON examination_artifacts (parsed_reg_no, parsed_subject_code)
+2026-04-07 22:12:30,215 - sqlalchemy.engine.Engine - INFO - [no key 0.00071s] ()
+2026-04-07 22:12:30,216 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:30,216 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:30,217 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBB2C0>, 'CREATE INDEX ix_artifacts_reg_subject ON examination_artifacts (parsed_reg_no, parsed_subject_code)', ())
+2026-04-07 22:12:30,225 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBB2C0>, 'CREATE INDEX ix_artifacts_reg_subject ON examination_artifacts (parsed_reg_no, parsed_subject_code)', ()) completed
+2026-04-07 22:12:30,226 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBB2C0>)
+2026-04-07 22:12:30,228 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBB2C0>) completed
+2026-04-07 22:12:30,228 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE audit_logs (
+	id INTEGER NOT NULL, 
+	action VARCHAR(100) NOT NULL, 
+	action_category VARCHAR(50) NOT NULL, 
+	description TEXT, 
+	actor_type VARCHAR(20) NOT NULL, 
+	actor_id VARCHAR(100), 
+	actor_username VARCHAR(100), 
+	actor_ip VARCHAR(45), 
+	artifact_id INTEGER, 
+	target_type VARCHAR(50), 
+	target_id VARCHAR(100), 
+	request_data JSON, 
+	response_data JSON, 
+	error_details JSON, 
+	moodle_api_function VARCHAR(100), 
+	moodle_response_code INTEGER, 
+	created_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(artifact_id) REFERENCES examination_artifacts (id)
+)
+
+
+2026-04-07 22:12:30,229 - sqlalchemy.engine.Engine - INFO - [no key 0.00120s] ()
+2026-04-07 22:12:30,230 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:30,231 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:30,231 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBBAC0>, '\nCREATE TABLE audit_logs (\n\tid INTEGER NOT NULL, \n\taction VARCHAR(100) NOT NULL, \n\taction_category VARCHAR(50) NOT NULL, \n\tdescription TEXT, \n\tactor_type VARCHAR(20) NOT NULL, \n\tactor_id VARCHAR(100), \n\tactor_username VARCHAR(100), \n\tactor_ip VARCHAR(45), \n\tartifact_id INTEGER, \n\ttarget_type VARCHAR(50), \n\ttarget_id VARCHAR(100), \n\trequest_data JSON, \n\tresponse_data JSON, \n\terror_details JSON, \n\tmoodle_api_function VARCHAR(100), \n\tmoodle_response_code INTEGER, \n\tcreated_at DATETIME DEFAULT CURRENT_TIMESTAMP, \n\tPRIMARY KEY (id), \n\tFOREIGN KEY(artifact_id) REFERENCES examination_artifacts (id)\n)\n\n', ())
+2026-04-07 22:12:30,308 - watchfiles.main - DEBUG - 3 changes detected: {(<Change.deleted: 3>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\exam_middleware.db-journal'), (<Change.added: 1>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\exam_middleware.db-journal'), (<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\exam_middleware.db')}
+2026-04-07 22:12:30,407 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBBAC0>, '\nCREATE TABLE audit_logs (\n\tid INTEGER NOT NULL, \n\taction VARCHAR(100) NOT NULL, \n\taction_category VARCHAR(50) NOT NULL, \n\tdescription TEXT, \n\tactor_type VARCHAR(20) NOT NULL, \n\tactor_id VARCHAR(100), \n\tactor_username VARCHAR(100), \n\tactor_ip VARCHAR(45), \n\tartifact_id INTEGER, \n\ttarget_type VARCHAR(50), \n\ttarget_id VARCHAR(100), \n\trequest_data JSON, \n\tresponse_data JSON, \n\terror_details JSON, \n\tmoodle_api_function VARCHAR(100), \n\tmoodle_response_code INTEGER, \n\tcreated_at DATETIME DEFAULT CURRENT_TIMESTAMP, \n\tPRIMARY KEY (id), \n\tFOREIGN KEY(artifact_id) REFERENCES examination_artifacts (id)\n)\n\n', ()) completed
+2026-04-07 22:12:30,408 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBBAC0>)
+2026-04-07 22:12:30,408 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBBAC0>) completed
+2026-04-07 22:12:30,409 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_audit_logs_action ON audit_logs (action)
+2026-04-07 22:12:30,410 - sqlalchemy.engine.Engine - INFO - [no key 0.00063s] ()
+2026-04-07 22:12:30,411 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:30,412 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:30,412 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBB9C0>, 'CREATE INDEX ix_audit_logs_action ON audit_logs (action)', ())
+2026-04-07 22:12:30,422 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBB9C0>, 'CREATE INDEX ix_audit_logs_action ON audit_logs (action)', ()) completed
+2026-04-07 22:12:30,423 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBB9C0>)
+2026-04-07 22:12:30,424 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBB9C0>) completed
+2026-04-07 22:12:30,423 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_audit_artifact_action ON audit_logs (artifact_id, action)
+2026-04-07 22:12:30,424 - sqlalchemy.engine.Engine - INFO - [no key 0.00099s] ()
+2026-04-07 22:12:30,425 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:30,425 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:30,426 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBBAC0>, 'CREATE INDEX ix_audit_artifact_action ON audit_logs (artifact_id, action)', ())
+2026-04-07 22:12:30,434 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBBAC0>, 'CREATE INDEX ix_audit_artifact_action ON audit_logs (artifact_id, action)', ()) completed
+2026-04-07 22:12:30,566 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBBAC0>)
+2026-04-07 22:12:30,566 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBBAC0>) completed
+2026-04-07 22:12:30,567 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_audit_actor ON audit_logs (actor_type, actor_id)
+2026-04-07 22:12:30,568 - sqlalchemy.engine.Engine - INFO - [no key 0.00058s] ()
+2026-04-07 22:12:30,568 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:30,569 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:30,569 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBB9C0>, 'CREATE INDEX ix_audit_actor ON audit_logs (actor_type, actor_id)', ())
+2026-04-07 22:12:30,577 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBB9C0>, 'CREATE INDEX ix_audit_actor ON audit_logs (actor_type, actor_id)', ()) completed
+2026-04-07 22:12:30,577 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBB9C0>)
+2026-04-07 22:12:30,577 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBB9C0>) completed
+2026-04-07 22:12:30,578 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_audit_logs_created_at ON audit_logs (created_at)
+2026-04-07 22:12:30,578 - sqlalchemy.engine.Engine - INFO - [no key 0.00044s] ()
+2026-04-07 22:12:30,580 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:30,580 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:30,581 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBBAC0>, 'CREATE INDEX ix_audit_logs_created_at ON audit_logs (created_at)', ())
+2026-04-07 22:12:30,589 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBBAC0>, 'CREATE INDEX ix_audit_logs_created_at ON audit_logs (created_at)', ()) completed
+2026-04-07 22:12:30,589 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBBAC0>)
+2026-04-07 22:12:30,589 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBBAC0>) completed
+2026-04-07 22:12:30,591 - sqlalchemy.engine.Engine - INFO - 
+CREATE TABLE submission_queue (
+	id INTEGER NOT NULL, 
+	artifact_id INTEGER NOT NULL, 
+	status VARCHAR(20), 
+	priority INTEGER, 
+	retry_count INTEGER, 
+	max_retries INTEGER, 
+	next_retry_at DATETIME, 
+	queued_at DATETIME DEFAULT CURRENT_TIMESTAMP, 
+	processed_at DATETIME, 
+	last_error TEXT, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(artifact_id) REFERENCES examination_artifacts (id)
+)
+
+
+2026-04-07 22:12:30,592 - sqlalchemy.engine.Engine - INFO - [no key 0.00117s] ()
+2026-04-07 22:12:30,593 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:30,594 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:30,595 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9D40>, '\nCREATE TABLE submission_queue (\n\tid INTEGER NOT NULL, \n\tartifact_id INTEGER NOT NULL, \n\tstatus VARCHAR(20), \n\tpriority INTEGER, \n\tretry_count INTEGER, \n\tmax_retries INTEGER, \n\tnext_retry_at DATETIME, \n\tqueued_at DATETIME DEFAULT CURRENT_TIMESTAMP, \n\tprocessed_at DATETIME, \n\tlast_error TEXT, \n\tPRIMARY KEY (id), \n\tFOREIGN KEY(artifact_id) REFERENCES examination_artifacts (id)\n)\n\n', ())
+2026-04-07 22:12:30,750 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CB9D40>, '\nCREATE TABLE submission_queue (\n\tid INTEGER NOT NULL, \n\tartifact_id INTEGER NOT NULL, \n\tstatus VARCHAR(20), \n\tpriority INTEGER, \n\tretry_count INTEGER, \n\tmax_retries INTEGER, \n\tnext_retry_at DATETIME, \n\tqueued_at DATETIME DEFAULT CURRENT_TIMESTAMP, \n\tprocessed_at DATETIME, \n\tlast_error TEXT, \n\tPRIMARY KEY (id), \n\tFOREIGN KEY(artifact_id) REFERENCES examination_artifacts (id)\n)\n\n', ()) completed
+2026-04-07 22:12:30,751 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9D40>)
+2026-04-07 22:12:30,752 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CB9D40>) completed
+2026-04-07 22:12:30,751 - sqlalchemy.engine.Engine - INFO - CREATE INDEX ix_queue_status_retry ON submission_queue (status, next_retry_at)
+2026-04-07 22:12:30,754 - sqlalchemy.engine.Engine - INFO - [no key 0.00315s] ()
+2026-04-07 22:12:30,757 - aiosqlite - DEBUG - executing functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:30,758 - aiosqlite - DEBUG - operation functools.partial(<built-in method cursor of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:30,758 - aiosqlite - DEBUG - executing functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBB2C0>, 'CREATE INDEX ix_queue_status_retry ON submission_queue (status, next_retry_at)', ())
+2026-04-07 22:12:30,772 - watchfiles.main - DEBUG - 3 changes detected: {(<Change.deleted: 3>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\exam_middleware.db-journal'), (<Change.added: 1>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\exam_middleware.db-journal'), (<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\exam_middleware.db')}
+2026-04-07 22:12:30,780 - aiosqlite - DEBUG - operation functools.partial(<built-in method execute of sqlite3.Cursor object at 0x0000021593CBB2C0>, 'CREATE INDEX ix_queue_status_retry ON submission_queue (status, next_retry_at)', ()) completed
+2026-04-07 22:12:30,780 - aiosqlite - DEBUG - executing functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBB2C0>)
+2026-04-07 22:12:30,781 - aiosqlite - DEBUG - operation functools.partial(<built-in method close of sqlite3.Cursor object at 0x0000021593CBB2C0>) completed
+2026-04-07 22:12:30,781 - sqlalchemy.engine.Engine - INFO - COMMIT
+2026-04-07 22:12:30,788 - aiosqlite - DEBUG - executing functools.partial(<built-in method commit of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:30,790 - aiosqlite - DEBUG - operation functools.partial(<built-in method commit of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:30,791 - aiosqlite - DEBUG - executing functools.partial(<built-in method rollback of sqlite3.Connection object at 0x0000021593CC49A0>)
+2026-04-07 22:12:30,791 - aiosqlite - DEBUG - operation functools.partial(<built-in method rollback of sqlite3.Connection object at 0x0000021593CC49A0>) completed
+2026-04-07 22:12:30,791 - app.main - INFO - Database tables created/verified
+2026-04-07 22:12:30,792 - app.main - INFO - Upload directory: C:\Users\WELCOME\Downloads\Smart-answer-sheet-processor-for-LMS-main\uploads
+2026-04-07 22:12:30,803 - app.main - INFO - Storage directory: C:\Users\WELCOME\Downloads\Smart-answer-sheet-processor-for-LMS-main\Smart-answer-sheet-processor-for-LMS-main\exam_middleware\storage
+2026-04-07 22:12:30,942 - app.main - INFO - Examination Middleware started successfully
+2026-04-07 22:12:31,126 - watchfiles.main - DEBUG - 3 changes detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\exam_middleware.db'), (<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\exam_middleware.db-journal'), (<Change.deleted: 3>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\exam_middleware.db-journal')}
+2026-04-07 22:12:31,483 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:31,840 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:32,243 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:32,652 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:33,118 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:33,536 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:34,000 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:34,416 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:34,888 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:35,347 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:35,810 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:36,274 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:36,737 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:37,150 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:37,616 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:37,977 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:38,447 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:38,856 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:39,317 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:39,727 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:40,193 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:40,653 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:41,121 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:41,534 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:42,003 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:42,463 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:42,878 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:43,331 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:43,744 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:44,260 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:44,673 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:45,177 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:45,637 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:45,988 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:46,442 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:46,909 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:47,324 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:47,790 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:48,259 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:48,666 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:49,070 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:49,524 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:49,988 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:50,453 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:50,915 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:51,375 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:51,836 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:52,248 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:52,712 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:53,179 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:53,643 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:54,105 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:54,618 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:54,978 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:55,483 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:55,940 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:56,404 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:56,916 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:57,323 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:57,676 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:58,182 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:58,593 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:59,010 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:59,463 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:12:59,822 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:00,330 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:00,786 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:01,299 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:01,706 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:02,210 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:02,576 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:03,031 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:03,392 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:03,847 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:04,257 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:04,710 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:05,173 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:05,685 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:06,143 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:06,602 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:07,113 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:07,525 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:07,992 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:08,457 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:08,920 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:09,285 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:09,738 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:10,196 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:10,654 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:11,112 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:11,524 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:11,988 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:12,450 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:12,917 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:13,332 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:13,796 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:14,260 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:14,620 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:15,078 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:15,531 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:15,945 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:16,402 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:16,855 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:17,208 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:17,667 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:18,135 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:18,498 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:18,908 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:19,361 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:19,775 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:20,188 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:20,670 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:21,138 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:21,554 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:21,961 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:22,377 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:22,787 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:23,194 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:23,648 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:24,070 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:24,535 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:24,944 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:25,404 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:25,820 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:26,223 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:26,689 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:27,096 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:27,508 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:27,938 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:28,308 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:28,815 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:29,287 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:29,697 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:30,153 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:30,565 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:30,971 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:31,428 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:31,831 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:32,288 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:32,753 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:33,107 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:33,562 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:34,028 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:34,443 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:34,851 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:35,263 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:35,715 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:36,135 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:36,589 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:36,952 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:37,365 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:37,782 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:38,200 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:38,610 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:39,026 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:39,481 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:39,897 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:40,352 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:40,770 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:41,225 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:41,640 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:42,098 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:42,501 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:42,908 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:43,315 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:43,775 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:44,192 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:44,648 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:45,063 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:45,519 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:45,871 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:46,331 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:46,747 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:47,205 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:47,659 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:48,114 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:48,567 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:49,022 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:49,476 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:49,880 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:50,337 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:50,753 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:51,206 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:51,608 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:52,064 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:52,479 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:52,885 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:53,340 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:53,705 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:54,163 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:54,617 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:55,032 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:55,489 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:55,941 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:56,358 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:56,811 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:57,214 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:57,673 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:58,075 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:58,529 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:58,983 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:59,388 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:13:59,843 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:00,257 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:00,714 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:01,080 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:01,541 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:01,956 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:02,413 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:02,766 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:03,221 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:03,624 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:04,078 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:04,482 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:04,887 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:05,339 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:05,794 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:06,210 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:06,617 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:07,069 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:07,523 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:07,876 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:08,333 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:08,735 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:09,192 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:09,608 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:10,066 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:10,487 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:10,939 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:11,303 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:11,764 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:12,231 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:12,646 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:13,103 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:13,507 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:14,016 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:14,430 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:14,834 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:15,290 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:15,705 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:16,163 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:16,579 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:17,032 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:17,437 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:17,894 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:18,347 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:18,802 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:19,256 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:19,710 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:20,163 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:20,567 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:21,021 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:21,476 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:21,891 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:22,346 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:22,761 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:23,215 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:23,668 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:24,135 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:24,537 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:24,941 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:25,398 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:25,815 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:26,270 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:26,722 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:27,174 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:27,577 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:28,033 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:28,450 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:28,904 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:29,356 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:29,809 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:30,276 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:30,780 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:31,245 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:31,700 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:32,203 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:32,666 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:33,074 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:33,530 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:33,946 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:34,351 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:34,757 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:35,165 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:35,571 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:35,978 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:36,382 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:36,788 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:37,196 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:37,600 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:38,005 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:38,409 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:38,815 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:39,223 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:39,629 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:40,034 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:40,441 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:40,846 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:41,249 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:41,656 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:42,063 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:42,469 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:42,874 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:43,281 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:43,691 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:44,098 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:44,507 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:44,913 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:45,436 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:45,840 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:46,244 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:46,651 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:47,008 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:47,416 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:47,823 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:48,229 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:48,634 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:48,990 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:49,397 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:49,803 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:50,206 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:50,611 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:51,017 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:51,423 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:51,830 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:52,235 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:52,591 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:53,002 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:53,406 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:53,814 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:54,217 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:54,624 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:55,028 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:55,433 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:55,837 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:56,242 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:56,651 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:57,057 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:57,464 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:57,870 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:58,278 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:58,686 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:59,092 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:59,446 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:14:59,855 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:15:00,259 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:15:00,664 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:15:01,119 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:15:01,523 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:15:01,926 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:15:02,330 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:15:02,734 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:15:03,142 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:15:03,498 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:15:03,906 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:15:04,362 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:15:04,767 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-07 22:15:05,272 - watchfiles.main - DEBUG - 1 change detected: {(<Change.modified: 2>, 'C:\\Users\\WELCOME\\Downloads\\Smart-answer-sheet-processor-for-LMS-main\\logs\\app.log')}
+2026-04-08 11:34:22,822 - app.main - WARNING - Mock Moodle LMS is ENABLED - Development mode only!

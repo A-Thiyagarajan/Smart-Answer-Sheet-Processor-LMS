@@ -1,0 +1,1830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - Examination Middleware</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #10b981;
+            --primary-dark: #059669;
+            --primary-light: #34d399;
+            --success: #10b981;
+            --success-light: #34d399;
+            --warning: #f59e0b;
+            --warning-light: #fbbf24;
+            --danger: #ef4444;
+            --danger-light: #f87171;
+            --purple: #8b5cf6;
+            --purple-light: #a78bfa;
+            
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-300: #d1d5db;
+            --gray-400: #9ca3af;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+            
+            --transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--gray-50);
+            color: var(--gray-900);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            color: var(--gray-900);
+        }
+        
+        h2 { font-size: 1.875rem; }
+        h4 { font-size: 1.5rem; }
+        h5 { font-size: 1.25rem; }
+        
+        /* Navbar */
+        .navbar {
+            background: white !important;
+            border-bottom: 1px solid var(--gray-200);
+            box-shadow: var(--shadow-sm);
+            padding: 0.875rem 0;
+            backdrop-filter: blur(8px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.125rem;
+            color: var(--gray-900) !important;
+            letter-spacing: -0.025em;
+        }
+        
+        .navbar-brand i {
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+        
+        /* Main Container */
+        .main-container {
+            max-width: 1280px;
+            padding: 2rem 1rem;
+            animation: fadeIn 0.4s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Cards */
+        .card {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            box-shadow: var(--shadow-md);
+        }
+        
+        .card-header {
+            background: white;
+            border-bottom: 1px solid var(--gray-200);
+            padding: 1.25rem 1.5rem;
+            font-weight: 600;
+        }
+        
+        .card-header.bg-primary {
+            background: var(--primary) !important;
+            border: none;
+            color: white !important;
+        }
+        
+        /* Login Card */
+        .login-card {
+            max-width: 460px;
+            margin: 3rem auto;
+            animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Welcome Banner */
+        .welcome-banner {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            animation: slideUp 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .welcome-banner h2 {
+            color: var(--gray-900);
+            margin-bottom: 0.5rem;
+        }
+        
+        .welcome-banner h2 i {
+            color: var(--warning);
+        }
+        
+        /* Stats */
+        .stats-row {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        
+        .stat-item {
+            padding: 1rem 1.25rem;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 90px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .stat-item.total {
+            background: rgba(139, 92, 246, 0.1);
+            color: var(--purple);
+        }
+        
+        .stat-item.pending {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+        }
+        
+        .stat-item.submitted {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+        }
+        
+        .stat-number {
+            font-size: 1.75rem;
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: -0.05em;
+        }
+        
+        /* Paper Cards */
+        .paper-card {
+            animation: scaleIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) backwards;
+            transition: var(--transition);
+        }
+        
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .paper-card:nth-child(1) { animation-delay: 0.05s; }
+        .paper-card:nth-child(2) { animation-delay: 0.1s; }
+        .paper-card:nth-child(3) { animation-delay: 0.15s; }
+        .paper-card:nth-child(4) { animation-delay: 0.2s; }
+        .paper-card:nth-child(5) { animation-delay: 0.25s; }
+        .paper-card:nth-child(6) { animation-delay: 0.3s; }
+        
+        .paper-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .paper-preview {
+            height: 180px;
+            background: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 1px solid var(--gray-200);
+        }
+        
+        .paper-preview img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: cover;
+        }
+        
+        .paper-preview .pdf-icon {
+            font-size: 3.5rem;
+            color: var(--danger);
+        }
+        
+        .card-title {
+            font-weight: 700;
+            color: var(--gray-900);
+            font-size: 1.125rem;
+            letter-spacing: -0.025em;
+        }
+        
+        /* Status Badges */
+        .status-badge {
+            font-size: 0.6875rem;
+            padding: 0.375rem 0.75rem;
+            border-radius: 50px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .status-pending {
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
+        }
+        
+        .status-submitted {
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
+        }
+        
+        /* Buttons */
+        .btn {
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 0.625rem 1.25rem;
+            font-size: 0.875rem;
+            transition: var(--transition);
+            border: none;
+        }
+        
+        .btn-submit {
+            background: var(--primary);
+            color: white;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .btn-submit:hover {
+            background: var(--primary-dark);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-md);
+            color: white;
+        }
+        
+        .btn-submit:disabled {
+            background: var(--gray-300);
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-outline-primary {
+            border: 1px solid var(--primary-light);
+            color: var(--primary);
+            background: white;
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: var(--gray-600);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: var(--gray-700);
+            color: white;
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-outline-danger {
+            border: 1px solid var(--danger-light);
+            color: var(--danger);
+        }
+        
+        .btn-outline-danger:hover {
+            background: var(--danger);
+            color: white;
+        }
+        
+        /* Forms */
+        .form-control {
+            border-radius: 8px;
+            padding: 0.625rem 0.875rem;
+            border: 1px solid var(--gray-300);
+            font-size: 0.9375rem;
+            transition: var(--transition);
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+            outline: none;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--gray-700);
+            margin-bottom: 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .input-group-text {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-300);
+            border-right: none;
+            color: var(--gray-500);
+        }
+        
+        .input-group .form-control {
+            border-left: none;
+        }
+        
+        /* Alerts */
+        .alert {
+            border-radius: 8px;
+            border: none;
+            padding: 1rem;
+            font-size: 0.875rem;
+        }
+        
+        .alert-danger {
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            border-left: 3px solid var(--danger);
+        }
+        
+        .alert-warning {
+            background: rgba(245, 158, 11, 0.1);
+            color: var(--warning);
+            border-left: 3px solid var(--warning);
+        }
+        
+        /* Modals */
+        .modal-content {
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+        }
+        
+        .modal-header {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 1.25rem 1.5rem;
+        }
+        
+        .modal-title {
+            font-weight: 700;
+        }
+        
+        .modal-body iframe {
+            display: block;
+            width: 100%;
+            height: min(75vh, 720px);
+            border: 0;
+            border-radius: 8px;
+            background: var(--gray-100);
+        }
+
+        .paper-action-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.875rem 1rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--gray-200);
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.08), rgba(52, 211, 153, 0.06));
+        }
+
+        .paper-action-text {
+            color: var(--gray-700);
+            font-size: 0.9375rem;
+            margin: 0;
+        }
+
+        .paper-action-text strong {
+            color: var(--gray-900);
+        }
+
+        .modal-footer {
+            position: sticky;
+            bottom: 0;
+            z-index: 3;
+            background: white;
+            border-top: 1px solid var(--gray-200);
+            padding: 1rem 1.25rem;
+        }
+
+        .confirm-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            margin-top: 1.25rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .confirm-actions .btn {
+            min-width: 160px;
+            min-height: 46px;
+        }
+
+        .paper-actions {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .paper-actions .btn {
+            min-height: 42px;
+        }
+        
+        /* Loading */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        
+        .loading-overlay.active {
+            display: flex;
+        }
+        
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--gray-200);
+            border-top-color: var(--primary);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+        
+        .empty-state i {
+            font-size: 4rem;
+            color: var(--gray-300);
+        }
+        
+        .empty-state h4 {
+            font-weight: 600;
+            color: var(--gray-600);
+            margin-top: 1.5rem;
+        }
+        
+        /* Moodle Info */
+        .moodle-info {
+            background: rgba(16, 185, 129, 0.05);
+            border-radius: 8px;
+            padding: 0.875rem 1rem;
+            margin-top: 1.5rem;
+            border-left: 3px solid var(--primary);
+        }
+        
+        .moodle-info small {
+            color: var(--primary-dark);
+            font-size: 0.8125rem;
+        }
+        
+        /* Footer */
+        .footer {
+            background: white;
+            border-top: 1px solid var(--gray-200);
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+        
+        .footer h5 {
+            font-weight: 700;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .footer p,
+        .footer a {
+            color: var(--gray-600);
+            font-size: 0.875rem;
+            line-height: 1.8;
+        }
+        
+        .footer a {
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .footer a:hover {
+            color: var(--primary);
+        }
+        
+        .footer-logo {
+            font-weight: 800;
+            font-size: 1.125rem;
+            color: var(--gray-900);
+            margin-bottom: 0.75rem;
+            letter-spacing: -0.025em;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: var(--gray-100);
+            color: var(--gray-600);
+            margin-right: 0.5rem;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid var(--gray-200);
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .footer-bottom p {
+            margin-bottom: 0.25rem;
+            font-size: 0.8125rem;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--gray-100);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--gray-400);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--gray-500);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+            }
+            
+            .welcome-banner {
+                padding: 1.5rem;
+            }
+            
+            .welcome-banner h2 {
+                font-size: 1.5rem;
+            }
+            
+            .stats-row {
+                justify-content: center;
+            }
+            
+            .stat-item {
+                flex: 1;
+                min-width: 75px;
+            }
+
+            .paper-action-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .confirm-actions {
+                flex-direction: column;
+            }
+
+            .confirm-actions .btn {
+                width: 100%;
+                min-width: 0;
+            }
+        }
+        
+        /* Sections */
+        #loginSection,
+        #dashboardSection {
+            display: none;
+        }
+        
+        #loginSection.active,
+        #dashboardSection.active {
+            display: block;
+        }
+        
+        /* Mobile navbar tweaks */
+        @media (max-width: 576px) {
+            .navbar { padding: 0.5rem 0; }
+            .navbar .container { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; }
+            .navbar-brand { font-size: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+            .navbar-brand i { font-size: 1.1rem; }
+            .navbar-nav { display: flex; align-items: center; gap: 0.5rem; }
+            .navbar-text { gap: 6px; font-size: 0.95rem; }
+            .navbar .user-name { white-space: normal; overflow: visible; text-overflow: initial; max-width: none; }
+            .user-row, .actions-row { padding-left: 0.5rem; padding-right: 0.5rem; }
+            .actions-row { flex-wrap: nowrap; }
+            .actions-row .btn { min-width: 44px; }
+        }
+
+        /* Desktop: ensure actions align vertically centered */
+        @media (min-width: 992px) {
+            .navbar .actions-row { align-items: center; }
+            .navbar .user-row { align-items: center; display: flex; }
+            /* On large screens, place user info next to actions on the right */
+            .navbar .d-flex.flex-column.flex-lg-row { justify-content: flex-end; }
+            .navbar .flex-grow-1.user-row { flex: 0 0 auto; order: 2; margin-right: 0.75rem; justify-content: flex-end; }
+            .navbar .actions-row { order: 3; }
+            .navbar .user-name { white-space: nowrap; }
+            .btn { padding: 0.35rem 0.6rem; font-size: 0.82rem; }
+            .btn-outline-primary, .btn-outline-secondary, .btn-outline-danger { padding: 0.25rem 0.5rem; font-size: 0.78rem; }
+            .btn-group .dropdown-menu { right: 0; left: auto; }
+            /* Ensure logout button aligns to the right and stays visible */
+            #logoutBtn { margin-left: 0.5rem; }
+        }
+    </style>
+    <link href="/static/css/style.css?v=2" rel="stylesheet">
+    <script src="/static/js/local_mode.js"></script>
+</head>
+<body>
+    <div class="loading-overlay" id="loadingOverlay" role="status" aria-hidden="true">
+        <div style="text-align:center;">
+            <div class="spinner" aria-hidden="true">
+                <div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div>
+            </div>
+            
+        </div>
+    </div>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-mortarboard-fill me-2"></i>
+                Student Portal
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#studentNavbar" aria-controls="studentNavbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="studentNavbar">
+                <div class="navbar-nav ms-auto align-items-center w-100">
+                    <div class="d-flex flex-column flex-lg-row align-items-center w-100 py-2 py-lg-0">
+                        <!-- user info will render inline with actions on large screens -->
+
+                        <div class="d-flex align-items-center actions-row" style="gap:0.5rem;">
+                            <div id="userInfo" class="d-flex d-lg-none justify-content-center w-100 mb-2">
+                                <i class="bi bi-person-circle me-1"></i>
+                                <span id="userNameMobile" class="fw-semibold user-name"></span>
+                            </div>
+                            <div class="user-inline d-none d-lg-flex align-items-center me-2">
+                                <i class="bi bi-person-circle me-1"></i>
+                                <span id="userNameDesktop" class="fw-semibold user-name"></span>
+                            </div>
+                            <div class="btn-group" role="group">
+                                <button id="reportsBtn" class="btn btn-outline-primary btn-sm" onclick="openMyReportsModal()">
+                                    <i class="bi bi-bell"></i>
+                                    <span id="reportsBadge" class="badge bg-danger ms-1" style="display:none;">0</span>
+                                </button>
+                                <button id="reportsSettingsBtn" class="btn btn-outline-secondary btn-sm dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="visually-hidden">Toggle polling interval</span>
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="reportsSettingsBtn" style="min-width:200px;">
+                                    <li class="mb-2"><strong>Report Poll Interval</strong></li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="pollInterval" id="poll10" value="10000">
+                                            <label class="form-check-label" for="poll10">10 seconds</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="pollInterval" id="poll30" value="30000">
+                                            <label class="form-check-label" for="poll30">30 seconds (default)</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="pollInterval" id="poll60" value="60000">
+                                            <label class="form-check-label" for="poll60">60 seconds</label>
+                                        </div>
+                                    </li>
+                                    <li class="mt-2">
+                                        <button class="btn btn-sm btn-primary" id="savePollIntervalBtn">Save</button>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <button class="btn btn-outline-danger btn-sm" id="logoutBtn" style="display: none;" onclick="logout()">
+                                    <i class="bi bi-box-arrow-right me-1"></i> Logout
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <!-- Login Section -->
+        <div id="loginSection" class="active">
+            <div class="card login-card">
+                <div class="card-header bg-primary text-center">
+                    <h4 class="mb-0">
+                        <i class="bi bi-mortarboard me-2"></i>
+                        Student Login
+                    </h4>
+                    <small class="opacity-90 d-block mt-1">Access your examination portal</small>
+                </div>
+                <div class="card-body p-4">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Moodle Username</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person"></i></span>
+                                <input type="text" class="form-control" id="username" required placeholder="Enter username">
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="password" class="form-label">Moodle Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-key"></i></span>
+                                <input type="password" class="form-control" id="password" required placeholder="Enter password">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="registerNumber" class="form-label">Register Number</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-hash"></i></span>
+                                <input type="text" class="form-control" id="registerNumber" required 
+                                       placeholder="12-digit number" 
+                                       pattern="\d{12}" 
+                                       maxlength="12">
+                            </div>
+                            <small class="text-muted">Enter your 12-digit university register number</small>
+                        </div>
+                        <div id="loginError" class="alert alert-danger" style="display: none;"></div>
+                        <button type="submit" class="btn btn-submit w-100">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+                            Sign In
+                        </button>
+                    </form>
+                    <div class="moodle-info">
+                        <i class="bi bi-shield-check me-2"></i>
+                        <small>Your credentials are securely used to submit papers. We never store your password.</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dashboard Section -->
+        <div id="dashboardSection">
+            <div class="welcome-banner">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h2>
+                            <i class="bi bi-hand-wave me-2"></i>
+                            Welcome, <span id="studentName">Student</span>!
+                        </h2>
+                        <p class="text-muted mb-0">View and submit your examination answer sheets</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stats-row justify-content-end">
+                            <div class="stat-item total">
+                                <div class="stat-number" id="totalPapers">0</div>
+                                <small>Total</small>
+                            </div>
+                            <div class="stat-item pending">
+                                <div class="stat-number" id="pendingPapers">0</div>
+                                <small>Pending</small>
+                            </div>
+                            <div class="stat-item submitted">
+                                <div class="stat-number" id="submittedPapers">0</div>
+                                <small>Submitted</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row g-4" id="papersGrid"></div>
+
+            <div class="card" id="emptyState" style="display: none;">
+                <div class="empty-state">
+                    <i class="bi bi-file-earmark-x"></i>
+                    <h4>No Papers Available</h4>
+                    <p class="text-muted">There are no examination papers assigned to your register number yet.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- View Paper Modal -->
+    <div class="modal fade" id="viewPaperModal" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-file-earmark-text me-2"></i>
+                        <span id="modalPaperTitle">View Paper</span>
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-3">
+                    <div class="paper-action-bar">
+                        <p class="paper-action-text mb-0">
+                            <strong>Review this answer sheet carefully.</strong>
+                            Use the submit button once you confirm this is your paper.
+                        </p>
+                        <button type="button" class="btn btn-submit" id="modalSubmitBtnInline" onclick="submitFromModal()">
+                            <i class="bi bi-cloud-upload me-2"></i>
+                            Submit to Moodle
+                        </button>
+                    </div>
+                    <iframe id="paperFrame" src=""></iframe>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-submit" id="modalSubmitBtn" onclick="submitFromModal()">
+                        <i class="bi bi-cloud-upload me-2"></i>
+                        Submit to Moodle
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <!-- My Reports Modal (student) -->
+            <div class="modal fade" id="myReportsModal" tabindex="-1">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">My Reports</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body" id="myReportsModalBody">
+                            <div class="text-center py-4 text-muted">Loading...</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Toast container for non-blocking notifications -->
+            <div aria-live="polite" aria-atomic="true" class="position-fixed top-0 end-0 p-3" style="z-index: 1080;">
+                <div id="toastContainer"></div>
+            </div>
+
+    <!-- Submission Confirmation Modal -->
+    <div class="modal fade" id="confirmModal" tabindex="-1">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="bi bi-question-circle me-2"></i>
+                        Confirm Submission
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="mb-3">Are you sure you want to submit this paper to Moodle?</p>
+                    <div class="alert alert-warning border-0">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        <strong>Important:</strong> This action will submit your answer sheet to the assignment in Moodle. Please verify your paper before submitting.
+                    </div>
+                    <div id="confirmDetails" class="bg-light p-3 rounded-3">
+                        <p class="mb-2"><strong>Subject:</strong> <span id="confirmSubject" class="text-success"></span></p>
+                        <p class="mb-0"><strong>File:</strong> <span id="confirmFilename"></span></p>
+                    </div>
+                    <div class="confirm-actions">
+                        <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" class="btn btn-submit" id="confirmSubmitBtnBody" onclick="confirmSubmission()">
+                            <i class="bi bi-check-lg me-2"></i>
+                            Yes, Submit Now
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary px-4" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-submit" id="confirmSubmitBtn" onclick="confirmSubmission()">
+                        <i class="bi bi-check-lg me-2"></i>
+                        Yes, Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Result Modal -->
+    <div class="modal fade" id="resultModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header" id="resultModalHeader">
+                    <h5 class="modal-title" id="resultModalTitle">Submission Result</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center py-5" id="resultModalBody">
+                    <!-- Result content will be inserted here -->
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-submit px-5" data-bs-dismiss="modal">Continue</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <!-- Report Issue Modal -->
+            <div class="modal fade" id="reportModal" tabindex="-1">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header bg-success text-white">
+                            <h5 class="modal-title mb-0">
+                                <i class="bi bi-flag-fill me-2"></i>
+                                Report an Issue with this Paper
+                            </h5>
+                            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label class="form-label">Describe the problem</label>
+                                <textarea id="reportMessage" class="form-control" rows="4" placeholder="Explain what's wrong (wrong register number, subject code, damaged file etc.)"></textarea>
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label">Suggested Register No</label>
+                                    <input id="reportSuggestedReg" class="form-control" maxlength="12" placeholder="12-digit reg (optional)">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Suggested Subject Code</label>
+                                    <input id="reportSuggestedSub" class="form-control" placeholder="e.g. 19AI405">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer justify-content-between">
+                            <div>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                            </div>
+                            <div>
+                                <button type="button" class="btn btn-danger" id="reportSubmitBtn" onclick="submitReport()">Submit Report</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 mb-3">
+                    <div class="footer-logo d-flex align-items-center mb-2">
+                        <img src="https://saveetha.ac.in/wp-content/uploads/2024/03/sec-logo-01as.png" alt="Saveetha Logo" style="height:35px; margin-right:8px;" />
+                    </div>
+                    <p class="mb-1" style="font-size: 0.85rem;">
+                        Examination Middleware System - Department of AI & ML
+                    </p>
+                </div>
+                
+                <div class="col-lg-6 mb-3">
+                    <p class="mb-0" style="font-size: 0.85rem;">
+                        <i class="bi bi-telephone-fill me-2 text-primary"></i>
+                        +91 44 6681 1000 |
+                        <i class="bi bi-envelope-fill me-2 ms-2 text-primary"></i>
+                        info@saveetha.ac.in
+                    </p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p class="mb-0">
+                    © 2026 Saveetha Engineering College. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+    // Runtime cleanup: remove Moodle footer/info blocks injected into pages
+    (function(){
+        const phrases = [
+            'You are logged in as',
+            'Data retention summary',
+            'Get the mobile app'
+        ];
+
+        function removeFooterBlocks(){
+            const elements = Array.from(document.querySelectorAll('body *'));
+            for(const el of elements){
+                try{
+                    const text = (el.innerText || '').trim();
+                    if(!text) continue;
+                    for(const p of phrases){
+                        if(text.includes(p)){
+                            el.remove();
+                            break;
+                        }
+                    }
+                }catch(e){}
+            }
+        }
+
+        if(document.readyState === 'loading'){
+            document.addEventListener('DOMContentLoaded', removeFooterBlocks);
+        } else {
+            removeFooterBlocks();
+        }
+    })();
+    
+    // State
+        let sessionToken = null;
+        let studentRegNo = null;
+        let papers = [];
+        let currentPaperId = null;
+        let currentReportArtifact = null;
+        let studentReportsCache = []; // cache of last-fetched reports for change detection
+        
+        // DOM Elements
+        const loginSection = document.getElementById('loginSection');
+        const dashboardSection = document.getElementById('dashboardSection');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        
+        // Check for existing session
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('studentToken');
+            const regNo = localStorage.getItem('studentRegNo');
+            const name = localStorage.getItem('studentName');
+            
+            if (token && regNo) {
+                sessionToken = token;
+                studentRegNo = regNo;
+                
+                try {
+                    showLoading();
+                    showDashboard(name || regNo);
+                    await loadPapers();
+                    await loadReportNotifications();
+                    startReportPolling();
+                    hideLoading();
+                } catch (error) {
+                    console.log('Session validation failed:', error);
+                    logout();
+                    hideLoading();
+                }
+            }
+        });
+        
+        // Login form handler
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            const registerNumber = document.getElementById('registerNumber').value;
+            
+            showLoading();
+            
+            try {
+                const response = await fetch('/auth/student/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        password: password,
+                        register_number: registerNumber
+                    })
+                });
+
+                // Attempt to parse JSON, but fall back to text for non-JSON responses
+                let data = {};
+                try {
+                    const text = await response.text();
+                    data = text ? JSON.parse(text) : {};
+                } catch (err) {
+                    // not JSON
+                    data = { _raw: err ? String(err) : undefined };
+                }
+
+                if (response.ok && data.session_id) {
+                    // Clear only session-related keys (avoid wiping user preferences)
+                    try {
+                        localStorage.removeItem('studentToken');
+                        localStorage.removeItem('studentRegNo');
+                        localStorage.removeItem('studentName');
+                    } catch (e) {}
+
+                    sessionToken = data.session_id;
+                    studentRegNo = registerNumber;
+
+                    localStorage.setItem('studentToken', sessionToken);
+                    localStorage.setItem('studentRegNo', registerNumber);
+                    localStorage.setItem('studentName', data.full_name || username);
+
+                    showDashboard(data.full_name || username);
+                    await loadPapers();
+                    await loadReportNotifications();
+                    startReportPolling();
+                } else {
+                    // Derive a friendly error message from common API shapes
+                    let message = 'Login failed. Please check your credentials.';
+
+                    if (data) {
+                        if (data.detail) {
+                            if (Array.isArray(data.detail)) {
+                                // FastAPI validation error array
+                                message = data.detail.map(d => d.msg || d.message || JSON.stringify(d)).join('; ');
+                            } else if (typeof data.detail === 'string') {
+                                message = data.detail;
+                            } else if (data.detail.message) {
+                                message = data.detail.message;
+                            } else {
+                                message = JSON.stringify(data.detail);
+                            }
+                        } else if (data.message) {
+                            message = data.message;
+                        } else if (data.error) {
+                            message = data.error;
+                        } else if (data._raw) {
+                            message = data._raw;
+                        }
+                    }
+
+                    // If still generic, prefer status text when available
+                    if ((!message || message === '{}') && response.statusText) {
+                        message = response.statusText;
+                    }
+
+                    showLoginError(message);
+                }
+            } catch (error) {
+                showLoginError('Connection error. Please try again.');
+            } finally {
+                hideLoading();
+            }
+        });
+        
+        function showLoginError(message) {
+            const errorDiv = document.getElementById('loginError');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            errorDiv.style.animation = 'slideUpFade 0.3s ease-out';
+        }
+        
+        function showDashboard(name) {
+            loginSection.classList.remove('active');
+            dashboardSection.classList.add('active');
+            loginSection.style.display = 'none';
+            dashboardSection.style.display = 'block';
+            document.getElementById('userInfo').style.display = 'block';
+            const mobileName = document.getElementById('userNameMobile');
+            const desktopName = document.getElementById('userNameDesktop');
+            if (mobileName) mobileName.textContent = studentRegNo;
+            if (desktopName) desktopName.textContent = studentRegNo;
+            document.getElementById('logoutBtn').style.display = 'block';
+            document.getElementById('studentName').textContent = name;
+        }
+        
+        function logout() {
+            stopReportPolling();
+            sessionToken = null;
+            studentRegNo = null;
+            papers = [];
+            
+            localStorage.removeItem('studentToken');
+            localStorage.removeItem('studentRegNo');
+            localStorage.removeItem('studentName');
+            
+            dashboardSection.classList.remove('active');
+            loginSection.classList.add('active');
+            dashboardSection.style.display = 'none';
+            loginSection.style.display = 'block';
+            document.getElementById('userInfo').style.display = 'none';
+            document.getElementById('logoutBtn').style.display = 'none';
+            document.getElementById('papersGrid').innerHTML = '';
+            const badge = document.getElementById('reportsBadge');
+            if (badge) {
+                badge.style.display = 'none';
+                badge.textContent = '0';
+            }
+        }
+        
+        async function loadPapers() {
+            showLoading();
+            
+            try {
+                const response = await fetch('/student/dashboard', {
+                    headers: {
+                        'X-Session-ID': sessionToken
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    const pendingPapers = (data.pending_papers || []).map(p => ({
+                        id: p.artifact_uuid,
+                        artifact_uuid: p.artifact_uuid,
+                        subject_code: p.subject_code,
+                        exam_session: p.exam_session || 'CIA-I',
+                        subject_name: p.subject_name,
+                        original_filename: p.filename,
+                        filename: p.filename,
+                        upload_timestamp: p.uploaded_at,
+                        workflow_status: 'pending',
+                        can_submit: p.can_submit,
+                        message: p.message,
+                        file_extension: p.filename ? p.filename.split('.').pop() : ''
+                    }));
+                    
+                    const submittedPapers = (data.submitted_papers || []).map(p => ({
+                        id: p.artifact_uuid,
+                        artifact_uuid: p.artifact_uuid,
+                        subject_code: p.parsed_subject_code,
+                        exam_session: p.exam_session || 'CIA-I',
+                        original_filename: p.original_filename,
+                        filename: p.original_filename,
+                        upload_timestamp: p.uploaded_at,
+                        submit_timestamp: p.submit_timestamp,
+                        workflow_status: 'submitted_to_moodle',
+                        file_extension: p.original_filename ? p.original_filename.split('.').pop() : ''
+                    }));
+                    
+                    papers = [...pendingPapers, ...submittedPapers];
+                    renderPapers();
+                    updateStats();
+                } else if (response.status === 401) {
+                    logout();
+                } else {
+                    console.error('Failed to load papers:', data);
+                }
+            } catch (error) {
+                console.error('Error loading papers:', error);
+            } finally {
+                hideLoading();
+            }
+        }
+        
+        function renderPapers() {
+            const grid = document.getElementById('papersGrid');
+            const emptyState = document.getElementById('emptyState');
+            
+            if (papers.length === 0) {
+                grid.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+            
+            emptyState.style.display = 'none';
+            
+            grid.innerHTML = papers.map(paper => {
+                const isSubmitted = paper.workflow_status === 'submitted_to_moodle';
+                const canSubmit = paper.can_submit !== false;
+                const statusClass = isSubmitted ? 'submitted' : 'pending';
+                const statusText = isSubmitted ? 'Submitted' : 'Pending';
+                
+                // include session token in preview URL when available (server requires X-Session-ID or session param)
+                const previewUrl = window.LocalExamStore.getArtifactViewUrl(paper.artifact_uuid, { sessionToken });
+                const isImage = ['jpg', 'jpeg', 'png'].includes(paper.file_extension?.toLowerCase());
+                const previewContent = isImage 
+                    ? `<img src="${previewUrl}" alt="Paper preview" onerror="this.parentElement.innerHTML='<i class=\\'bi bi-image text-secondary\\' style=\\'font-size: 5rem;\\'></i>'">`
+                    : `<object data="${previewUrl}" type="application/pdf" style="width:100%; height:100%;">
+                            <iframe src="${previewUrl}" style="width:100%; height:100%; border:0;"></iframe>
+                       </object>`;
+                
+                return `
+                    <div class="col-md-6 col-lg-4 mb-4">
+                        <div class="card paper-card h-100">
+                            <div class="paper-preview">
+                                ${previewContent}
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h5 class="card-title mb-0">${paper.subject_code}</h5>
+                                    <span class="status-badge status-${statusClass}">${statusText}</span>
+                                </div>
+                                <p class="card-text text-primary small fw-semibold mb-1">${paper.exam_session || 'CIA-I'}</p>
+                                ${paper.subject_name ? `<p class="card-text text-muted small mb-1">${paper.subject_name}</p>` : ''}
+                                <p class="card-text text-muted small">
+                                    <i class="bi bi-file-earmark me-1"></i>
+                                    ${paper.filename || paper.original_filename}
+                                </p>
+                                <p class="card-text text-muted small mb-3">
+                                    <i class="bi bi-calendar me-1"></i>
+                                    Uploaded: ${new Date(paper.upload_timestamp).toLocaleDateString()}
+                                </p>
+                                ${paper.message ? `<p class="text-warning small"><i class="bi bi-exclamation-triangle me-1"></i>${paper.message}</p>` : ''}
+                                <div class="paper-actions mt-auto">
+                                    <button class="btn btn-outline-primary btn-sm flex-grow-1" onclick="viewPaper('${paper.artifact_uuid}', '${paper.subject_code}', ${isSubmitted})">
+                                        <i class="bi bi-eye me-1"></i> View
+                                    </button>
+                                    <button class="btn btn-outline-danger btn-sm" onclick="openReportModal('${paper.artifact_uuid}')">
+                                        <i class="bi bi-flag-fill me-1"></i> Report
+                                    </button>
+                                    ${!isSubmitted ? `
+                                        <button class="btn btn-submit btn-sm flex-grow-1" ${!canSubmit ? 'disabled' : ''} onclick="initSubmission('${paper.artifact_uuid}', '${paper.subject_code}', '${paper.filename || paper.original_filename}')">
+                                            <i class="bi bi-cloud-upload me-1"></i> Submit
+                                        </button>
+                                    ` : `
+                                        <button class="btn btn-success btn-sm flex-grow-1" disabled>
+                                            <i class="bi bi-check-circle me-1"></i> Done
+                                        </button>
+                                    `}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function updateStats() {
+            const total = papers.length;
+            const submitted = papers.filter(p => p.workflow_status === 'submitted_to_moodle').length;
+            const pending = total - submitted;
+            
+            document.getElementById('totalPapers').textContent = total;
+            document.getElementById('pendingPapers').textContent = pending;
+            document.getElementById('submittedPapers').textContent = submitted;
+        }
+        
+        function viewPaper(paperId, subjectCode, isSubmitted) {
+            currentPaperId = paperId;
+            
+            document.getElementById('modalPaperTitle').textContent = `${subjectCode} - Answer Sheet`;
+            // Include session token as URL parameter since iframes can't send custom headers
+            document.getElementById('paperFrame').src = window.LocalExamStore.getArtifactViewUrl(paperId, { sessionToken });
+            const submitButtons = [
+                document.getElementById('modalSubmitBtn'),
+                document.getElementById('modalSubmitBtnInline')
+            ];
+            submitButtons.forEach((btn) => {
+                if (!btn) return;
+                btn.style.display = 'inline-flex';
+                btn.disabled = !!isSubmitted;
+                btn.innerHTML = isSubmitted
+                    ? '<i class="bi bi-check-circle me-2"></i>Already Submitted'
+                    : '<i class="bi bi-cloud-upload me-2"></i>Submit to Moodle';
+            });
+            
+            const modal = new bootstrap.Modal(document.getElementById('viewPaperModal'));
+            modal.show();
+        }
+        
+        function submitFromModal() {
+            if (currentPaperId) {
+                const paper = papers.find(p => p.id === currentPaperId);
+                if (paper) {
+                    initSubmission(paper.id, paper.subject_code, paper.original_filename);
+                }
+            }
+        }
+
+        function openReportModal(artifactId) {
+            currentReportArtifact = artifactId;
+            document.getElementById('reportMessage').value = '';
+            document.getElementById('reportSuggestedReg').value = '';
+            document.getElementById('reportSuggestedSub').value = '';
+            const modal = new bootstrap.Modal(document.getElementById('reportModal'));
+            modal.show();
+        }
+
+        async function submitReport() {
+            const msg = document.getElementById('reportMessage').value.trim();
+            const suggestedReg = document.getElementById('reportSuggestedReg').value.trim();
+            const suggestedSub = document.getElementById('reportSuggestedSub').value.trim();
+
+            if (!msg) {
+                alert('Please enter a description of the problem.');
+                return;
+            }
+
+            const submitBtn = document.getElementById('reportSubmitBtn');
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Sending...';
+
+            try {
+                if (!sessionToken) {
+                    alert('Session missing or expired. Please login again.');
+                    logout();
+                    return;
+                }
+
+                // Send session both as header and query param as fallback
+                const url = `/student/paper/${encodeURIComponent(currentReportArtifact)}/report?session=${encodeURIComponent(sessionToken)}`;
+                const res = await fetch(url, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Session-ID': sessionToken
+                    },
+                    body: JSON.stringify({
+                        message: msg,
+                        suggested_reg_no: suggestedReg || null,
+                        suggested_subject_code: suggestedSub || null
+                    })
+                });
+
+                const data = await res.json();
+                if (res.status === 401) {
+                    alert('Session invalid or expired. Please login again.');
+                    logout();
+                    return;
+                }
+
+                if (res.ok) {
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('reportModal'));
+                    if (modal) modal.hide();
+                    showResult(true, 'Report Sent', `<p class="mb-0">Your report was submitted. Staff will review and respond.</p>`);
+                } else {
+                    alert(data.detail || data.message || 'Failed to submit report');
+                }
+            } catch (err) {
+                console.error('Report error', err);
+                alert('Failed to submit report. Please try again later.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Submit Report';
+            }
+        }
+        
+        function initSubmission(paperId, subjectCode, filename) {
+            currentPaperId = paperId;
+            
+            document.getElementById('confirmSubject').textContent = subjectCode;
+            document.getElementById('confirmFilename').textContent = filename;
+            
+            const viewModal = bootstrap.Modal.getInstance(document.getElementById('viewPaperModal'));
+            if (viewModal) viewModal.hide();
+            
+            const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+            confirmModal.show();
+        }
+        
+        async function confirmSubmission() {
+            const confirmModal = bootstrap.Modal.getInstance(document.getElementById('confirmModal'));
+            confirmModal.hide();
+            
+            showLoading();
+            
+            try {
+                const response = await fetch(`/student/submit/${currentPaperId}`, {
+                    method: 'POST',
+                    headers: {
+                        'X-Session-ID': sessionToken
+                    }
+                });
+                
+                const data = await response.json();
+                
+                hideLoading();
+                
+                if (response.ok && data.success) {
+                    showResult(true, 'Submission Successful!', `
+                        <i class="bi bi-check-circle text-success" style="font-size: 5rem;"></i>
+                        <h4 class="mt-4">Paper Submitted Successfully</h4>
+                        <p class="text-muted">Your answer sheet has been submitted to Moodle.</p>
+                        ${data.moodle_submission_id ? `<small class="text-muted">Submission ID: ${data.moodle_submission_id}</small>` : ''}
+                    `);
+                    
+                    await loadPapers();
+                } else {
+                    showResult(false, 'Submission Failed', `
+                        <i class="bi bi-x-circle text-danger" style="font-size: 5rem;"></i>
+                        <h4 class="mt-4">Submission Failed</h4>
+                        <p class="text-muted">${data.detail || data.message || 'An error occurred during submission.'}</p>
+                    `);
+                }
+            } catch (error) {
+                hideLoading();
+                showResult(false, 'Error', `
+                    <i class="bi bi-exclamation-triangle text-warning" style="font-size: 5rem;"></i>
+                    <h4 class="mt-4">Connection Error</h4>
+                    <p class="text-muted">Failed to connect to the server. Please try again.</p>
+                `);
+            }
+        }
+        
+        function showResult(success, title, content) {
+            const header = document.getElementById('resultModalHeader');
+            header.style.background = success 
+                ? 'linear-gradient(135deg, #059669, #047857)' 
+                : 'linear-gradient(135deg, #dc2626, #b91c1c)';
+            
+            document.getElementById('resultModalTitle').textContent = title;
+            document.getElementById('resultModalBody').innerHTML = content;
+            
+            const resultModal = new bootstrap.Modal(document.getElementById('resultModal'));
+            resultModal.show();
+        }
+        
+        function showLoading() {
+            loadingOverlay.classList.add('active');
+        }
+        
+        function hideLoading() {
+            loadingOverlay.classList.remove('active');
+        }
+
+        // Toast helper for non-blocking notifications
+        function showToast(title, htmlContent, variant = 'info') {
+            try {
+                if (variant === 'info' && htmlContent && !String(htmlContent).includes('<') && !String(title).includes('<')) {
+                    htmlContent = title;
+                    title = variant === 'info' ? 'Notice' : variant;
+                }
+                const container = document.getElementById('toastContainer');
+                const toastEl = document.createElement('div');
+                const toneClass = variant === 'success'
+                    ? 'text-bg-success'
+                    : variant === 'danger'
+                        ? 'text-bg-danger'
+                        : variant === 'warning'
+                            ? 'text-bg-warning'
+                            : 'text-bg-light';
+                toastEl.className = `toast align-items-center ${toneClass} border-0`;
+                toastEl.setAttribute('role', 'alert');
+                toastEl.setAttribute('aria-live', 'polite');
+                toastEl.setAttribute('aria-atomic', 'true');
+
+                const header = document.createElement('div');
+                header.className = 'd-flex justify-content-between align-items-center p-2';
+                header.style.borderBottom = '1px solid rgba(0,0,0,0.05)';
+
+                const titleEl = document.createElement('strong');
+                titleEl.className = 'me-auto';
+                titleEl.innerHTML = title;
+
+                const btnClose = document.createElement('button');
+                btnClose.type = 'button';
+                btnClose.className = 'btn-close btn-close-white me-2';
+                btnClose.setAttribute('data-bs-dismiss', 'toast');
+                btnClose.setAttribute('aria-label', 'Close');
+
+                header.appendChild(titleEl);
+                header.appendChild(btnClose);
+
+                const body = document.createElement('div');
+                body.className = 'toast-body p-3';
+                body.innerHTML = htmlContent;
+
+                toastEl.appendChild(header);
+                toastEl.appendChild(body);
+
+                container.appendChild(toastEl);
+
+                const bsToast = new bootstrap.Toast(toastEl, { delay: 8000 });
+                bsToast.show();
+
+                toastEl.addEventListener('hidden.bs.toast', () => {
+                    try { container.removeChild(toastEl); } catch (e) {}
+                });
+            } catch (e) {
+                console.warn('Could not show toast', e);
+            }
+        }
+
+        // Fetch student's reports and update notification badge
+        async function loadReportNotifications() {
+            if (!sessionToken) return;
+            try {
+                const res = await fetch('/student/reports', {
+                    headers: { 'X-Session-ID': sessionToken }
+                });
+                if (!res.ok) return;
+                const reports = await res.json();
+                const unresolved = (reports || []).filter(r => !r.resolved).length;
+                // detect newly resolved reports
+                try {
+                    const prevMap = {};
+                    (studentReportsCache || []).forEach(r => { prevMap[String(r.id)] = r; });
+                    const newlyResolved = [];
+                    (reports || []).forEach(r => {
+                        const prev = prevMap[String(r.id)];
+                        if (prev && !prev.resolved && r.resolved) {
+                            newlyResolved.push(r);
+                        }
+                    });
+                    if (newlyResolved.length) {
+                        newlyResolved.forEach(nr => {
+                            showToast('Report Resolved', `
+                                <h6 class="mb-1">Your report for paper ${nr.artifact_uuid || nr.artifact_id} was resolved</h6>
+                                <div class="small text-muted">Resolved by: ${nr.resolved_by || '-'} on ${nr.resolved_at ? new Date(nr.resolved_at).toLocaleString() : '-'}</div>
+                                ${nr.resolved_note ? `<div class="mt-2">Note: ${nr.resolved_note}</div>` : ''}
+                            `, 'success');
+                        });
+                    }
+                } catch (e) {
+                    console.warn('report change detection failed', e);
+                }
+                const btn = document.getElementById('reportsBtn');
+                const badge = document.getElementById('reportsBadge');
+                // Always show the reports (bell) button; only show badge when there are unresolved reports
+                btn.style.display = 'inline-block';
+                if (unresolved > 0) {
+                    badge.style.display = 'inline-block';
+                    badge.textContent = String(unresolved);
+                } else {
+                    badge.style.display = 'none';
+                }
+                // update cache
+                studentReportsCache = reports || [];
+            } catch (e) {
+                console.warn('Could not load report notifications', e);
+            }
+        }
+
+        async function openMyReportsModal() {
+            const modalEl = document.getElementById('myReportsModal');
+            const bodyEl = document.getElementById('myReportsModalBody');
+            const modal = new bootstrap.Modal(modalEl);
+            bodyEl.innerHTML = '<div class="text-center py-4 text-muted">Loading...</div>';
+            modal.show();
+
+            try {
+                const res = await fetch('/student/reports', { headers: { 'X-Session-ID': sessionToken } });
+                if (!res.ok) {
+                    bodyEl.innerHTML = '<div class="alert alert-danger">Failed to load reports.</div>';
+                    return;
+                }
+
+                const reports = await res.json();
+                if (!reports || !reports.length) {
+                    bodyEl.innerHTML = '<div class="text-center text-muted py-4"><i class="bi bi-chat-left-dots fs-1"></i><p class="mt-2">You have not submitted any reports.</p></div>';
+                    return;
+                }
+
+                let html = '<div class="list-group">';
+                reports.forEach(r => {
+                    html += `<div class="list-group-item">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <strong>${r.artifact_uuid || 'Paper'}</strong>
+                                <div class="small text-muted">Submitted: ${new Date(r.created_at).toLocaleString()}</div>
+                            </div>
+                            <div class="text-end">
+                                ${r.resolved ? `<span class="badge bg-success">Resolved</span>` : `<span class="badge bg-warning text-dark">Pending</span>`}
+                                <button class="btn btn-sm btn-outline-danger ms-2" onclick="deleteStudentReport(${r.id})">Delete</button>
+                            </div>
+                        </div>
+                        <div class="mt-2">${r.description || ''}</div>
+                        ${r.resolved ? `<div class="mt-2 small text-muted">Resolved by: ${r.resolved_by || '-'} on ${r.resolved_at ? new Date(r.resolved_at).toLocaleString() : '-' }${r.resolved_note ? `<div>Note: ${r.resolved_note}</div>` : ''}</div>` : ''}
+                    </div>`;
+                });
+                html += '</div>';
+                bodyEl.innerHTML = html;
+            } catch (err) {
+                console.error('Error loading student reports', err);
+                bodyEl.innerHTML = '<div class="alert alert-danger">Error loading reports</div>';
+            }
+        }
+
+        // Allow student to delete their own report (withdraw)
+        async function deleteStudentReport(reportId) {
+            if (!reportId) return;
+            try {
+                const res = await fetch(`/student/reports/${encodeURIComponent(reportId)}`, {
+                    method: 'DELETE',
+                    headers: { 'X-Session-ID': sessionToken }
+                });
+                const data = await res.json().catch(() => ({}));
+                if (res.ok) {
+                    // Refresh modal and notification badge (no success toast to avoid duplicate messages)
+                    await loadReportNotifications();
+                    await openMyReportsModal();
+                } else {
+                    showToast(data.detail || data.message || 'Failed to delete report', 'danger');
+                }
+            } catch (err) {
+                console.error('Error deleting report', err);
+                showToast('Error deleting report', 'danger');
+            }
+        }
+
+        // Polling scheduler (configurable)
+        let reportPollTimerId = null;
+
+        function getPollIntervalMs() {
+            const v = localStorage.getItem('reportPollIntervalMs');
+            return v ? parseInt(v, 10) : 30000;
+        }
+
+        function scheduleNextReportPoll() {
+            const interval = getPollIntervalMs();
+            if (reportPollTimerId) {
+                clearTimeout(reportPollTimerId);
+                reportPollTimerId = null;
+            }
+            reportPollTimerId = setTimeout(async () => {
+                if (sessionToken) await loadReportNotifications();
+                scheduleNextReportPoll();
+            }, interval);
+        }
+
+        function startReportPolling() {
+            scheduleNextReportPoll();
+        }
+
+        function stopReportPolling() {
+            if (reportPollTimerId) {
+                clearTimeout(reportPollTimerId);
+                reportPollTimerId = null;
+            }
+        }
+
+        // Wire up polling interval controls
+        document.addEventListener('DOMContentLoaded', () => {
+            try {
+                const cur = String(getPollIntervalMs());
+                const radios = document.getElementsByName('pollInterval');
+                radios.forEach(r => { if (r.value === cur) r.checked = true; });
+            } catch (e) {}
+
+            const saveBtn = document.getElementById('savePollIntervalBtn');
+            if (saveBtn) {
+                saveBtn.addEventListener('click', () => {
+                    try {
+                        const radios = document.getElementsByName('pollInterval');
+                        let selected = null;
+                        radios.forEach(r => { if (r.checked) selected = r.value; });
+                        if (selected) {
+                            localStorage.setItem('reportPollIntervalMs', String(selected));
+                            // restart polling with new interval
+                            if (sessionToken) {
+                                startReportPolling();
+                            }
+                            const dd = document.querySelector('#reportsSettingsBtn');
+                            if (dd) dd.click();
+                        }
+                    } catch (e) { console.warn(e); }
+                });
+            }
+        });
+    </script>
+    <!-- Removed artificial loader overlay and delay to prevent double-submit UX issues -->
+</body>
+</html>

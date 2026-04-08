@@ -1,0 +1,2104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Portal - Examination Middleware</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1d4ed8;
+            --accent-color: #3b82f6;
+            --dark-accent: #1e40af;
+            --bg-color: #f8fafc;
+            --card-bg: #ffffff;
+            --border-color: #e2e8f0;
+            --text-primary: #0f172a;
+            --text-secondary: #64748b;
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: var(--bg-color);
+            min-height: 100vh;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: var(--text-primary);
+        }
+        
+        .main-container {
+            max-width: 1280px;
+            padding: 2rem 1.5rem;
+        }
+        
+        /* Cards */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            transition: border-color 0.2s ease;
+        }
+        
+        .card:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .login-card {
+            max-width: 500px;
+            margin: 4rem auto;
+        }
+        
+        .card-header {
+            background: var(--primary-color);
+            color: white;
+            border-radius: 12px 12px 0 0 !important;
+            padding: 2rem;
+            border: none;
+        }
+        
+        .card-header h4, .card-header h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 0;
+        }
+        
+        /* Navbar */
+        .navbar {
+            background: var(--card-bg) !important;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+        }
+        
+        .navbar-brand {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            font-size: 1.3rem;
+            color: var(--primary-color) !important;
+        }
+        
+        /* Stats cards */
+        .stats-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 2rem 1.5rem;
+            text-align: center;
+            color: white;
+            margin-bottom: 1.5rem;
+            transition: border-color 0.2s ease;
+        }
+        
+        .stats-card:hover {
+            border-color: currentColor;
+        }
+        
+        .stats-card.total { 
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            border-color: #6366f1;
+        }
+        .stats-card.valid { 
+            background: linear-gradient(135deg, #10b981, #059669);
+            border-color: #10b981;
+        }
+        .stats-card.invalid { 
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            border-color: #ef4444;
+        }
+        .stats-card.uploaded { 
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            border-color: #3b82f6;
+        }
+        
+        .stats-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            font-family: 'Poppins', sans-serif;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+        
+        .stats-card small {
+            font-weight: 500;
+            opacity: 0.95;
+            font-size: 0.95rem;
+        }
+        
+        /* Upload zone */
+        .upload-zone {
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            padding: 3.5rem 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: #f8fafc;
+        }
+        
+        .upload-zone:hover,
+        .upload-zone.dragover {
+            border-color: var(--primary-color);
+            background: #eff6ff;
+        }
+        
+        .upload-zone i {
+            font-size: 4rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .upload-zone h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        /* File items */
+        .file-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+            border: 1px solid var(--border-color);
+            transition: border-color 0.2s ease;
+            background: var(--card-bg);
+        }
+        
+        .file-item:hover {
+            border-color: var(--primary-color);
+        }
+        
+        .file-item.valid {
+            background: #f0fdf4;
+            border-color: #86efac;
+        }
+        
+        .file-item.invalid {
+            background: #fef2f2;
+            border-color: #fca5a5;
+        }
+        
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .file-info i {
+            font-size: 1.75rem;
+        }
+        
+        .file-info strong {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        /* Buttons */
+        .btn-primary {
+            background: var(--primary-color);
+            border: none;
+            padding: 0.875rem 2rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-1px);
+        }
+        
+        .btn-primary:disabled {
+            background: #cbd5e1;
+            transform: none;
+        }
+        
+        .btn-outline-secondary {
+            border: 2px solid var(--border-color);
+            color: var(--text-secondary);
+            font-weight: 600;
+            border-radius: 8px;
+            padding: 0.875rem 2rem;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-outline-secondary:hover {
+              background: var(--secondary-color);
+              color: #fff;
+              border-color: var(--secondary-color);
+        }
+        
+        .btn-outline-danger {
+            border: 2px solid #fca5a5;
+            color: #dc2626;
+            transition: all 0.2s ease;
+        }
+        
+        .btn-outline-danger:hover {
+                background: #dc2626;
+                color: #fff;
+                border-color: #dc2626;
+        }
+
+        .btn-danger {
+            background: #dc2626;
+            border-color: #dc2626;
+            font-weight: 600;
+        }
+
+        .btn-danger:hover {
+            background: #b91c1c;
+            border-color: #b91c1c;
+        }
+
+            /* Add for btn-outline-primary (refresh) */
+            .btn-outline-primary {
+                    border: 2px solid var(--accent-color);
+                    color: var(--accent-color);
+                    background: #fff;
+                    font-weight: 600;
+                    border-radius: 8px;
+                    padding: 0.875rem 2rem;
+                    transition: all 0.2s ease;
+            }
+            .btn-outline-primary:hover {
+                    background: var(--accent-color);
+                    color: #fff !important;
+                    border-color: var(--accent-color);
+            }
+        
+        /* Form styles */
+        .form-control {
+            border-radius: 8px;
+            padding: 0.875rem 1rem;
+            border: 1px solid var(--border-color);
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+        }
+        
+        .input-group-text {
+            background: #f8fafc;
+            border: 1px solid var(--border-color);
+            border-right: none;
+            border-radius: 8px 0 0 8px;
+            color: var(--primary-color);
+        }
+        
+        .input-group .form-control {
+            border-left: none;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .form-label {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Progress bar */
+        .progress-container {
+            display: none;
+        }
+        
+        .progress-container.active {
+            display: block;
+        }
+        
+        .progress {
+            border-radius: 50px;
+            overflow: hidden;
+            background: #e5e7eb;
+            height: 8px;
+        }
+        
+        .progress-bar {
+            background: var(--primary-color);
+        }
+        
+        /* Alerts */
+        .alert {
+            border-radius: 8px;
+            border: none;
+            padding: 1rem 1.25rem;
+        }
+        
+        .alert-info {
+            background: #eff6ff;
+            color: #1e40af;
+            border-left: 3px solid var(--primary-color);
+        }
+        
+        .alert-success {
+            background: #f0fdf4;
+            color: #065f46;
+            border-left: 3px solid #10b981;
+        }
+        
+        .alert-danger {
+            background: #fef2f2;
+            color: #991b1b;
+            border-left: 3px solid #ef4444;
+        }
+        
+        .alert-warning {
+            background: #fffbeb;
+            color: #92400e;
+            border-left: 3px solid #f59e0b;
+        }
+        
+        .alert code {
+            background: rgba(0, 0, 0, 0.05);
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        /* List group for results */
+        .list-group-item {
+            border: 1px solid var(--border-color);
+            padding: 1rem 1.25rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+            background: var(--card-bg);
+            transition: border-color 0.2s ease;
+        }
+        
+        .list-group-item:hover {
+            border-color: var(--primary-color);
+        }
+        
+        /* Sections visibility */
+        #loginSection, #uploadSection {
+            display: none;
+        }
+        
+        #loginSection.active, #uploadSection.active {
+            display: block;
+        }
+        
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-color);
+            border-radius: 10px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--card-bg);
+            border-top: 1px solid var(--border-color);
+            padding: 2rem 0 1rem;
+            margin-top: 3rem;
+        }
+        
+        .footer h5 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+        }
+        
+        .footer p, .footer a {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+        
+        .footer a {
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+        
+        .footer a:hover {
+            color: var(--primary-color);
+        }
+        
+        .footer-logo {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+        
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: #f8fafc;
+            color: var(--text-secondary);
+            margin-right: 0.5rem;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border-color);
+        }
+        
+        .social-links a:hover {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+            transform: translateY(-2px);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid var(--border-color);
+            padding-top: 1.5rem;
+            margin-top: 2rem;
+            text-align: center;
+        }
+        
+        .footer-bottom p {
+            margin-bottom: 0;
+            font-size: 0.85rem;
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+            }
+            
+            .stats-card {
+                margin-bottom: 1rem;
+            }
+            
+            .stats-number {
+                font-size: 2rem;
+            }
+            
+            .upload-zone {
+                padding: 2.5rem 1.5rem;
+            }
+            
+            .upload-zone i {
+                font-size: 3rem;
+            }
+        }
+
+        /* Loader styles */
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.95);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+
+        .loading-overlay.active {
+            display: flex;
+        }
+
+        .loading-spinner {
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--border-color);
+            border-top-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Compact action buttons for table rows (enterprise-friendly) */
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            height: 34px;              /* target 32-36px */
+            padding: 6px 10px;         /* compact padding */
+            font-size: 13px;          /* slightly smaller text */
+            border-radius: 6px;       /* subtle corners */
+            min-width: 0;             /* let content size naturally */
+            white-space: nowrap;
+        }
+        .action-btn .bi {
+            margin-right: 6px;
+            font-size: 14px;          /* compact icon */
+        }
+        /* Slightly reduce visual weight for outline buttons inside tables */
+        table .btn-outline-primary, table .btn-outline-secondary, table .btn-outline-danger {
+            border-width: 1px;
+            padding: 6px 10px;
+            font-size: 13px;
+        }
+
+        .artifact-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .artifact-actions .action-btn {
+            margin: 0 !important;
+        }
+
+        .artifact-actions .badge {
+            line-height: 1;
+        }
+
+        .modal-content {
+            border: 0;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 24px 64px rgba(15, 23, 42, 0.18);
+        }
+
+        .modal-header {
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .modal-body {
+            padding: 1.5rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: flex-end;
+            padding: 1rem 1.5rem 1.25rem;
+            border-top: 1px solid var(--border-color);
+            background: #f8fafc;
+        }
+
+        .modal-footer .btn {
+            min-width: 140px;
+        }
+
+        .confirm-inline-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            justify-content: flex-end;
+            margin-top: 1.25rem;
+        }
+
+        .confirm-inline-actions .btn {
+            min-width: 140px;
+        }
+        /* Preserve small tappable area on mobile */
+        @media (max-width: 576px) {
+            .action-btn { height: auto; padding: 8px 12px; font-size: 14px; }
+            table .btn-outline-primary, table .btn-outline-secondary, table .btn-outline-danger { padding: 8px 12px; }
+            .modal-body,
+            .modal-header,
+            .modal-footer {
+                padding-left: 1rem;
+                padding-right: 1rem;
+            }
+            .modal-footer .btn,
+            .confirm-inline-actions .btn {
+                width: 100%;
+            }
+        }
+    </style>
+    <link href="/static/css/style.css?v=2" rel="stylesheet">
+    <script src="/static/js/local_mode.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light mb-4">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <img src="https://saveetha.ac.in/wp-content/uploads/2024/03/sec-logo-01as.png" alt="Saveetha Logo" style="height:80px;" />
+            </a>
+            <div class="navbar-nav ms-auto align-items-center">
+                <span class="navbar-text me-3" id="userInfo" style="display: none;">
+                    <i class="bi bi-person-circle me-1 text-primary"></i>
+                    <span id="userName" class="fw-semibold"></span>
+                </span>
+                <button class="btn btn-outline-danger btn-sm px-3" id="logoutBtn" style="display: none;" onclick="logout()">
+                    <i class="bi bi-box-arrow-right me-1"></i> Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container main-container">
+        <!-- Login Section -->
+        <div id="loginSection" class="active">
+            <div class="card login-card">
+                <div class="card-header text-center">
+                    <h4>
+                        <i class="bi bi-shield-lock-fill me-2"></i>
+                        Staff Login
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+                                <input type="text" class="form-control" id="username" required placeholder="Enter your username">
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="bi bi-key-fill"></i></span>
+                                <input type="password" class="form-control" id="password" required placeholder="Enter your password">
+                            </div>
+                        </div>
+                        <div id="loginError" class="alert alert-danger" style="display: none;"></div>
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+                            Login
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Upload Section -->
+        <div id="uploadSection">
+            <div class="row mb-4">
+                <div class="col-md-3 col-6">
+                    <div class="stats-card total">
+                        <div class="stats-number" id="totalFiles">0</div>
+                        <small><i class="bi bi-files me-1"></i>Selected Files</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stats-card valid">
+                        <div class="stats-number" id="validFiles">0</div>
+                        <small><i class="bi bi-check-circle me-1"></i>Valid Files</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stats-card invalid">
+                        <div class="stats-number" id="invalidFiles">0</div>
+                        <small><i class="bi bi-x-circle me-1"></i>Invalid Files</small>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stats-card uploaded">
+                        <div class="stats-number" id="uploadedFiles">0</div>
+                        <small><i class="bi bi-cloud-check me-1"></i>Total Uploaded</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-cloud-upload-fill me-2"></i>
+                        Upload Examination Papers
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <div class="alert alert-info mb-4">
+                        <i class="bi bi-info-circle-fill me-2"></i>
+                        <strong>Filename Format:</strong> <code>{RegisterNumber}_{SubjectCode}.{pdf|jpg|jpeg|png}</code>
+                        <br>
+                        <small class="d-block mt-1">Example: <code>611221104088_19AI405.pdf</code></small>
+                    </div>
+
+                    <div class="row g-3 align-items-end mb-4">
+                        <div class="col-lg-6">
+                            <label for="examSessionSelect" class="form-label fw-semibold">Choose CIA Session</label>
+                            <select class="form-select form-select-lg" id="examSessionSelect">
+                                <option value="">Select where these files should be uploaded</option>
+                                <option value="CIA-I">CIA I</option>
+                                <option value="CIA-II">CIA II</option>
+                                <option value="CIA-III">CIA III</option>
+                            </select>
+                            <small class="text-muted d-block mt-2">The upload button appears only after you choose a CIA session.</small>
+                        </div>
+                    </div>
+
+                    <div class="upload-zone" id="uploadZone">
+                        <i class="bi bi-cloud-arrow-up-fill"></i>
+                        <h5 class="mt-2">Drag & Drop Files Here</h5>
+                        <p class="text-muted mb-0">or click to browse your files</p>
+                        <input type="file" id="fileInput" multiple accept=".pdf,.jpg,.jpeg,.png" style="display: none;">
+                    </div>
+
+                    <div class="progress-container mt-4" id="progressContainer">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="fw-semibold">Uploading files...</span>
+                            <span id="progressText" class="fw-bold text-primary">0%</span>
+                        </div>
+                        <div class="progress" style="height: 12px;">
+                            <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+                        </div>
+                    </div>
+
+                    <div class="file-list mt-4" id="fileList"></div>
+
+                    <div class="d-flex gap-3 mt-4">
+                        <button class="btn btn-primary flex-grow-1" id="uploadBtn" disabled onclick="uploadFiles()" style="display: none;">
+                            <i class="bi bi-cloud-upload-fill me-2"></i>
+                            Upload Valid Files
+                        </button>
+                        <button class="btn btn-outline-secondary" onclick="clearFiles()">
+                            <i class="bi bi-trash me-2"></i>
+                            Clear All
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Upload Results -->
+            <div class="card mt-4" id="resultsCard" style="display: none;">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="bi bi-list-check me-2"></i>
+                        Upload Results
+                    </h5>
+                </div>
+                <div class="card-body p-4">
+                    <div id="uploadResults"></div>
+                </div>
+            </div>
+
+            <!-- Previously Uploaded Files -->
+            <div class="card mt-4" id="pendingFilesCard">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h5 class="mb-0">
+                        <i class="bi bi-file-earmark-pdf-fill me-2"></i>
+                        Previously Uploaded Files
+                    </h5>
+                    <button class="btn btn-sm btn-outline-primary" onclick="loadPendingFiles()">
+                        <i class="bi bi-arrow-clockwise me-1"></i>
+                        Refresh
+                    </button>
+                </div>
+                <div class="card-body p-4">
+                    <div class="mb-3">
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-search"></i></span>
+                            <input type="search" id="pendingFilesSearch" class="form-control" placeholder="Search files, reg no, subject, status...">
+                        </div>
+                    </div>
+
+                    <div id="pendingFilesList">
+                        <div class="text-center text-muted py-4">
+                            <i class="bi bi-hourglass-split fs-1"></i>
+                            <p class="mt-2">Loading...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer removed for faculty grading page -->
+    <style>
+        /* Remove reserved bottom padding on this page since footer is omitted */
+        body { padding-bottom: 0 !important; }
+    </style>
+
+    <!-- Reports Modal -->
+    <div class="modal fade" id="reportsModal" tabindex="-1">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reportsModalTitle">Reports</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="reportsModalBody">
+                    <!-- Reports will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loader Overlay -->
+    <div class="loader-overlay" id="loadingOverlay" role="status" aria-hidden="true">
+        <div style="text-align:center;">
+            <div class="spinner" aria-hidden="true">
+                <div></div><div></div><div></div><div></div><div></div>
+                <div></div><div></div><div></div><div></div><div></div>
+            </div>
+            
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // State
+        let authToken = null; 
+        let selectedFiles = [];
+        let validatedFiles = [];
+        let pendingArtifacts = []; // cached server-side file list for searching/filtering
+        let serverUploadedCount = 0; // Track server uploaded files
+        
+        // Filename pattern
+        const FILENAME_PATTERN = /^(\d{12})_([A-Z0-9]{2,10})\.(pdf|jpg|jpeg|png)$/i;
+        
+        // DOM Elements
+        const loginSection = document.getElementById('loginSection');
+        const uploadSection = document.getElementById('uploadSection');
+        const loginForm = document.getElementById('loginForm');
+        const uploadZone = document.getElementById('uploadZone');
+        const fileInput = document.getElementById('fileInput');
+        const fileList = document.getElementById('fileList');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const examSessionSelect = document.getElementById('examSessionSelect');
+        const userInfo = document.getElementById('userInfo');
+        const userName = document.getElementById('userName');
+        const logoutBtn = document.getElementById('logoutBtn');
+        
+        // Check for existing session
+        document.addEventListener('DOMContentLoaded', async () => {
+            const token = localStorage.getItem('authToken');
+            const user = localStorage.getItem('userName');
+            if (token && user) {
+                authToken = token;
+                
+                // Verify token is still valid before showing upload section
+                try {
+                    const response = await fetch('/upload/all', {
+                        headers: {
+                            'Authorization': `Bearer ${authToken}`
+                        }
+                    });
+                    
+                    if (response.status === 401) {
+                        // Token expired, clear and show login
+                        localStorage.removeItem('authToken');
+                        localStorage.removeItem('userName');
+                        authToken = null;
+                        return;
+                    }
+                    
+                    // Token valid, show upload section
+                    showUploadSection(user);
+                } catch (error) {
+                    console.error('Session validation error:', error);
+                    // On network error, still try to show upload section
+                    showUploadSection(user);
+                }
+            }
+        });
+        
+        // Login form handler
+        loginForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const params = new URLSearchParams();
+                params.append('username', username);
+                params.append('password', password);
+                
+                const response = await fetch('/auth/staff/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: params.toString()
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok && data.access_token) {
+                    authToken = data.access_token;
+                    localStorage.setItem('authToken', authToken);
+                    localStorage.setItem('userName', username);
+                    showUploadSection(username);
+                } else {
+                    showLoginError(data.detail || 'Login failed. Please check your credentials.');
+                }
+            } catch (error) {
+                showLoginError('Connection error. Please try again.');
+            }
+        });
+        
+        function showLoginError(message) {
+            const errorDiv = document.getElementById('loginError');
+            errorDiv.textContent = message;
+            errorDiv.style.display = 'block';
+            errorDiv.style.animation = 'fadeInUp 0.3s ease-out';
+        }
+        
+        function showUploadSection(user) {
+            loginSection.classList.remove('active');
+            uploadSection.classList.add('active');
+            loginSection.style.display = 'none';
+            uploadSection.style.display = 'block';
+            userInfo.style.display = 'block';
+            userName.textContent = user;
+            logoutBtn.style.display = 'block';
+            // Only load if we haven't already loaded during token validation
+            if (document.getElementById('pendingFilesList').innerHTML.includes('Loading...')) {
+                loadPendingFiles();
+            }
+        }
+        
+        async function loadPendingFiles() {
+            const pendingFilesList = document.getElementById('pendingFilesList');
+            
+            // Check if authToken exists
+            if (!authToken) {
+                pendingFilesList.innerHTML = `
+                    <div class="alert alert-warning mb-0">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Please login to view uploaded files.
+                    </div>
+                `;
+                return;
+            }
+            
+            // Show loading state
+            pendingFilesList.innerHTML = `
+                <div class="text-center text-muted py-4">
+                    <i class="bi bi-hourglass-split fs-1"></i>
+                    <p class="mt-2">Loading...</p>
+                </div>
+            `;
+            
+            // Try multiple possible endpoints
+            const possibleEndpoints = [
+                '/upload/all',
+                '/upload/list',
+                '/upload/',
+                '/upload',
+                '/artifacts',
+                '/files'
+            ];
+            
+            let response = null;
+            let successEndpoint = null;
+            
+            for (const endpoint of possibleEndpoints) {
+                try {
+                    const res = await fetch(endpoint, {
+                        headers: {
+                            'Authorization': `Bearer ${authToken}`
+                        }
+                    });
+                    
+                    if (res.status === 401) {
+                        logout();
+                        return;
+                    }
+                    
+                    if (res.ok) {
+                        response = res;
+                        successEndpoint = endpoint;
+                        console.log('Found working endpoint:', endpoint);
+                        break;
+                    }
+                } catch (e) {
+                    console.log(`Endpoint ${endpoint} failed:`, e.message);
+                }
+            }
+            
+            if (!response) {
+                // Update stats to show we couldn't load server data
+                serverUploadedCount = 0;
+                updateStats();
+                pendingFilesList.innerHTML = `
+                    <div class="alert alert-info mb-0">
+                        <i class="bi bi-info-circle me-2"></i>
+                        Unable to load previously uploaded files. The listing API endpoint may not be available.
+                        <br><small class="text-muted">Files are being uploaded successfully. Check with your administrator for the correct endpoint.</small>
+                    </div>
+                `;
+                return;
+            }
+            
+            try {
+                const data = await response.json();
+                console.log('Pending files response from', successEndpoint, ':', data);
+                
+                // Handle different possible response structures
+                let artifacts = null;
+                let total = 0;
+                
+                if (Array.isArray(data)) {
+                    artifacts = data;
+                    total = data.length;
+                } else if (data.artifacts && Array.isArray(data.artifacts)) {
+                    artifacts = data.artifacts;
+                    total = data.total || data.artifacts.length;
+                } else if (data.files && Array.isArray(data.files)) {
+                    artifacts = data.files;
+                    total = data.total || data.files.length;
+                } else if (data.data && Array.isArray(data.data)) {
+                    artifacts = data.data;
+                    total = data.total || data.data.length;
+                } else if (data.uploads && Array.isArray(data.uploads)) {
+                    artifacts = data.uploads;
+                    total = data.total || data.uploads.length;
+                } else if (data.items && Array.isArray(data.items)) {
+                    artifacts = data.items;
+                    total = data.total || data.items.length;
+                } else if (data.results && Array.isArray(data.results)) {
+                    artifacts = data.results;
+                    total = data.total || data.results.length;
+                }
+                
+                // Compute visible artifacts (exclude items marked deleted by staff)
+                let visibleArtifacts = [];
+                if (Array.isArray(artifacts)) {
+                    visibleArtifacts = artifacts.filter(a => {
+                        const err = (a.error_message || a.error || a.errorMessage || '').toString();
+                        if (err && err.includes('Deleted by staff')) return false;
+                        const ws = (a.workflow_status || a.status || '').toString().toLowerCase();
+                        if (ws === 'deleted') return false;
+                        return true;
+                    });
+                }
+
+                // Update server uploaded count and refresh stats using visible artifacts
+                serverUploadedCount = (visibleArtifacts && visibleArtifacts.length) || total || (artifacts ? artifacts.length : 0);
+                updateStats();
+
+                if (visibleArtifacts && visibleArtifacts.length > 0) {
+                    // Cache only visible artifacts for client-side search/filtering
+                    pendingArtifacts = visibleArtifacts;
+                    // Render initial (unfiltered) view
+                    renderPendingFiles('');
+                } else if (artifacts && artifacts.length === 0) {
+                    pendingFilesList.innerHTML = `
+                        <div class="text-center text-muted py-4">
+                            <i class="bi bi-inbox fs-1"></i>
+                            <p class="mt-2 mb-0">No files uploaded yet</p>
+                        </div>
+                    `;
+                } else {
+                    console.error('Unexpected response structure:', data);
+                    pendingFilesList.innerHTML = `
+                        <div class="alert alert-warning mb-0">
+                            <i class="bi bi-exclamation-triangle me-2"></i>
+                            Unexpected response format from server.
+                            <br><small class="text-muted">Response keys: ${Object.keys(data || {}).join(', ') || 'none'}</small>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Parse error:', error);
+                serverUploadedCount = 0;
+                updateStats();
+                pendingFilesList.innerHTML = `
+                    <div class="alert alert-warning mb-0">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        Could not parse response: ${error.message}
+                    </div>
+                `;
+            }
+        }
+        
+        function getStatusBadge(status) {
+            const statusMap = {
+                'pending': { class: 'bg-warning text-dark', icon: 'hourglass-split', text: 'Pending' },
+                'processing': { class: 'bg-info', icon: 'arrow-repeat', text: 'Processing' },
+                'submitted': { class: 'bg-success', icon: 'check-circle', text: 'Submitted' },
+                'failed': { class: 'bg-danger', icon: 'x-circle', text: 'Failed' },
+                'deleted': { class: 'bg-secondary text-white', icon: 'trash', text: 'Deleted' },
+                'completed': { class: 'bg-success', icon: 'check2-all', text: 'Completed' }
+            };
+            const s = statusMap[status?.toLowerCase()] || { class: 'bg-secondary', icon: 'question-circle', text: status || 'Unknown' };
+            return `<span class="badge ${s.class}"><i class="bi bi-${s.icon} me-1"></i>${s.text}</span>`;
+        }
+        
+        function logout() {
+            authToken = null;
+            serverUploadedCount = 0; // Reset server count on logout
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userName');
+            uploadSection.classList.remove('active');
+            loginSection.classList.add('active');
+            uploadSection.style.display = 'none';
+            loginSection.style.display = 'block';
+            userInfo.style.display = 'none';
+            logoutBtn.style.display = 'none';
+            clearFiles();
+            // Reset all stats to 0
+            document.getElementById('totalFiles').textContent = '0';
+            document.getElementById('validFiles').textContent = '0';
+            document.getElementById('invalidFiles').textContent = '0';
+            document.getElementById('uploadedFiles').textContent = '0';
+        }
+
+        // Render pending files with optional client-side search/filter
+        function renderPendingFiles(query) {
+            const pendingFilesList = document.getElementById('pendingFilesList');
+            const q = (query || '').toString().toLowerCase().trim();
+
+            if (!pendingArtifacts || pendingArtifacts.length === 0) {
+                pendingFilesList.innerHTML = `
+                    <div class="text-center text-muted py-4">
+                        <i class="bi bi-inbox fs-1"></i>
+                        <p class="mt-2 mb-0">No files uploaded yet</p>
+                    </div>
+                `;
+                return;
+            }
+
+            const filtered = pendingArtifacts.filter(a => {
+                // Hide artifacts that were explicitly deleted by staff
+                const err = (a.error_message || a.error || a.errorMessage || '') .toString();
+                if (err && err.includes('Deleted by staff')) return false;
+                const filename = (a.filename || a.file_name || a.name || a.original_filename || '') .toString().toLowerCase();
+                const regNo = (a.register_number || a.reg_no || a.registration_number || a.student_id || '') .toString().toLowerCase();
+                const sub = (a.subject_code || a.sub_code || a.subject || a.course_code || '') .toString().toLowerCase();
+                const examSession = (a.exam_session || a.examSession || '') .toString().toLowerCase();
+                const status = (a.status || '') .toString().toLowerCase();
+
+                if (!q) return true;
+                return filename.includes(q) || regNo.includes(q) || sub.includes(q) || examSession.includes(q) || status.includes(q);
+            });
+
+            if (filtered.length === 0) {
+                pendingFilesList.innerHTML = `
+                    <div class="text-center text-muted py-4">
+                        <i class="bi bi-search fs-1"></i>
+                        <p class="mt-2 mb-0">No matching files</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = '<div class="table-responsive"><table class="table table-hover mb-0">';
+            html += `<thead>
+                        <tr>
+                            <th>Filename</th>
+                            <th>Register No.</th>
+                            <th>Subject</th>
+                            <th>CIA</th>
+                            <th>Status</th>
+                            <th>Uploaded</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead><tbody>`;
+
+            filtered.forEach(a => {
+                const statusBadge = getStatusBadge(a.status);
+                const uploadDate = a.uploaded_at ? new Date(a.uploaded_at).toLocaleString() : 
+                                  (a.created_at ? new Date(a.created_at).toLocaleString() : 
+                                  (a.timestamp ? new Date(a.timestamp).toLocaleString() : '-'));
+                const filename = a.filename || a.file_name || a.name || a.original_filename || '-';
+                const regNo = a.register_number || a.reg_no || a.registration_number || a.student_id || '-';
+                const subCode = a.subject_code || a.sub_code || a.subject || a.course_code || '-';
+                const examSession = a.exam_session || a.examSession || '-';
+
+                // Try to resolve artifact identifier (prefer id, then artifact_uuid)
+                const artifactIdVal = a.id || a.artifact_id || a._id || '';
+                const artifactUuidVal = a.artifact_uuid || a.uuid || a.file_uuid || '';
+
+                            html += `
+                    <tr>
+                        <td><i class="bi bi-file-earmark-pdf text-danger me-2"></i>${filename}</td>
+                        <td><span class="badge bg-secondary">${regNo}</span></td>
+                        <td><span class="badge bg-primary">${subCode}</span></td>
+                        <td><span class="badge bg-info text-dark">${examSession}</span></td>
+                        <td>${statusBadge}</td>
+                        <td><small class="text-muted">${uploadDate}</small></td>
+                        <td>
+                            <div class="artifact-actions">
+                                <button class="btn btn-sm btn-outline-primary btn-details action-btn" data-artifact-uuid="${artifactUuidVal || ''}" data-artifact-id="${artifactIdVal || ''}">
+                                    <i class="bi bi-eye"></i> Details
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger btn-reports action-btn" data-artifact-uuid="${artifactUuidVal || ''}" data-artifact-id="${artifactIdVal || ''}">
+                                    <i class="bi bi-flag-fill"></i> Reports <span class="badge bg-danger ms-2">${a.report_count || 0}</span>
+                                </button>
+                                <button class="btn btn-sm btn-outline-danger btn-delete action-btn" data-artifact-uuid="${artifactUuidVal || ''}" data-artifact-id="${artifactIdVal || ''}">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += '</tbody></table></div>';
+            html += `<div class="text-muted small mt-3">Showing ${filtered.length} of ${pendingArtifacts.length} files</div>`;
+            pendingFilesList.innerHTML = html;
+        }
+
+        // Attach search listener
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('pendingFilesSearch');
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    renderPendingFiles(e.target.value);
+                });
+            }
+        });
+        
+        // File upload zone handlers
+        uploadZone.addEventListener('click', () => fileInput.click());
+        examSessionSelect.addEventListener('change', () => updateUploadState());
+        
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('dragover');
+        });
+        
+        uploadZone.addEventListener('dragleave', () => {
+            uploadZone.classList.remove('dragover');
+        });
+        
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('dragover');
+            handleFiles(e.dataTransfer.files);
+        });
+        
+        fileInput.addEventListener('change', (e) => {
+            handleFiles(e.target.files);
+        });
+        
+        function handleFiles(files) {
+            for (const file of files) {
+                const validation = validateFilename(file.name);
+                const fileObj = {
+                    file: file,
+                    name: file.name,
+                    size: formatFileSize(file.size),
+                    valid: validation.valid,
+                    registerNumber: validation.registerNumber,
+                    subjectCode: validation.subjectCode,
+                    error: validation.error
+                };
+                selectedFiles.push(fileObj);
+            }
+            renderFileList();
+            updateStats();
+        }
+        
+        function validateFilename(filename) {
+            const match = filename.match(FILENAME_PATTERN);
+            if (match) {
+                return {
+                    valid: true,
+                    registerNumber: match[1],
+                    subjectCode: match[2].toUpperCase()
+                };
+            }
+            return {
+                valid: false,
+                error: 'Invalid filename format. Expected: {12-digit RegNo}_{SubjectCode}.{pdf|jpg|jpeg|png}'
+            };
+        }
+        
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + ' ' + sizes[i];
+        }
+        
+        function renderFileList() {
+            fileList.innerHTML = selectedFiles.map((f, index) => `
+                <div class="file-item ${f.valid ? 'valid' : 'invalid'}">
+                    <div class="file-info">
+                        <i class="bi ${f.valid ? 'bi-file-earmark-check-fill text-success' : 'bi-file-earmark-x-fill text-danger'}"></i>
+                        <div>
+                            <strong>${f.name}</strong>
+                            <br>
+                            <small class="text-muted">${f.size}</small>
+                        </div>
+                    </div>
+                    <button class="btn btn-sm btn-outline-danger" onclick="removeFile(${index})">
+                        <i class="bi bi-x-lg"></i>
+                    </button>
+                </div>
+            `).join('');
+        }
+        
+        function updateStats() {
+            const total = selectedFiles.length;
+            const valid = selectedFiles.filter(f => f.valid).length;
+            const invalid = total - valid;
+            
+            // Animate the number changes
+            animateNumber('totalFiles', total);
+            animateNumber('validFiles', valid);
+            animateNumber('invalidFiles', invalid);
+            animateNumber('uploadedFiles', serverUploadedCount);
+            
+            validatedFiles = selectedFiles.filter(f => f.valid);
+            updateUploadState(valid);
+        }
+
+        function updateUploadState(validCount = null) {
+            const valid = validCount === null ? selectedFiles.filter(f => f.valid).length : validCount;
+            const hasExamSession = Boolean(examSessionSelect.value);
+            uploadBtn.style.display = hasExamSession ? 'inline-flex' : 'none';
+            uploadBtn.disabled = valid === 0 || !hasExamSession;
+        }
+        
+        function animateNumber(elementId, targetValue) {
+            const element = document.getElementById(elementId);
+            const currentValue = parseInt(element.textContent) || 0;
+            
+            if (currentValue === targetValue) return;
+            
+            const duration = 300; // ms
+            const steps = 10;
+            const stepDuration = duration / steps;
+            const increment = (targetValue - currentValue) / steps;
+            
+            let step = 0;
+            const timer = setInterval(() => {
+                step++;
+                if (step >= steps) {
+                    element.textContent = targetValue;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.round(currentValue + (increment * step));
+                }
+            }, stepDuration);
+        }
+        
+        function clearFiles() {
+            selectedFiles = [];
+            validatedFiles = [];
+            fileList.innerHTML = '';
+            updateUploadState(0);
+            updateStats();
+            document.getElementById('resultsCard').style.display = 'none';
+        }
+        
+        async function uploadFiles() {
+            if (validatedFiles.length === 0) return;
+            if (!examSessionSelect.value) {
+                alert('Please choose CIA I, CIA II, or CIA III before uploading.');
+                return;
+            }
+            
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const resultsCard = document.getElementById('resultsCard');
+            const uploadResults = document.getElementById('uploadResults');
+            const loadingOverlay = document.getElementById('loadingOverlay');
+            
+            progressContainer.classList.add('active');
+            uploadBtn.disabled = true;
+            loadingOverlay.classList.add('active');
+            
+            const formData = new FormData();
+            validatedFiles.forEach(f => {
+                formData.append('files', f.file);
+            });
+            formData.append('exam_session', examSessionSelect.value);
+            
+            try {
+                const response = await fetch('/upload/bulk', {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    },
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                progressBar.style.width = '100%';
+                progressText.textContent = '100%';
+                
+                // Handle token expiration
+                if (response.status === 401) {
+                    uploadResults.innerHTML = `
+                        <div class="alert alert-warning">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            Session expired. Please login again.
+                        </div>
+                    `;
+                    resultsCard.style.display = 'block';
+                    setTimeout(() => logout(), 2000);
+                    return;
+                }
+                
+                if (response.ok) {
+                    document.getElementById('uploadedFiles').textContent = data.successful || 0;
+                    
+                    let resultsHtml = `
+                        <div class="alert alert-success">
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            Successfully uploaded <strong>${data.successful}</strong> of <strong>${data.total_files}</strong> files
+                        </div>
+                    `;
+                    
+                    if (data.results && data.results.length > 0) {
+                        resultsHtml += '<div class="list-group">';
+                        data.results.forEach(r => {
+                            const icon = r.success ? 'bi-check-circle-fill text-success' : 'bi-x-circle-fill text-danger';
+                            // Prefer a single error string: check r.error, r.errors (array), or r.message
+                            const singleError = r.error || (r.errors && r.errors.length ? r.errors[0] : null) || r.message || 'Unknown error';
+                            resultsHtml += `
+                                <div class="list-group-item d-flex align-items-center">
+                                    <i class="${icon} me-3" style="font-size: 1.25rem;"></i>
+                                    <strong class="flex-grow-1">${r.filename}</strong>
+                                    ${r.success ? '<span class="badge bg-success px-3 py-2">Uploaded</span>' : `<span class="badge bg-danger px-3 py-2">Failed: ${singleError}</span>`}
+                                </div>
+                            `;
+                        });
+                        resultsHtml += '</div>';
+                    }
+                    
+                    uploadResults.innerHTML = resultsHtml;
+                    // Reload pending files after successful upload
+                    loadPendingFiles();
+                } else {
+                    uploadResults.innerHTML = `
+                        <div class="alert alert-danger">
+                            <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                            Upload failed: ${data.detail || 'Unknown error'}
+                        </div>
+                    `;
+                }
+                
+                resultsCard.style.display = 'block';
+            } catch (error) {
+                uploadResults.innerHTML = `
+                    <div class="alert alert-danger">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                        Connection error: ${error.message}
+                    </div>
+                `;
+                resultsCard.style.display = 'block';
+            } finally {
+                setTimeout(() => {
+                    progressContainer.classList.remove('active');
+                    uploadBtn.disabled = false;
+                    loadingOverlay.classList.remove('active');
+                }, 1000);
+            }
+        }
+    </script>
+    <!-- Loader Overlay -->
+    <div class="loader-overlay" id="loaderOverlay">
+        <div class="spinner">
+            <div></div>   
+            <div></div>    
+            <div></div>    
+            <div></div>    
+            <div></div>    
+            <div></div>    
+            <div></div>    
+            <div></div>    
+            <div></div>    
+            <div></div>    
+        </div>
+    </div>
+<script>
+        // Reports & Edit Modals
+        async function viewReports(artifactUuid, artifactId) {
+            const modalEl = document.getElementById('reportsModal');
+            const bodyEl = document.getElementById('reportsModalBody');
+            const titleEl = document.getElementById('reportsModalTitle');
+            bodyEl.innerHTML = '<div class="text-center py-4">Loading...</div>';
+            titleEl.textContent = 'Reports';
+            const modal = new bootstrap.Modal(modalEl);
+            modal.show();
+
+            try {
+                let id = artifactId || '';
+                if (!id && artifactUuid) {
+                    const res = await fetch(`/admin/artifacts/${encodeURIComponent(artifactUuid)}`, { headers: { 'Authorization': `Bearer ${authToken}` } });
+                    if (res.ok) {
+                        const ad = await res.json();
+                        id = ad.id;
+                    }
+                }
+
+                if (!id) {
+                    bodyEl.innerHTML = '<div class="alert alert-warning">Unable to resolve artifact identifier.</div>';
+                    return;
+                }
+
+                const res = await fetch(`/admin/audit-logs?artifact_id=${encodeURIComponent(id)}`, { headers: { 'Authorization': `Bearer ${authToken}` } });
+                if (!res.ok) {
+                    bodyEl.innerHTML = '<div class="alert alert-danger">Failed to load reports.</div>';
+                    return;
+                }
+
+                const logs = await res.json();
+                
+                // DEBUG: Log all audit entries to console
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                console.log('🔍 AUDIT LOGS for artifact ID:', id);
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+                console.log('📊 Total logs received:', logs.length);
+                console.table(logs.map(l => ({
+                    id: l.id,
+                    action: l.action,
+                    actor: l.actor_username || l.actor_id,
+                    target_id: l.target_id,
+                    artifact_id: l.artifact_id,
+                    created: new Date(l.created_at).toLocaleString()
+                })));
+                
+                // Build a map of resolved report entries keyed by the original report id
+                const resolvedMap = {};
+                (logs || []).forEach(l => {
+                    if (l.action === 'report_resolved') {
+                        // prefer explicit request_data.resolved_report_id but also accept target_id
+                        const resolvedId = (l.request_data && l.request_data.resolved_report_id) || l.target_id;
+                        if (resolvedId) resolvedMap[String(resolvedId)] = l;
+                    }
+                });
+
+                // Build maps for deleted reports and all report_issue entries.
+                const deletedMap = {};
+                // Accept any report_deleted entry as indicating the target report was withdrawn.
+                // Some older entries may have target_type unset, so don't require it here.
+                const deletedLogs = (logs || []).filter(l => l.action === 'report_deleted');
+                console.log('🗑️  report_deleted entries found:', deletedLogs.length);
+                if (deletedLogs.length > 0) {
+                    console.table(deletedLogs.map(l => ({
+                        id: l.id,
+                        target_id: l.target_id,
+                        artifact_id: l.artifact_id,
+                        actor: l.actor_username || l.actor_id
+                    })));
+                }
+                
+                deletedLogs.forEach(l => {
+                    if (l && (l.target_id || (l.request_data && l.request_data.target_id))) {
+                        const tid = l.target_id || (l.request_data && l.request_data.target_id);
+                        console.log(`✅ Marking report ${tid} as WITHDRAWN`);
+                        deletedMap[String(tid)] = l;
+                    }
+                });
+
+                const allReports = (logs || []).filter(l => l.action === 'report_issue');
+                console.log('📝 report_issue entries found:', allReports.length);
+                if (allReports.length > 0) {
+                    console.table(allReports.map(r => ({
+                        id: r.id,
+                        status: deletedMap[String(r.id)] ? '⚪ WITHDRAWN' : (resolvedMap[String(r.id)] ? '🟢 RESOLVED' : '🟦 ACTIVE'),
+                        actor: r.actor_username || r.actor_id,
+                        created: new Date(r.created_at).toLocaleString()
+                    })));
+                }
+                console.log('━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━');
+
+                // Badge count: only active (not withdrawn) reports
+                const activeReports = allReports.filter(r => !deletedMap[String(r.id)]);
+
+                if (!allReports.length) {
+                    bodyEl.innerHTML = '<div class="text-center text-muted py-4"><i class="bi bi-chat-left-dots fs-1"></i><p class="mt-2">No reports for this artifact</p></div>';
+                    return;
+                }
+
+                let html = '<div class="list-group">';
+                // Render each original report_issue entry. If it was withdrawn, render a withdrawn placeholder
+                allReports.forEach(r => {
+                    const deletion = deletedMap[String(r.id)];
+                    const req = r.request_data || {};
+                    let suggestionsHtml = '';
+                    if (req.suggested_reg_no) suggestionsHtml += `<div><strong>Suggested Reg:</strong> ${req.suggested_reg_no}</div>`;
+                    if (req.suggested_subject_code) suggestionsHtml += `<div><strong>Suggested Subject:</strong> ${req.suggested_subject_code}</div>`;
+                    if (req.page_number) suggestionsHtml += `<div><strong>Page:</strong> ${req.page_number}</div>`;
+                    if (req.notes) suggestionsHtml += `<div><strong>Notes:</strong> ${req.notes}</div>`;
+
+                    // Determine if this report has already been resolved by checking for a corresponding
+                    // 'report_resolved' audit entry (targeting this report id)
+                    const resolvedEntry = (resolvedMap && (resolvedMap[String(r.id)] || resolvedMap[r.id]));
+
+                    const suggestionPanel = suggestionsHtml ? `<div class="mt-2 p-3 border rounded bg-light small">${suggestionsHtml}</div>` : '';
+
+                    // Helper to escape HTML to avoid XSS when inserting user text
+                    const escapeHtml = (str) => {
+                        if (str === null || str === undefined) return '';
+                        return String(str)
+                            .replace(/&/g, '&amp;')
+                            .replace(/</g, '&lt;')
+                            .replace(/>/g, '&gt;')
+                            .replace(/"/g, '&quot;')
+                            .replace(/'/g, '&#39;');
+                    };
+
+                    if (deletion) {
+                        // Render withdrawn placeholder. Disable action buttons for withdrawn reports.
+                        html += `<div class="list-group-item text-muted">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <strong>${r.actor_username || r.actor_id || 'Student'}</strong>
+                                    <span class="badge bg-secondary ms-2">Withdrawn</span>
+                                    <div class="small text-muted">${new Date(deletion.created_at).toLocaleString()}</div>
+                                    ${deletion.actor_username || deletion.actor_id ? `<div class="small text-muted">Withdrawn by ${deletion.actor_username || deletion.actor_id}</div>` : ''}
+                                    ${r.actor_email ? `<div class="small text-muted">${r.actor_email}</div>` : ''}
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-primary me-2" disabled>Edit Artifact</button>
+                                    <button class="btn btn-sm btn-outline-success me-2" disabled>Resolve</button>
+                                </div>
+                            </div>
+                            <div class="mt-2">${escapeHtml('Student withdrew their report')}</div>
+                        </div>`;
+                    } else {
+                        // Normal active report entry
+                        const applyBtn = (req.suggested_reg_no || req.suggested_subject_code) ? `<button class="btn btn-sm btn-outline-secondary me-2" onclick="applySuggestion('${artifactUuid}','${id}','${(req.suggested_reg_no||'')}', '${(req.suggested_subject_code||'')}')">Apply Suggestion</button>` : '';
+
+                        html += `<div class="list-group-item">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <strong>${r.actor_username || r.actor_id || 'Student'}</strong>
+                                    <span class="badge bg-primary ms-2">Active</span>
+                                    <div class="small text-muted">${new Date(r.created_at).toLocaleString()}</div>
+                                    ${r.actor_email ? `<div class="small text-muted">${r.actor_email}</div>` : ''}
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-primary me-2" onclick="openEditForm('${artifactUuid}','${id}')">Edit Artifact</button>
+                                    ${applyBtn}
+                                    ${resolvedEntry ? `<span class="badge bg-success">Resolved</span>` : `<button class="btn btn-sm btn-outline-success me-2" onclick="resolveReport('${artifactUuid}','${id}',${r.id})">Resolve</button>`}
+                                </div>
+                            </div>
+                            <div class="mt-2">${escapeHtml(r.description || '')}</div>
+                            ${suggestionPanel}
+                            ${resolvedEntry ? `<div class="mt-2 small text-muted">Resolved by ${resolvedEntry.actor_username || resolvedEntry.actor_id} on ${new Date(resolvedEntry.created_at).toLocaleString()}</div>` : ''}
+                        </div>`;
+                    }
+                });
+                html += '</div>';
+
+                bodyEl.innerHTML = html;
+            } catch (err) {
+                console.error(err);
+                bodyEl.innerHTML = '<div class="alert alert-danger">Error loading reports</div>';
+            }
+        }
+
+        async function resolveReport(artifactUuid, artifactId, reportId) {
+            if (!(await showConfirm('Mark this report as resolved?', 'Resolve Report'))) return;
+            try {
+                const res = await fetch(`/admin/artifacts/${encodeURIComponent(artifactUuid)}/reports/${encodeURIComponent(reportId)}/resolve`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ note: 'Resolved by staff' })
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    showToast(data.message || 'Report resolved', 'success');
+                    // Refresh the reports modal
+                    viewReports(artifactUuid, artifactId);
+                } else {
+                    showToast(data.detail || data.message || 'Failed to resolve report', 'danger');
+                }
+            } catch (err) {
+                console.error('Error resolving report', err);
+                showToast('Error resolving report', 'danger');
+            }
+        }
+
+        async function openEditForm(artifactUuid, artifactId) {
+            const modalEl = document.getElementById('reportsModal');
+            const bodyEl = document.getElementById('reportsModalBody');
+            bodyEl.innerHTML = `
+                <div class="mb-3">
+                    <label class="form-label">Parsed Register Number</label>
+                    <input id="editParsedReg" class="form-control" placeholder="12-digit register number">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Original Filename</label>
+                    <input id="editOriginalFilename" class="form-control" placeholder="Original filename (e.g. answer_sheet.pdf)">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Parsed Subject Code</label>
+                    <input id="editParsedSub" class="form-control" placeholder="Subject code">
+                </div>
+                <div class="text-end">
+                    <button class="btn btn-secondary me-2" onclick="viewReports('${artifactUuid}','${artifactId}')">Back to reports</button>
+                    <button class="btn btn-primary" onclick="submitArtifactEdit('${artifactUuid}','${artifactId}')">Save Changes</button>
+                </div>
+            `;
+
+            // prefill with current values
+            try {
+                const res = await fetch(`/admin/artifacts/${encodeURIComponent(artifactUuid)}`, { headers: { 'Authorization': `Bearer ${authToken}` } });
+                if (res.ok) {
+                    const a = await res.json();
+                    document.getElementById('editParsedReg').value = a.parsed_reg_no || '';
+                    document.getElementById('editParsedSub').value = a.parsed_subject_code || '';
+                    document.getElementById('editOriginalFilename').value = a.original_filename || a.raw_filename || '';
+                }
+            } catch (e) {
+                console.warn('Could not preload artifact details', e);
+            }
+        }
+
+        async function submitArtifactEdit(artifactUuid, artifactId) {
+            const reg = document.getElementById('editParsedReg').value.trim();
+            const sub = document.getElementById('editParsedSub').value.trim();
+            const orig = document.getElementById('editOriginalFilename').value.trim();
+            try {
+                const res = await fetch(`/admin/artifacts/${encodeURIComponent(artifactUuid)}/edit`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ parsed_reg_no: reg || null, parsed_subject_code: sub || null, original_filename: orig || null })
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    showToast(data.message || 'Artifact updated', 'success');
+                    loadPendingFiles();
+                } else {
+                    showToast(data.detail || data.message || 'Failed to update artifact', 'danger');
+                }
+            } catch (err) {
+                console.error(err);
+                showToast('Error updating artifact', 'danger');
+            }
+        }
+
+        // Apply suggestion from a report directly to the artifact metadata
+        async function applySuggestion(artifactUuid, artifactId, suggestedReg, suggestedSub) {
+            if (!suggestedReg && !suggestedSub) {
+                showToast('No suggestion provided', 'warning');
+                return;
+            }
+
+            const confirmMsg = `Apply suggested values?\n${suggestedReg ? 'Reg: ' + suggestedReg + '\n' : ''}${suggestedSub ? 'Subject: ' + suggestedSub : ''}`;
+            if (!(await showConfirm(confirmMsg, 'Apply Suggestion'))) return;
+
+            try {
+                const payload = {
+                    parsed_reg_no: suggestedReg || null,
+                    parsed_subject_code: suggestedSub || null,
+                    original_filename: null
+                };
+
+                const res = await fetch(`/admin/artifacts/${encodeURIComponent(artifactUuid)}/edit`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`,
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+                if (res.ok) {
+                    showToast(data.message || 'Suggestion applied', 'success');
+                    // Refresh reports and listing
+                    viewReports(artifactUuid, artifactId);
+                    loadPendingFiles();
+                } else {
+                    showToast(data.detail || data.message || 'Failed to apply suggestion', 'danger');
+                }
+            } catch (err) {
+                console.error('Error applying suggestion', err);
+                showToast('Error applying suggestion', 'danger');
+            }
+        }
+
+        async function viewArtifactDetails(artifactUuid, artifactId) {
+            const modalEl = document.getElementById('reportsModal');
+            const bodyEl = document.getElementById('reportsModalBody');
+            const titleEl = document.getElementById('reportsModalTitle');
+            bodyEl.innerHTML = '<div class="text-center py-4">Loading...</div>';
+            titleEl.textContent = 'Artifact Details';
+            const modal = new bootstrap.Modal(modalEl);
+            modal.show();
+
+            try {
+                let id = artifactId || '';
+                if (!id && artifactUuid) {
+                    // Try to resolve via artifact endpoint
+                    const res = await fetch(`/admin/artifacts/${encodeURIComponent(artifactUuid)}`, { headers: { 'Authorization': `Bearer ${authToken}` } });
+                    if (res.ok) {
+                        const ad = await res.json();
+                        id = ad.id;
+                    }
+                }
+
+                // If we have id, request details (artifact endpoint already gives full details)
+                const resp = await fetch(`/admin/artifacts/${encodeURIComponent(artifactUuid)}`, { headers: { 'Authorization': `Bearer ${authToken}` } });
+                if (!resp.ok) {
+                    bodyEl.innerHTML = '<div class="alert alert-danger">Failed to load artifact details.</div>';
+                    return;
+                }
+
+                const a = await resp.json();
+
+                // Helper: format ISO timestamps to local `YYYY-MM-DD HH:MM:SS`
+                function formatLocal(ts) {
+                    if (!ts) return '-';
+                    const d = new Date(ts);
+                    if (isNaN(d)) return ts;
+                    const pad = (n) => String(n).padStart(2, '0');
+                    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+                }
+
+                // Map workflow status to Bootstrap badge classes for colour
+                const statusClassMap = {
+                    'COMPLETED': 'badge bg-success',
+                    'SUBMITTED': 'badge bg-success',
+                    'PENDING': 'badge bg-warning text-dark',
+                    'PROCESSING': 'badge bg-info text-dark',
+                    'FAILED': 'badge bg-danger',
+                    'DELETED': 'badge bg-secondary'
+                };
+
+                const statusText = a.workflow_status || '-';
+                const statusHtml = statusText === '-' ? '-' : `<span class="${statusClassMap[statusText] || 'badge bg-secondary'}">${statusText}</span>`;
+
+                const uploadedAt = formatLocal(a.uploaded_at);
+                const submitTs = formatLocal(a.submit_timestamp);
+                const errorHtml = a.error_message ? `<span class="text-danger">${a.error_message}</span>` : '-';
+
+                const html = `
+                    <div class="mb-3"><strong>Filename:</strong> ${a.original_filename || a.raw_filename}</div>
+                    <div class="mb-3"><strong>Parsed Reg No:</strong> ${a.parsed_reg_no || '-'}</div>
+                    <div class="mb-3"><strong>Parsed Subject:</strong> ${a.parsed_subject_code || '-'}</div>
+                    <div class="mb-3"><strong>Status:</strong> ${statusHtml}</div>
+                    <div class="mb-3"><strong>Uploaded At:</strong> ${uploadedAt}</div>
+                    <div class="mb-3"><strong>Submit Timestamp:</strong> ${submitTs}</div>
+                    <div class="mb-3"><strong>Error:</strong> ${errorHtml}</div>
+                    <div class="text-end">
+                        <button class="btn btn-sm btn-outline-primary" onclick="openEditForm('${artifactUuid}','${a.id || artifactId || ''}')">Edit Metadata</button>
+                    </div>
+                `;
+
+                bodyEl.innerHTML = html;
+            } catch (err) {
+                console.error(err);
+                bodyEl.innerHTML = '<div class="alert alert-danger">Error loading artifact details</div>';
+            }
+        }
+
+        async function deleteArtifact(artifactUuid, artifactId) {
+            if (!(await showConfirm('Delete this artifact? This will remove it from student and staff listings.', 'Delete Artifact'))) return;
+            try {
+                const res = await fetch(`/admin/artifacts/${encodeURIComponent(artifactUuid)}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                const data = await res.json();
+                if (res.ok) {
+                    showToast(data.message || 'Artifact removed', 'success');
+                    loadPendingFiles();
+                } else {
+                    showToast(data.detail || data.message || 'Failed to delete artifact', 'danger');
+                }
+            } catch (err) {
+                console.error(err);
+                showToast('Error deleting artifact', 'danger');
+            }
+        }
+
+        // Event delegation for dynamically generated detail/report/delete buttons
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('.btn-details, .btn-reports, .btn-delete');
+            if (!btn) return;
+            const uuid = btn.dataset.artifactUuid;
+            const id = btn.dataset.artifactId;
+
+            if (btn.classList.contains('btn-details')) {
+                if (typeof viewArtifactDetails === 'function') {
+                    viewArtifactDetails(uuid, id);
+                }
+            } else if (btn.classList.contains('btn-reports')) {
+                if (typeof viewReports === 'function') {
+                    viewReports(uuid, id);
+                }
+            } else if (btn.classList.contains('btn-delete')) {
+                if (typeof deleteArtifact === 'function') {
+                    deleteArtifact(uuid, id);
+                }
+            }
+        });
+    // loader block removed to avoid duplicate declarations and conflicts
+</script>
+<!-- Toast container -->
+<div id="toastContainer" class="position-fixed top-0 end-0 p-3" style="z-index: 10800;"></div>
+
+<script>
+                // Toast helper
+                function showToast(message, type = 'info', title = '') {
+                                const container = document.getElementById('toastContainer');
+                                if (!container) return;
+
+                                const toastId = 'toast-' + Math.random().toString(36).slice(2, 9);
+                                const bgClass = type === 'success' ? 'bg-success text-white' : (type === 'danger' ? 'bg-danger text-white' : (type === 'warning' ? 'bg-warning text-dark' : 'bg-info text-white'));
+
+                                const toastHtml = `
+                                                <div id="${toastId}" class="toast align-items-center ${bgClass}" role="alert" aria-live="assertive" aria-atomic="true">
+                                                        <div class="d-flex">
+                                                                <div class="toast-body">${title ? `<strong class="me-2">${title}</strong>` : ''}${message}</div>
+                                                                <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+                                                        </div>
+                                                </div>`;
+
+                                const wrapper = document.createElement('div');
+                                wrapper.innerHTML = toastHtml;
+                                const toastEl = wrapper.firstElementChild;
+                                container.appendChild(toastEl);
+
+                                const bsToast = new bootstrap.Toast(toastEl, { delay: 5000 });
+                                bsToast.show();
+
+                                // Remove element after hidden
+                                toastEl.addEventListener('hidden.bs.toast', () => { try { toastEl.remove(); } catch (e) {} });
+                }
+
+                // Confirmation modal helper
+                function showConfirm(message, title = 'Confirm') {
+                        return new Promise((resolve) => {
+                                const el = document.getElementById('confirmModal');
+                                const body = document.getElementById('confirmModalBody');
+                                const titleEl = document.getElementById('confirmModalTitle');
+                                body.textContent = message;
+                                titleEl.textContent = title;
+
+                                const okBtn = el.querySelector('.confirm-ok');
+                                const okInlineBtn = el.querySelector('.confirm-ok-inline');
+                                const cancelBtn = el.querySelector('.confirm-cancel');
+                                const cancelInlineBtn = el.querySelector('.confirm-cancel-inline');
+
+                                okBtn.textContent = title.toLowerCase().includes('delete') ? 'Delete Artifact' : 'Confirm';
+                                okInlineBtn.textContent = okBtn.textContent;
+
+                                const modal = new bootstrap.Modal(el, { backdrop: 'static' });
+
+                                function cleanup() {
+                                        okBtn.removeEventListener('click', onOk);
+                                        okInlineBtn.removeEventListener('click', onOk);
+                                        cancelBtn.removeEventListener('click', onCancel);
+                                        cancelInlineBtn.removeEventListener('click', onCancel);
+                                        el.removeEventListener('hidden.bs.modal', onHidden);
+                                }
+
+                                function onOk() {
+                                        cleanup();
+                                        modal.hide();
+                                        resolve(true);
+                                }
+
+                                function onCancel() {
+                                        cleanup();
+                                        modal.hide();
+                                        resolve(false);
+                                }
+
+                                function onHidden() {
+                                        cleanup();
+                                        resolve(false);
+                                }
+
+                                okBtn.addEventListener('click', onOk);
+                                okInlineBtn.addEventListener('click', onOk);
+                                cancelBtn.addEventListener('click', onCancel);
+                                cancelInlineBtn.addEventListener('click', onCancel);
+                                el.addEventListener('hidden.bs.modal', onHidden);
+
+                                modal.show();
+                        });
+                }
+</script>
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmModalTitle">Confirm</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="confirmModalBody">Are you sure?</div>
+                <div class="confirm-inline-actions">
+                    <button type="button" class="btn btn-outline-secondary confirm-cancel-inline" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger confirm-ok-inline">Confirm</button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary confirm-cancel" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-danger confirm-ok">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Runtime cleanup: remove Moodle footer/info blocks injected into pages -->
+<script>
+(function(){
+    const phrases = [
+        'You are logged in as',
+        'Data retention summary',
+        'Get the mobile app'
+    ];
+
+    const selectors = [
+        '#page-footer', 'footer#page-footer', '.course-footer', '.moodle-footer', '.colophon', '.site-footer', '.moodle-info', '.logininfo', '.userloggedinas', '.footerbar'
+    ];
+
+    function removeBySelector(){
+        try{
+            selectors.forEach(s => {
+                document.querySelectorAll(s).forEach(el => el.remove());
+            });
+        }catch(e){}
+    }
+
+    function removeFooterBlocks(){
+        removeBySelector();
+        const elements = Array.from(document.querySelectorAll('body *'));
+        for(const el of elements){
+            try{
+                const text = (el.innerText || '').trim();
+                if(!text) continue;
+                for(const p of phrases){
+                    if(text.includes(p)){
+                        el.remove();
+                        break;
+                    }
+                }
+            }catch(e){}
+        }
+    }
+
+    if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', removeFooterBlocks);
+        document.addEventListener('DOMContentLoaded', () => setTimeout(removeFooterBlocks, 800));
+    } else {
+        removeFooterBlocks();
+        setTimeout(removeFooterBlocks, 800);
+    }
+})();
+</script>
+
+</body>
+</html>
