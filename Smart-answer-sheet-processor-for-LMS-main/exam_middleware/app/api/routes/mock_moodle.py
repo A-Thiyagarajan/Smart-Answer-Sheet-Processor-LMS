@@ -547,20 +547,15 @@ def _student_submission_page(user: dict, course: dict, section: dict, item: dict
           {feedback_comment_html}
         </table>
         """
-    submission_comment_form = ""
+    submission_comment_cell = "No submission"
     if submitted:
         latest_comments = latest.get("submission_comment_items") or []
         latest_comment = latest_comments[-1]["comment"] if latest_comments else ""
-        submission_comment_form = f"""
-        <div style="margin-top:16px;">
-          <form method="post" action="/lms/course/{escape(course['course_code'])}/{escape(section['slug'])}/{escape(item['slug'])}/comment">
-            <label for="submissionComment" class="m-answer-feedback-title" style="font-size:20px; margin:18px 0 10px;">Submission comments</label>
-            <textarea id="submissionComment" name="submission_comment" rows="3" style="width:100%; border:1px solid #d0d7e2; border-radius:8px; padding:12px;" placeholder="Add an optional comment for faculty">{escape(latest_comment)}</textarea>
-            <div style="margin-top:10px;">
-              <button type="submit" class="btn btn-primary">Save comment</button>
-            </div>
-          </form>
-        </div>
+        submission_comment_cell = f"""
+        <form method="post" action="/lms/course/{escape(course['course_code'])}/{escape(section['slug'])}/{escape(item['slug'])}/comment" style="display:flex; gap:10px; align-items:flex-start; flex-wrap:wrap;">
+          <textarea id="submissionComment" name="submission_comment" rows="2" style="flex:1 1 320px; min-width:220px; border:1px solid #d0d7e2; border-radius:8px; padding:12px;" placeholder="Add an optional comment for faculty">{escape(latest_comment)}</textarea>
+          <button type="submit" class="btn btn-primary">Save</button>
+        </form>
         """
     body = f"""
     <div class="m-shell m-wide-shell">
@@ -576,9 +571,8 @@ def _student_submission_page(user: dict, course: dict, section: dict, item: dict
           <tr><td>Grading status</td><td class="{grading_class}">{grading_text}</td></tr>
           <tr><td>Last modified</td><td>{escape(latest['created_at'].replace('T',' ')[:19]) if submitted else '-'}</td></tr>
           <tr><td>File submissions</td><td>{file_row}</td></tr>
-          <tr><td>Submission<br>comments</td><td><a href="#">Comments ({latest.get('submission_comments',0) if submitted else 0})</a></td></tr>
+          <tr><td>Submission<br>comments</td><td>{submission_comment_cell}</td></tr>
         </table>
-        {submission_comment_form}
         {feedback_html}
       </div>
     </div>
