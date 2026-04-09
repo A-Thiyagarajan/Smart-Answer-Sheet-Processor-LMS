@@ -291,6 +291,12 @@ async def root():
     }
 
 
+@app.get("/ping", tags=["Root"])
+async def ping():
+    """Lightweight liveness endpoint for uptime and deployment checks."""
+    return {"status": "alive"}
+
+
 @app.get("/portal/staff", tags=["Portal"], include_in_schema=False)
 async def staff_portal(request: Request):
     """Staff upload portal page."""
