@@ -562,11 +562,24 @@ def _student_submission_page(user: dict, course: dict, section: dict, item: dict
         latest_comment = latest_comments[-1]["comment"] if latest_comments else ""
         submission_comment_cell = f"""
         <form method="post" action="/lms/course/{escape(course['course_code'])}/{escape(section['slug'])}/{escape(item['slug'])}/comment" class="m-inline-comment-form">
-          <textarea id="submissionComment" name="submission_comment" rows="3" placeholder="Write your submission comment for faculty" oninput="toggleSubmissionCommentAction(this)">{escape(latest_comment)}</textarea>
+          <textarea id="submissionComment" name="submission_comment" rows="3" placeholder="Write your submission comment for faculty" oninput="window.toggleStudentSubmissionCommentAction && window.toggleStudentSubmissionCommentAction(this)">{escape(latest_comment)}</textarea>
           <div id="submissionCommentActions" class="m-inline-comment-actions {'is-hidden' if not latest_comment.strip() else ''}">
             <button type="submit" id="submissionCommentSaveBtn" class="m-btn m-inline-comment-save">Save comment</button>
           </div>
         </form>
+        <script>
+          (function() {{
+            window.toggleStudentSubmissionCommentAction = function(textarea) {{
+              const actions = document.getElementById('submissionCommentActions');
+              if (!actions || !textarea) return;
+              actions.classList.toggle('is-hidden', !textarea.value.trim());
+            }};
+            const submissionCommentInput = document.getElementById('submissionComment');
+            if (submissionCommentInput) {{
+              window.toggleStudentSubmissionCommentAction(submissionCommentInput);
+            }}
+          }})();
+        </script>
         """
     body = f"""
     <div class="m-shell m-wide-shell">
@@ -681,11 +694,11 @@ def _faculty_submission_page(user: dict, course: dict, section: dict, item: dict
             <div class="m-grade-row">
               <div class="m-grade-field">
                 <label for="gradeInput">Grade</label>
-                <input name="grade" id="gradeInput" placeholder="Enter awarded mark" min="0" step="0.01" required>
+                <input name="grade" id="gradeInput" type="number" inputmode="decimal" placeholder="Enter awarded mark" min="0" step="0.01" required oninput="sanitizeGradeNumber(this)">
               </div>
               <div class="m-grade-field">
                 <label for="gradeMaxInput">Max grade</label>
-                <input name="grade_max" id="gradeMaxInput" placeholder="Enter maximum mark" min="0" step="0.01" required>
+                <input name="grade_max" id="gradeMaxInput" type="number" inputmode="decimal" placeholder="Enter maximum mark" min="0" step="0.01" required oninput="sanitizeGradeNumber(this)">
               </div>
             </div>
             <div class="m-grade-field">
@@ -709,10 +722,14 @@ def _faculty_submission_page(user: dict, course: dict, section: dict, item: dict
       function setGradeAction(actionType) {{
         document.getElementById('gradeActionType').value = actionType || 'save';
       }}
-      function toggleSubmissionCommentAction(textarea) {{
-        const actions = document.getElementById('submissionCommentActions');
-        if (!actions || !textarea) return;
-        actions.classList.toggle('is-hidden', !textarea.value.trim());
+      function sanitizeGradeNumber(input) {{
+        if (!input) return;
+        let value = String(input.value || '').replace(/[^0-9.]/g, '');
+        const parts = value.split('.');
+        if (parts.length > 2) {{
+          value = parts[0] + '.' + parts.slice(1).join('');
+        }}
+        input.value = value;
       }}
       function updateGradeModalButtons() {{
         const gradeValue = document.getElementById('gradeInput').value;
@@ -771,10 +788,6 @@ def _faculty_submission_page(user: dict, course: dict, section: dict, item: dict
         document.getElementById('gradeModal').classList.remove('open');
       }}
       document.addEventListener('DOMContentLoaded', function() {{
-        const submissionCommentInput = document.getElementById('submissionComment');
-        if (submissionCommentInput) {{
-          toggleSubmissionCommentAction(submissionCommentInput);
-        }}
         ['gradeInput', 'gradeMaxInput', 'feedbackPdfInput', 'feedbackCommentInput'].forEach(function(id) {{
           const el = document.getElementById(id);
           if (el) {{
