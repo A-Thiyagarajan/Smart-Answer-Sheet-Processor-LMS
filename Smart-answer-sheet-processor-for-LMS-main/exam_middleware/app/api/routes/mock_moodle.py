@@ -303,7 +303,7 @@ def _layout(title: str, body: str, user=None, footer: bool = False, guest_login_
     .m-grade-field {{ display:grid; gap:8px; }}
     .m-grade-field label {{ font-size:13px; font-weight:700; letter-spacing:.02em; color:#33506b; }}
     .m-inline-comment-form {{ display:grid; gap:12px; width:100%; }}
-    .m-inline-comment-form textarea {{ width:100%; min-height:72px; border:1px solid #cbd5e1; border-radius:18px; padding:12px 16px; background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%); box-shadow:inset 0 1px 2px rgba(15,23,42,.04); resize:vertical; line-height:1.45; transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease; }}
+    .m-inline-comment-form textarea {{ width:100%; min-height:58px; border:1px solid #cbd5e1; border-radius:18px; padding:10px 16px; background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%); box-shadow:inset 0 1px 2px rgba(15,23,42,.04); resize:vertical; line-height:1.35; transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease; }}
     .m-inline-comment-form textarea:focus {{ outline:none; border-color:#0ea5e9; box-shadow:0 0 0 4px rgba(14,165,233,.12), 0 12px 24px rgba(14,165,233,.08); transform:translateY(-1px); }}
     .m-inline-comment-actions {{ display:flex; justify-content:center; }}
     .m-inline-comment-save {{ min-width:160px; min-height:46px; border-radius:999px; background:linear-gradient(135deg,#0f6cbf,#22c55e); box-shadow:0 16px 30px rgba(34,197,94,.20); font-weight:700; letter-spacing:.02em; }}
@@ -561,7 +561,7 @@ def _student_submission_page(user: dict, course: dict, section: dict, item: dict
         latest_comments = latest.get("submission_comment_items") or []
         latest_comment = latest_comments[-1]["comment"] if latest_comments else ""
         submission_comment_cell = f"""
-        <form method="post" action="/lms/course/{escape(course['course_code'])}/{escape(section['slug'])}/{escape(item['slug'])}/comment" class="m-inline-comment-form">
+        <form method="post" action="/lms/course/{escape(course['course_code'])}/{escape(section['slug'])}/{escape(item['slug'])}/comment" class="m-inline-comment-form" onsubmit="return window.handleStudentSubmissionCommentSubmit && window.handleStudentSubmissionCommentSubmit(this)">
           <textarea id="submissionComment" name="submission_comment" rows="3" placeholder="Write your submission comment for faculty" oninput="window.toggleStudentSubmissionCommentAction && window.toggleStudentSubmissionCommentAction(this)">{escape(latest_comment)}</textarea>
           <div id="submissionCommentActions" class="m-inline-comment-actions {'is-hidden' if not latest_comment.strip() else ''}">
             <button type="submit" id="submissionCommentSaveBtn" class="m-btn m-inline-comment-save">Save comment</button>
@@ -569,13 +569,24 @@ def _student_submission_page(user: dict, course: dict, section: dict, item: dict
         </form>
         <script>
           (function() {{
+            const initialCommentValue = {latest_comment!r};
             window.toggleStudentSubmissionCommentAction = function(textarea) {{
               const actions = document.getElementById('submissionCommentActions');
               if (!actions || !textarea) return;
-              actions.classList.toggle('is-hidden', !textarea.value.trim());
+              actions.classList.toggle('is-hidden', textarea.value.trim() === initialCommentValue.trim());
+            }};
+            window.handleStudentSubmissionCommentSubmit = function(form) {{
+              const textarea = document.getElementById('submissionComment');
+              const actions = document.getElementById('submissionCommentActions');
+              if (actions) actions.classList.add('is-hidden');
+              if (textarea) {{
+                textarea.dataset.lastSavedValue = textarea.value.trim();
+              }}
+              return true;
             }};
             const submissionCommentInput = document.getElementById('submissionComment');
             if (submissionCommentInput) {{
+              submissionCommentInput.dataset.lastSavedValue = initialCommentValue.trim();
               window.toggleStudentSubmissionCommentAction(submissionCommentInput);
             }}
           }})();
