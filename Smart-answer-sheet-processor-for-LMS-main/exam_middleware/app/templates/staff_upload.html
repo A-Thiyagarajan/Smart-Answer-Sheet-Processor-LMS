@@ -876,42 +876,13 @@
         const userInfo = document.getElementById('userInfo');
         const userName = document.getElementById('userName');
         const logoutBtn = document.getElementById('logoutBtn');
+        const loginError = document.getElementById('loginError');
         
-        // Check for existing session
-        document.addEventListener('DOMContentLoaded', async () => {
-            const token = localStorage.getItem(STAFF_AUTH_TOKEN_KEY) || localStorage.getItem('authToken');
-            const user = localStorage.getItem(STAFF_USER_NAME_KEY) || localStorage.getItem('userName');
-            if (token && user) {
-                authToken = token;
-                localStorage.setItem(STAFF_AUTH_TOKEN_KEY, token);
-                localStorage.setItem(STAFF_USER_NAME_KEY, user);
-                localStorage.removeItem('authToken');
-                localStorage.removeItem('userName');
-                
-                // Verify token is still valid before showing upload section
-                try {
-                    const response = await fetch('/upload/all', {
-                        headers: {
-                            'Authorization': `Bearer ${authToken}`
-                        }
-                    });
-                    
-                    if (response.status === 401) {
-                        // Token expired, clear and show login
-                        localStorage.removeItem(STAFF_AUTH_TOKEN_KEY);
-                        localStorage.removeItem(STAFF_USER_NAME_KEY);
-                        authToken = null;
-                        return;
-                    }
-                    
-                    // Token valid, show upload section
-                    showUploadSection(user);
-                } catch (error) {
-                    console.error('Session validation error:', error);
-                    // On network error, still try to show upload section
-                    showUploadSection(user);
-                }
-            }
+        loginSection.style.display = 'none';
+        uploadSection.style.display = 'none';
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeStaffPortal();
         });
         
         // Login form handler
@@ -938,6 +909,7 @@
                     localStorage.setItem(STAFF_AUTH_TOKEN_KEY, authToken);
                     localStorage.setItem(STAFF_USER_NAME_KEY, username);
                     showUploadSection(username);
+                    loadPendingFiles({ silent: true });
                 } else {
                     showLoginError(data.detail || 'Login failed. Please check your credentials.');
                 }
@@ -945,15 +917,70 @@
                 showLoginError('Connection error. Please try again.');
             }
         });
-        
-        function showLoginError(message) {
-            const errorDiv = document.getElementById('loginError');
-            errorDiv.textContent = message;
-            errorDiv.style.display = 'block';
-            errorDiv.style.animation = 'fadeInUp 0.3s ease-out';
+
+        async function initializeStaffPortal() {
+            const token = localStorage.getItem(STAFF_AUTH_TOKEN_KEY) || localStorage.getItem('authToken');
+            const user = localStorage.getItem(STAFF_USER_NAME_KEY) || localStorage.getItem('userName');
+            
+            if (!token || !user) {
+                showLoginSection({ clearSession: false });
+                return;
+            }
+            
+            authToken = token;
+            localStorage.setItem(STAFF_AUTH_TOKEN_KEY, token);
+            localStorage.setItem(STAFF_USER_NAME_KEY, user);
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userName');
+            
+            showUploadSection(user, { skipLoad: true });
+            
+            try {
+                const response = await fetch('/upload/all', {
+                    headers: {
+                        'Authorization': `Bearer ${authToken}`
+                    }
+                });
+                
+                if (response.status === 401) {
+                    handleUnauthorizedSession();
+                    return;
+                }
+                
+                if (!response.ok) {
+                    throw new Error(`Session validation failed with status ${response.status}`);
+                }
+                
+                await loadPendingFiles({ silent: true });
+            } catch (error) {
+                console.error('Session validation error:', error);
+                loadPendingFiles({ silent: true }).catch(err => console.error('Background refresh failed:', err));
+            }
         }
         
-        function showUploadSection(user) {
+        function showLoginError(message) {
+            loginError.textContent = message;
+            loginError.style.display = 'block';
+            loginError.style.animation = 'fadeInUp 0.3s ease-out';
+        }
+        
+        function showLoginSection({ clearSession = false } = {}) {
+            if (clearSession) {
+                authToken = null;
+                localStorage.removeItem(STAFF_AUTH_TOKEN_KEY);
+                localStorage.removeItem(STAFF_USER_NAME_KEY);
+            }
+            loginError.style.display = 'none';
+            uploadSection.classList.remove('active');
+            loginSection.classList.add('active');
+            uploadSection.style.display = 'none';
+            loginSection.style.display = 'block';
+            userInfo.style.display = 'none';
+            logoutBtn.style.display = 'none';
+        }
+
+        function showUploadSection(user, { skipLoad = false } = {}) {
+            loginError.style.display = 'none';
             loginSection.classList.remove('active');
             uploadSection.classList.add('active');
             loginSection.style.display = 'none';
@@ -961,10 +988,25 @@
             userInfo.style.display = 'block';
             userName.textContent = user;
             logoutBtn.style.display = 'block';
-            loadPendingFiles();
+            if (!skipLoad) {
+                loadPendingFiles({ silent: true });
+            }
+        }
+
+        function handleUnauthorizedSession() {
+            serverUploadedCount = 0;
+            pendingArtifacts = [];
+            clearFiles();
+            document.getElementById('pendingFilesList').innerHTML = '<div class="text-center text-muted py-4">Loading uploaded files...</div>';
+            document.getElementById('totalFiles').textContent = '0';
+            document.getElementById('validFiles').textContent = '0';
+            document.getElementById('invalidFiles').textContent = '0';
+            document.getElementById('uploadedFiles').textContent = '0';
+            showLoginSection({ clearSession: true });
         }
         
-        async function loadPendingFiles() {
+        async function loadPendingFiles(options = {}) {
+            const { silent = false } = options;
             const pendingFilesList = document.getElementById('pendingFilesList');
             
             // Check if authToken exists
@@ -979,12 +1021,14 @@
             }
             
             // Show loading state
-            pendingFilesList.innerHTML = `
-                <div class="text-center text-muted py-4">
-                    <i class="bi bi-hourglass-split fs-1"></i>
-                    <p class="mt-2">Loading...</p>
-                </div>
-            `;
+            if (!silent) {
+                pendingFilesList.innerHTML = `
+                    <div class="text-center text-muted py-4">
+                        <i class="bi bi-hourglass-split fs-1"></i>
+                        <p class="mt-2">Loading...</p>
+                    </div>
+                `;
+            }
             
             // Try multiple possible endpoints
             const possibleEndpoints = [
@@ -1008,7 +1052,7 @@
                     });
                     
                     if (res.status === 401) {
-                        logout();
+                        handleUnauthorizedSession();
                         return;
                     }
                     
@@ -1133,16 +1177,7 @@
         }
         
         function logout() {
-            authToken = null;
             serverUploadedCount = 0; // Reset server count on logout
-            localStorage.removeItem(STAFF_AUTH_TOKEN_KEY);
-            localStorage.removeItem(STAFF_USER_NAME_KEY);
-            uploadSection.classList.remove('active');
-            loginSection.classList.add('active');
-            uploadSection.style.display = 'none';
-            loginSection.style.display = 'block';
-            userInfo.style.display = 'none';
-            logoutBtn.style.display = 'none';
             clearFiles();
             document.getElementById('pendingFilesList').innerHTML = '<div class="text-center text-muted py-4">Loading uploaded files...</div>';
             // Reset all stats to 0
@@ -1150,7 +1185,34 @@
             document.getElementById('validFiles').textContent = '0';
             document.getElementById('invalidFiles').textContent = '0';
             document.getElementById('uploadedFiles').textContent = '0';
+            showLoginSection({ clearSession: true });
         }
+
+        window.loadPendingFiles = loadPendingFiles;
+        window.addEventListener('pageshow', () => {
+            if (authToken && uploadSection.classList.contains('active')) {
+                loadPendingFiles({ silent: true }).catch((error) => console.error('Page refresh sync failed:', error));
+            }
+        });
+        window.addEventListener('focus', () => {
+            if (authToken && uploadSection.classList.contains('active')) {
+                loadPendingFiles({ silent: true }).catch((error) => console.error('Focus sync failed:', error));
+            }
+        });
+        window.addEventListener('storage', (event) => {
+            if (event.key !== STAFF_AUTH_TOKEN_KEY && event.key !== STAFF_USER_NAME_KEY) {
+                return;
+            }
+            const token = localStorage.getItem(STAFF_AUTH_TOKEN_KEY);
+            const user = localStorage.getItem(STAFF_USER_NAME_KEY);
+            if (token && user) {
+                authToken = token;
+                showUploadSection(user, { skipLoad: true });
+                loadPendingFiles({ silent: true }).catch((error) => console.error('Cross-tab sync failed:', error));
+                return;
+            }
+            handleUnauthorizedSession();
+        });
 
         // Render pending files with optional client-side search/filter
         function renderPendingFiles(query) {

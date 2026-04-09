@@ -1112,31 +1112,11 @@
         const dashboardSection = document.getElementById('dashboardSection');
         const loadingOverlay = document.getElementById('loadingOverlay');
         
-        // Check for existing session
-        document.addEventListener('DOMContentLoaded', async () => {
-            const token = localStorage.getItem('studentToken');
-            const regNo = localStorage.getItem('studentRegNo');
-            const name = localStorage.getItem('studentName');
-            
-            if (token && regNo) {
-                sessionToken = token;
-                studentRegNo = regNo;
-                
-                try {
-                    showLoading();
-                    showDashboard(name || regNo);
-                    await Promise.allSettled([
-                        loadPapers({ silent: true }),
-                        loadReportNotifications()
-                    ]);
-                    startReportPolling();
-                    hideLoading();
-                } catch (error) {
-                    console.log('Session validation failed:', error);
-                    logout();
-                    hideLoading();
-                }
-            }
+        loginSection.style.display = 'none';
+        dashboardSection.style.display = 'none';
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeStudentPortal();
         });
         
         // Login form handler
@@ -1231,6 +1211,35 @@
                 hideLoading();
             }
         });
+
+        async function initializeStudentPortal() {
+            const token = localStorage.getItem('studentToken');
+            const regNo = localStorage.getItem('studentRegNo');
+            const name = localStorage.getItem('studentName');
+            
+            if (!token || !regNo) {
+                showLoginScreen();
+                return;
+            }
+            
+            sessionToken = token;
+            studentRegNo = regNo;
+            
+            try {
+                showLoading();
+                showDashboard(name || regNo);
+                await Promise.allSettled([
+                    loadPapers({ silent: true }),
+                    loadReportNotifications()
+                ]);
+                startReportPolling();
+            } catch (error) {
+                console.log('Session validation failed:', error);
+                logout();
+            } finally {
+                hideLoading();
+            }
+        }
         
         function showLoginError(message) {
             const errorDiv = document.getElementById('loginError');
@@ -1252,6 +1261,15 @@
             document.getElementById('logoutBtn').style.display = 'block';
             document.getElementById('studentName').textContent = name;
         }
+
+        function showLoginScreen() {
+            dashboardSection.classList.remove('active');
+            loginSection.classList.add('active');
+            dashboardSection.style.display = 'none';
+            loginSection.style.display = 'block';
+            document.getElementById('userInfo').style.display = 'none';
+            document.getElementById('logoutBtn').style.display = 'none';
+        }
         
         function logout() {
             stopReportPolling();
@@ -1262,13 +1280,7 @@
             localStorage.removeItem('studentToken');
             localStorage.removeItem('studentRegNo');
             localStorage.removeItem('studentName');
-            
-            dashboardSection.classList.remove('active');
-            loginSection.classList.add('active');
-            dashboardSection.style.display = 'none';
-            loginSection.style.display = 'block';
-            document.getElementById('userInfo').style.display = 'none';
-            document.getElementById('logoutBtn').style.display = 'none';
+            showLoginScreen();
             document.getElementById('papersGrid').innerHTML = '';
             const badge = document.getElementById('reportsBadge');
             if (badge) {
@@ -1276,6 +1288,45 @@
                 badge.textContent = '0';
             }
         }
+
+        window.loadPapers = loadPapers;
+        window.loadReportNotifications = loadReportNotifications;
+        window.addEventListener('pageshow', () => {
+            if (sessionToken && dashboardSection.classList.contains('active')) {
+                Promise.allSettled([
+                    loadPapers({ silent: true }),
+                    loadReportNotifications()
+                ]).catch(() => {});
+            }
+        });
+        window.addEventListener('focus', () => {
+            if (sessionToken && dashboardSection.classList.contains('active')) {
+                Promise.allSettled([
+                    loadPapers({ silent: true }),
+                    loadReportNotifications()
+                ]).catch(() => {});
+            }
+        });
+        window.addEventListener('storage', (event) => {
+            if (!['studentToken', 'studentRegNo', 'studentName'].includes(event.key)) {
+                return;
+            }
+            const token = localStorage.getItem('studentToken');
+            const regNo = localStorage.getItem('studentRegNo');
+            const name = localStorage.getItem('studentName');
+            if (token && regNo) {
+                sessionToken = token;
+                studentRegNo = regNo;
+                showDashboard(name || regNo);
+                Promise.allSettled([
+                    loadPapers({ silent: true }),
+                    loadReportNotifications()
+                ]).catch(() => {});
+                startReportPolling();
+                return;
+            }
+            logout();
+        });
         
         async function loadPapers(options = {}) {
             const { silent = false } = options;
