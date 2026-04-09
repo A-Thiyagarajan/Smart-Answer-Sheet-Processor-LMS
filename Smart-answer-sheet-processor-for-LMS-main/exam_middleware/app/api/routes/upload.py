@@ -302,7 +302,7 @@ async def get_all_uploads(
         })
 
     return {
-        "total": total,
+        "total": len(filtered) if not include_deleted else total,
         "limit": limit,
         "offset": offset,
         "artifacts": artifacts_list
