@@ -283,16 +283,18 @@ class ArtifactService:
         return artifact
 
     async def get_active_by_file_hash(self, file_hash: str) -> Optional[ExaminationArtifact]:
-        """Return an active artifact with the same file hash, if any."""
+        """Return the most recent active artifact with the same file hash, if any."""
         result = await self.db.execute(
-            select(ExaminationArtifact).where(
+            select(ExaminationArtifact)
+            .where(
                 and_(
                     ExaminationArtifact.file_hash == file_hash,
                     ExaminationArtifact.workflow_status != WorkflowStatus.DELETED,
                 )
             )
+            .order_by(ExaminationArtifact.uploaded_at.desc(), ExaminationArtifact.id.desc())
         )
-        return result.scalar_one_or_none()
+        return result.scalars().first()
     
     async def get_by_uuid(self, artifact_uuid: str) -> Optional[ExaminationArtifact]:
         """Get artifact by UUID"""
