@@ -107,21 +107,35 @@ class ArtifactService:
         Returns:
             Created ExaminationArtifact
         """
-        # Reject exact duplicate files that are already active in the system.
+        normalized_exam_session = normalize_exam_session(exam_session)
+        stored_subject_code = compose_subject_session_key(parsed_subject_code, normalized_exam_session)
+        
+        # Reject same-content uploads only when the exact register + subject + CIA tuple matches.
+        # Different students may legitimately upload files that hash the same.
         existing_same_hash = None if allow_existing_hash else await self.get_active_by_file_hash(file_hash)
         if existing_same_hash:
             existing_subject_code, existing_exam_session = split_subject_session_key(existing_same_hash.parsed_subject_code)
-            raise Exception(
-                "This file has already been uploaded "
-                f"(register={existing_same_hash.parsed_reg_no or 'unknown'}, "
-                f"subject={existing_subject_code or 'unknown'}, "
-                f"session={existing_exam_session})."
+            same_register = bool(parsed_reg_no) and existing_same_hash.parsed_reg_no == parsed_reg_no
+            same_subject_session = bool(stored_subject_code) and existing_same_hash.parsed_subject_code == stored_subject_code
+            if same_register and same_subject_session:
+                raise Exception(
+                    "This file has already been uploaded for the same register, subject, and CIA "
+                    f"(register={existing_same_hash.parsed_reg_no or 'unknown'}, "
+                    f"subject={existing_subject_code or 'unknown'}, "
+                    f"session={existing_exam_session})."
+                )
+            logger.info(
+                "Allowing same-hash upload for different tuple: existing(reg=%s, subject=%s, session=%s) incoming(reg=%s, subject=%s, session=%s)",
+                existing_same_hash.parsed_reg_no,
+                existing_subject_code,
+                existing_exam_session,
+                parsed_reg_no,
+                parsed_subject_code,
+                normalized_exam_session,
             )
 
         # Generate transaction ID for idempotency
         transaction_id = None
-        normalized_exam_session = normalize_exam_session(exam_session)
-        stored_subject_code = compose_subject_session_key(parsed_subject_code, normalized_exam_session)
         if parsed_reg_no and parsed_subject_code:
             transaction_id = generate_transaction_id(
                 parsed_reg_no,
