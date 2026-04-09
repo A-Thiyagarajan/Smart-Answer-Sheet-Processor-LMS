@@ -425,6 +425,9 @@
             artifact.parsed_reg_no = body?.parsed_reg_no ? normalizeReg(body.parsed_reg_no) : artifact.parsed_reg_no;
             artifact.parsed_subject_code = body?.parsed_subject_code ? normalizeSubject(body.parsed_subject_code) : artifact.parsed_subject_code;
             artifact.original_filename = body?.original_filename || artifact.original_filename;
+            artifact.workflow_status = 'PENDING';
+            artifact.submit_timestamp = null;
+            artifact.error_message = null;
             saveArtifacts(artifacts);
             return jsonResponse({ success: true, message: 'Artifact updated' });
         }

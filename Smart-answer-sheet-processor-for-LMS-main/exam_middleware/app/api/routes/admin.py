@@ -14,7 +14,7 @@ import logging
 import os
 
 from app.db.database import get_db
-from app.db.models import StaffUser, SubjectMapping, ExaminationArtifact
+from app.db.models import StaffUser, SubjectMapping, ExaminationArtifact, WorkflowStatus
 from app.schemas import (
     SubjectMappingCreate,
     SubjectMappingResponse,
@@ -502,6 +502,21 @@ async def edit_artifact_metadata(
         target_sub = parsed_sub if parsed_sub is not None else split_subject_session_key(artifact.parsed_subject_code)[0]
         target_original = original_fname if original_fname is not None else artifact.original_filename
 
+        old_subject_code, old_exam_session = split_subject_session_key(artifact.parsed_subject_code)
+
+        # If the artifact was already pushed to the LMS, remove the stale LMS record first.
+        old_submission_removed = False
+        if settings.mock_lms_enabled:
+            old_submission = mock_lms_service.get_submission_by_artifact(
+                artifact_uuid=str(artifact.artifact_uuid),
+                exam_session=old_exam_session,
+            )
+            if old_submission:
+                old_submission_removed = mock_lms_service.delete_submission(
+                    course_code=old_submission["course_code"],
+                    submission_id=str(old_submission["submission_id"]),
+                )
+
         # Create a new artifact record by copying file metadata from the existing artifact
         new_artifact = await artifact_service.create_artifact(
             raw_filename=artifact.raw_filename,
@@ -517,6 +532,15 @@ async def edit_artifact_metadata(
             allow_existing_hash=True,
         )
 
+        # Clear LMS/submission linkage on the old artifact so the edit is reflected
+        # across student portal and LMS-derived pages immediately.
+        await artifact_service.reset_lms_sync(
+            artifact.id,
+            reason="staff_metadata_edit_replaced_artifact",
+            new_status=WorkflowStatus.PENDING,
+            clear_identity_links=True,
+        )
+
         # Mark the old artifact as deleted/superseded
         from app.db.models import WorkflowStatus as _WS
         try:
@@ -525,10 +549,28 @@ async def edit_artifact_metadata(
             artifact.transaction_id = None
             artifact.parsed_reg_no = None
             artifact.parsed_subject_code = None
+            artifact.moodle_draft_item_id = None
+            artifact.moodle_submission_id = None
+            artifact.lms_transaction_id = None
+            artifact.moodle_user_id = None
+            artifact.moodle_username = None
+            artifact.moodle_course_id = None
+            artifact.moodle_assignment_id = None
+            artifact.submitted_by_user_id = None
+            artifact.submit_timestamp = None
+            artifact.completed_at = None
+            artifact.validated_at = None
         except Exception:
             artifact.error_message = (artifact.error_message or "") + f"; Superseded by artifact {new_artifact.id}"
 
-        artifact.add_log_entry("admin_replaced", {"replaced_by": new_artifact.id, "replaced_by_uuid": str(new_artifact.artifact_uuid), "edited_by": current_staff.username})
+        artifact.add_log_entry("admin_replaced", {
+            "replaced_by": new_artifact.id,
+            "replaced_by_uuid": str(new_artifact.artifact_uuid),
+            "edited_by": current_staff.username,
+            "old_subject_code": old_subject_code,
+            "old_exam_session": old_exam_session,
+            "stale_lms_submission_removed": old_submission_removed,
+        })
 
         # Audit the replacement
         await audit_service.log_action(

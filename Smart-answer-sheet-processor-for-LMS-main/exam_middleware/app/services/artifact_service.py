@@ -549,8 +549,48 @@ class ArtifactService:
 
         logger.info(f"Artifact {artifact_id} marked as submitted")
         return artifact
-    
-    
+
+    async def reset_lms_sync(
+        self,
+        artifact_id: int,
+        reason: str,
+        *,
+        new_status: WorkflowStatus = WorkflowStatus.PENDING,
+        clear_identity_links: bool = True,
+    ) -> Optional[ExaminationArtifact]:
+        """Clear Moodle/LMS linkage so edited metadata no longer points to stale submissions."""
+        artifact = await self.get_by_id(artifact_id)
+        if not artifact:
+            return None
+
+        artifact.workflow_status = new_status
+        artifact.moodle_draft_item_id = None
+        artifact.moodle_submission_id = None
+        artifact.lms_transaction_id = None
+        artifact.submit_timestamp = None
+        artifact.completed_at = None
+        artifact.validated_at = None
+        artifact.error_message = None
+
+        if clear_identity_links:
+            artifact.moodle_user_id = None
+            artifact.moodle_username = None
+            artifact.moodle_course_id = None
+            artifact.moodle_assignment_id = None
+            artifact.submitted_by_user_id = None
+
+        artifact.add_log_entry("lms_sync_reset", {
+            "reason": reason,
+            "new_status": new_status.value,
+            "identity_links_cleared": clear_identity_links,
+        })
+
+        await self.db.flush()
+        await self.db.refresh(artifact)
+        logger.info("Reset LMS sync data for artifact %s (%s)", artifact_id, reason)
+        return artifact
+     
+     
     async def mark_failed(
         self,
         artifact_id: int,
