@@ -302,12 +302,12 @@ def _layout(title: str, body: str, user=None, footer: bool = False, guest_login_
     .m-grade-modal .m-btn.is-idle {{ background:#dbe5ef !important; color:#7b8794 !important; box-shadow:none !important; cursor:not-allowed; }}
     .m-grade-field {{ display:grid; gap:8px; }}
     .m-grade-field label {{ font-size:13px; font-weight:700; letter-spacing:.02em; color:#33506b; }}
-    .m-inline-comment-form {{ display:grid; gap:12px; max-width:620px; }}
+    .m-inline-comment-form {{ display:grid; gap:12px; width:100%; }}
     .m-inline-comment-form textarea {{ width:100%; min-height:108px; border:1px solid #cbd5e1; border-radius:18px; padding:14px 16px; background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%); box-shadow:inset 0 1px 2px rgba(15,23,42,.04); resize:vertical; line-height:1.55; transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease; }}
     .m-inline-comment-form textarea:focus {{ outline:none; border-color:#0ea5e9; box-shadow:0 0 0 4px rgba(14,165,233,.12), 0 12px 24px rgba(14,165,233,.08); transform:translateY(-1px); }}
     .m-inline-comment-actions {{ display:flex; justify-content:center; }}
     .m-inline-comment-save {{ min-width:160px; min-height:46px; border-radius:999px; background:linear-gradient(135deg,#0f6cbf,#22c55e); box-shadow:0 16px 30px rgba(34,197,94,.20); font-weight:700; letter-spacing:.02em; }}
-    .m-inline-comment-save[hidden] {{ display:none !important; }}
+    .m-inline-comment-actions.is-hidden {{ display:none !important; }}
     .m-focus-shell {{ width:min(100%, 1280px); margin:0 auto; }}
     .m-wide-shell {{ width:min(100%, 1640px); max-width:1640px; margin:0 auto; }}
     .m-focus-shell .m-panel:first-child {{ background:linear-gradient(135deg,#ffffff 0%,#f7fbff 100%); }}
@@ -563,8 +563,8 @@ def _student_submission_page(user: dict, course: dict, section: dict, item: dict
         submission_comment_cell = f"""
         <form method="post" action="/lms/course/{escape(course['course_code'])}/{escape(section['slug'])}/{escape(item['slug'])}/comment" class="m-inline-comment-form">
           <textarea id="submissionComment" name="submission_comment" rows="3" placeholder="Write your submission comment for faculty" oninput="toggleSubmissionCommentAction(this)">{escape(latest_comment)}</textarea>
-          <div class="m-inline-comment-actions">
-            <button type="submit" id="submissionCommentSaveBtn" class="m-btn m-inline-comment-save" {"hidden" if not latest_comment.strip() else ""}>Save comment</button>
+          <div id="submissionCommentActions" class="m-inline-comment-actions {'is-hidden' if not latest_comment.strip() else ''}">
+            <button type="submit" id="submissionCommentSaveBtn" class="m-btn m-inline-comment-save">Save comment</button>
           </div>
         </form>
         """
@@ -710,9 +710,9 @@ def _faculty_submission_page(user: dict, course: dict, section: dict, item: dict
         document.getElementById('gradeActionType').value = actionType || 'save';
       }}
       function toggleSubmissionCommentAction(textarea) {{
-        const btn = document.getElementById('submissionCommentSaveBtn');
-        if (!btn || !textarea) return;
-        btn.hidden = !textarea.value.trim();
+        const actions = document.getElementById('submissionCommentActions');
+        if (!actions || !textarea) return;
+        actions.classList.toggle('is-hidden', !textarea.value.trim());
       }}
       function updateGradeModalButtons() {{
         const gradeValue = document.getElementById('gradeInput').value;
