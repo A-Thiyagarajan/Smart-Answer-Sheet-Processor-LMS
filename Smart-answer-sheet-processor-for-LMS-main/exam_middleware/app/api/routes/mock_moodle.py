@@ -292,13 +292,22 @@ def _layout(title: str, body: str, user=None, footer: bool = False, guest_login_
     .m-grade-modal-close {{ border:0; background:#ffffff; color:#334155; width:40px; height:40px; border-radius:999px; cursor:pointer; font-size:20px; box-shadow:0 6px 18px rgba(15,23,42,.08); }}
     .m-grade-modal .m-grade-form {{ margin-top:0; }}
     .m-grade-modal .m-btn {{ width:auto; }}
-    .m-grade-modal input {{ width:100%; min-height:50px; border:1px solid #cbd5e1; border-radius:14px; padding:12px 14px; font-size:15px; background:#fff; }}
-    .m-grade-modal input:focus {{ outline:none; border-color:#0ea5e9; box-shadow:0 0 0 4px rgba(14,165,233,.12); }}
+    .m-grade-modal input,.m-grade-modal textarea {{ width:100%; min-height:52px; border:1px solid #cbd5e1; border-radius:16px; padding:14px 16px; font-size:15px; background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%); box-shadow:inset 0 1px 2px rgba(15,23,42,.03); transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease; }}
+    .m-grade-modal textarea {{ min-height:108px; resize:vertical; line-height:1.55; }}
+    .m-grade-modal input:focus,.m-grade-modal textarea:focus {{ outline:none; border-color:#0ea5e9; box-shadow:0 0 0 4px rgba(14,165,233,.12), 0 12px 24px rgba(14,165,233,.08); transform:translateY(-1px); }}
     .m-grade-modal .m-btn {{ min-height:48px; border-radius:14px; background:linear-gradient(135deg,#0f6cbf,#0ea5e9); font-size:15px; font-weight:700; box-shadow:0 14px 26px rgba(14,165,233,.22); }}
     .m-grade-modal-actions {{ display:grid; grid-template-columns:1fr; gap:12px; margin-top:4px; }}
     .m-grade-modal-actions.reaccess {{ grid-template-columns:1fr 1fr; }}
     .m-grade-modal .m-btn.m-remove {{ background:linear-gradient(135deg,#ef4444,#dc2626); box-shadow:0 14px 26px rgba(239,68,68,.22); }}
     .m-grade-modal .m-btn.is-idle {{ background:#dbe5ef !important; color:#7b8794 !important; box-shadow:none !important; cursor:not-allowed; }}
+    .m-grade-field {{ display:grid; gap:8px; }}
+    .m-grade-field label {{ font-size:13px; font-weight:700; letter-spacing:.02em; color:#33506b; }}
+    .m-inline-comment-form {{ display:grid; gap:12px; max-width:620px; }}
+    .m-inline-comment-form textarea {{ width:100%; min-height:108px; border:1px solid #cbd5e1; border-radius:18px; padding:14px 16px; background:linear-gradient(180deg,#ffffff 0%,#f8fbff 100%); box-shadow:inset 0 1px 2px rgba(15,23,42,.04); resize:vertical; line-height:1.55; transition:border-color .2s ease, box-shadow .2s ease, transform .2s ease; }}
+    .m-inline-comment-form textarea:focus {{ outline:none; border-color:#0ea5e9; box-shadow:0 0 0 4px rgba(14,165,233,.12), 0 12px 24px rgba(14,165,233,.08); transform:translateY(-1px); }}
+    .m-inline-comment-actions {{ display:flex; justify-content:center; }}
+    .m-inline-comment-save {{ min-width:160px; min-height:46px; border-radius:999px; background:linear-gradient(135deg,#0f6cbf,#22c55e); box-shadow:0 16px 30px rgba(34,197,94,.20); font-weight:700; letter-spacing:.02em; }}
+    .m-inline-comment-save[hidden] {{ display:none !important; }}
     .m-focus-shell {{ width:min(100%, 1280px); margin:0 auto; }}
     .m-wide-shell {{ width:min(100%, 1640px); max-width:1640px; margin:0 auto; }}
     .m-focus-shell .m-panel:first-child {{ background:linear-gradient(135deg,#ffffff 0%,#f7fbff 100%); }}
@@ -552,9 +561,11 @@ def _student_submission_page(user: dict, course: dict, section: dict, item: dict
         latest_comments = latest.get("submission_comment_items") or []
         latest_comment = latest_comments[-1]["comment"] if latest_comments else ""
         submission_comment_cell = f"""
-        <form method="post" action="/lms/course/{escape(course['course_code'])}/{escape(section['slug'])}/{escape(item['slug'])}/comment" style="display:flex; gap:10px; align-items:flex-start; flex-wrap:wrap;">
-          <textarea id="submissionComment" name="submission_comment" rows="2" style="flex:1 1 320px; min-width:220px; border:1px solid #d0d7e2; border-radius:8px; padding:12px;" placeholder="Add an optional comment for faculty">{escape(latest_comment)}</textarea>
-          <button type="submit" class="btn btn-primary">Save</button>
+        <form method="post" action="/lms/course/{escape(course['course_code'])}/{escape(section['slug'])}/{escape(item['slug'])}/comment" class="m-inline-comment-form">
+          <textarea id="submissionComment" name="submission_comment" rows="3" placeholder="Write your submission comment for faculty" oninput="toggleSubmissionCommentAction(this)">{escape(latest_comment)}</textarea>
+          <div class="m-inline-comment-actions">
+            <button type="submit" id="submissionCommentSaveBtn" class="m-btn m-inline-comment-save" {"hidden" if not latest_comment.strip() else ""}>Save comment</button>
+          </div>
         </form>
         """
     body = f"""
@@ -668,11 +679,23 @@ def _faculty_submission_page(user: dict, course: dict, section: dict, item: dict
             <input type="hidden" name="submission_id" id="gradeSubmissionId">
             <input type="hidden" name="action_type" id="gradeActionType" value="save">
             <div class="m-grade-row">
-              <input name="grade" id="gradeInput" placeholder="Grade" min="0" step="0.01" required>
-              <input name="grade_max" id="gradeMaxInput" placeholder="Max grade" min="0" step="0.01" required>
+              <div class="m-grade-field">
+                <label for="gradeInput">Grade</label>
+                <input name="grade" id="gradeInput" placeholder="Enter awarded mark" min="0" step="0.01" required>
+              </div>
+              <div class="m-grade-field">
+                <label for="gradeMaxInput">Max grade</label>
+                <input name="grade_max" id="gradeMaxInput" placeholder="Enter maximum mark" min="0" step="0.01" required>
+              </div>
             </div>
-            <input name="feedback_pdf" id="feedbackPdfInput" placeholder="Feedback PDF name">
-            <textarea name="feedback_comment" id="feedbackCommentInput" rows="3" placeholder="Optional feedback comment for the student"></textarea>
+            <div class="m-grade-field">
+              <label for="feedbackPdfInput">Annotated PDF name</label>
+              <input name="feedback_pdf" id="feedbackPdfInput" placeholder="Optional annotated PDF filename">
+            </div>
+            <div class="m-grade-field">
+              <label for="feedbackCommentInput">Feedback comments</label>
+              <textarea name="feedback_comment" id="feedbackCommentInput" rows="3" placeholder="Optional feedback comment for the student"></textarea>
+            </div>
             <div class="m-grade-modal-actions" id="gradeModalActions">
               <button class="m-btn m-remove" type="submit" id="gradeRemoveBtn" onclick="setGradeAction('remove')">Remove grade</button>
               <button class="m-btn" type="submit" id="gradeSaveBtn" onclick="setGradeAction('save')">Save</button>
@@ -685,6 +708,11 @@ def _faculty_submission_page(user: dict, course: dict, section: dict, item: dict
       let gradeModalOriginal = null;
       function setGradeAction(actionType) {{
         document.getElementById('gradeActionType').value = actionType || 'save';
+      }}
+      function toggleSubmissionCommentAction(textarea) {{
+        const btn = document.getElementById('submissionCommentSaveBtn');
+        if (!btn || !textarea) return;
+        btn.hidden = !textarea.value.trim();
       }}
       function updateGradeModalButtons() {{
         const gradeValue = document.getElementById('gradeInput').value;
@@ -743,6 +771,10 @@ def _faculty_submission_page(user: dict, course: dict, section: dict, item: dict
         document.getElementById('gradeModal').classList.remove('open');
       }}
       document.addEventListener('DOMContentLoaded', function() {{
+        const submissionCommentInput = document.getElementById('submissionComment');
+        if (submissionCommentInput) {{
+          toggleSubmissionCommentAction(submissionCommentInput);
+        }}
         ['gradeInput', 'gradeMaxInput', 'feedbackPdfInput', 'feedbackCommentInput'].forEach(function(id) {{
           const el = document.getElementById(id);
           if (el) {{
