@@ -297,6 +297,12 @@ async def ping():
     return {"status": "alive"}
 
 
+@app.head("/ping", tags=["Root"])
+async def ping_head():
+    """Explicit HEAD support for uptime monitors that probe with HEAD requests."""
+    return {}
+
+
 @app.get("/portal/staff", tags=["Portal"], include_in_schema=False)
 async def staff_portal(request: Request):
     """Staff upload portal page."""
