@@ -144,7 +144,9 @@ class MockLMSService:
                 "graded_on": None,
                 "graded_by": None,
                 "feedback_pdf": None,
+                "feedback_comment": None,
                 "submission_comments": 0,
+                "submission_comment_items": [],
                 **submission,
             }
             normalized_submissions.append(merged)
@@ -271,7 +273,9 @@ class MockLMSService:
             "graded_on": None,
             "graded_by": None,
             "feedback_pdf": None,
+            "feedback_comment": None,
             "submission_comments": 0,
+            "submission_comment_items": [],
         }
         store["submissions"].append(submission)
         self._write_store(store)
@@ -302,6 +306,7 @@ class MockLMSService:
         grade_max: float,
         graded_by: str,
         feedback_pdf: Optional[str] = None,
+        feedback_comment: Optional[str] = None,
     ) -> Optional[Dict[str, Any]]:
         store = self._ensure_store()
         target = next((s for s in store["submissions"] if str(s.get("submission_id")) == str(submission_id)), None)
@@ -313,6 +318,7 @@ class MockLMSService:
         target["graded_on"] = datetime.now(timezone.utc).isoformat()
         target["graded_by"] = graded_by
         target["feedback_pdf"] = feedback_pdf or f"feedback_{target['filename']}"
+        target["feedback_comment"] = (feedback_comment or "").strip() or None
         self._write_store(store)
         return target
 
@@ -326,6 +332,31 @@ class MockLMSService:
         target["graded_on"] = None
         target["graded_by"] = None
         target["feedback_pdf"] = None
+        target["feedback_comment"] = None
+        self._write_store(store)
+        return target
+
+    def add_submission_comment(
+        self,
+        submission_id: str,
+        author_username: str,
+        comment: str,
+    ) -> Optional[Dict[str, Any]]:
+        store = self._ensure_store()
+        target = next((s for s in store["submissions"] if str(s.get("submission_id")) == str(submission_id)), None)
+        if not target:
+            return None
+        text = (comment or "").strip()
+        if not text:
+            return target
+        items = list(target.get("submission_comment_items") or [])
+        items.append({
+            "author_username": author_username,
+            "comment": text,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+        })
+        target["submission_comment_items"] = items
+        target["submission_comments"] = len(items)
         self._write_store(store)
         return target
 

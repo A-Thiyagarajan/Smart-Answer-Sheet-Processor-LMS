@@ -1276,6 +1276,7 @@
             sessionToken = null;
             studentRegNo = null;
             papers = [];
+            papersSnapshotSignature = '';
             
             localStorage.removeItem('studentToken');
             localStorage.removeItem('studentRegNo');
@@ -1287,6 +1288,22 @@
                 badge.style.display = 'none';
                 badge.textContent = '0';
             }
+        }
+
+        let papersSnapshotSignature = '';
+
+        function buildPapersSnapshotSignature(nextPapers) {
+            return JSON.stringify((nextPapers || []).map((paper) => ({
+                artifact_uuid: paper.artifact_uuid,
+                subject_code: paper.subject_code,
+                exam_session: paper.exam_session || 'CIA-I',
+                filename: paper.filename || paper.original_filename || '',
+                workflow_status: paper.workflow_status,
+                upload_timestamp: paper.upload_timestamp || null,
+                submit_timestamp: paper.submit_timestamp || null,
+                can_submit: paper.can_submit !== false,
+                message: paper.message || null
+            })));
         }
 
         window.loadPapers = loadPapers;
@@ -1382,9 +1399,14 @@
                         file_extension: p.original_filename ? p.original_filename.split('.').pop() : ''
                     }));
                     
-                    papers = [...pendingPapers, ...submittedPapers];
-                    renderPapers();
-                    updateStats();
+                    const nextPapers = [...pendingPapers, ...submittedPapers];
+                    const nextSignature = buildPapersSnapshotSignature(nextPapers);
+                    if (nextSignature !== papersSnapshotSignature) {
+                        papers = nextPapers;
+                        papersSnapshotSignature = nextSignature;
+                        renderPapers();
+                        updateStats();
+                    }
                 } else if (response.status === 401) {
                     logout();
                 } else {
@@ -1414,12 +1436,6 @@
                 const canSubmit = paper.can_submit !== false;
                 const statusClass = isSubmitted ? 'submitted' : 'pending';
                 const statusText = isSubmitted ? 'Submitted' : 'Pending';
-                const hasGrade = paper.grade !== null && paper.grade !== undefined;
-                const gradeMarkup = hasGrade
-                    ? `<div class="small text-success fw-semibold mb-2"><i class="bi bi-award me-1"></i>Grade: ${paper.grade}/${paper.grade_max ?? 100}${paper.graded_by ? ` by ${paper.graded_by}` : ''}</div>`
-                    : (paper.grading_status === 'graded'
-                        ? `<div class="small text-success fw-semibold mb-2"><i class="bi bi-award me-1"></i>Graded</div>`
-                        : '');
                 
                 // include session token in preview URL when available (server requires X-Session-ID or session param)
                 const previewUrl = window.LocalExamStore.getArtifactViewUrl(paper.artifact_uuid, { sessionToken });
@@ -1451,7 +1467,6 @@
                                     <i class="bi bi-calendar me-1"></i>
                                     Uploaded: ${new Date(paper.upload_timestamp).toLocaleDateString()}
                                 </p>
-                                ${gradeMarkup}
                                 ${paper.message ? `<p class="text-warning small"><i class="bi bi-exclamation-triangle me-1"></i>${paper.message}</p>` : ''}
                                 <div class="paper-actions mt-auto">
                                     <button class="btn btn-outline-primary btn-sm flex-grow-1" onclick="viewPaper('${paper.artifact_uuid}', '${paper.subject_code}', ${isSubmitted})">
@@ -1855,7 +1870,7 @@
                 reportPollTimerId = null;
             }
             reportPollTimerId = setTimeout(async () => {
-                if (sessionToken) {
+                if (sessionToken && !document.hidden) {
                     await Promise.allSettled([
                         loadReportNotifications(),
                         loadPapers({ silent: true })

@@ -532,6 +532,11 @@ def _student_submission_page(user: dict, course: dict, section: dict, item: dict
     )
     feedback_html = ""
     if graded:
+        feedback_comment_html = (
+            f"<tr><td>Feedback<br>comments</td><td>{escape(latest.get('feedback_comment') or '-')}</td></tr>"
+            if latest.get("feedback_comment")
+            else ""
+        )
         feedback_html = f"""
         <div class="m-answer-feedback-title">Feedback</div>
         <table class="m-status-table m-answer-table">
@@ -539,7 +544,23 @@ def _student_submission_page(user: dict, course: dict, section: dict, item: dict
           <tr><td>Graded on</td><td>{escape(latest['graded_on'].replace('T',' ')[:19])}</td></tr>
           <tr><td>Graded by</td><td>{escape(latest['graded_by'] or '')}</td></tr>
           <tr><td>Annotate PDF</td><td><div class="m-file-row"><span class="m-file-icon"></span><a href="#">{escape(latest.get('feedback_pdf') or 'feedback.pdf')}</a></div><div style="margin-top:8px;"><a href="#">View annotated PDF...</a></div></td></tr>
+          {feedback_comment_html}
         </table>
+        """
+    submission_comment_form = ""
+    if submitted:
+        latest_comments = latest.get("submission_comment_items") or []
+        latest_comment = latest_comments[-1]["comment"] if latest_comments else ""
+        submission_comment_form = f"""
+        <div style="margin-top:16px;">
+          <form method="post" action="/lms/course/{escape(course['course_code'])}/{escape(section['slug'])}/{escape(item['slug'])}/comment">
+            <label for="submissionComment" class="m-answer-feedback-title" style="font-size:20px; margin:18px 0 10px;">Submission comments</label>
+            <textarea id="submissionComment" name="submission_comment" rows="3" style="width:100%; border:1px solid #d0d7e2; border-radius:8px; padding:12px;" placeholder="Add an optional comment for faculty">{escape(latest_comment)}</textarea>
+            <div style="margin-top:10px;">
+              <button type="submit" class="btn btn-primary">Save comment</button>
+            </div>
+          </form>
+        </div>
         """
     body = f"""
     <div class="m-shell m-wide-shell">
@@ -557,6 +578,7 @@ def _student_submission_page(user: dict, course: dict, section: dict, item: dict
           <tr><td>File submissions</td><td>{file_row}</td></tr>
           <tr><td>Submission<br>comments</td><td><a href="#">Comments ({latest.get('submission_comments',0) if submitted else 0})</a></td></tr>
         </table>
+        {submission_comment_form}
         {feedback_html}
       </div>
     </div>
@@ -579,6 +601,15 @@ def _faculty_submission_card(course: dict, section: dict, item: dict, sub: dict)
       <iframe src="{view_url}"></iframe>
     </object>
     """
+    latest_student_comment = ""
+    comment_items = sub.get("submission_comment_items") or []
+    if comment_items:
+        latest_student_comment = comment_items[-1].get("comment") or ""
+    student_comment_html = (
+        f'<div><strong>Student comment:</strong> {escape(latest_student_comment)}</div>'
+        if latest_student_comment else
+        f'<div><strong>Student comments:</strong> {int(sub.get("submission_comments", 0) or 0)}</div>'
+    )
     return f"""
     <article class="m-grade-card">
       <div class="m-grade-preview">{preview_html}</div>
@@ -595,6 +626,7 @@ def _faculty_submission_card(course: dict, section: dict, item: dict, sub: dict)
           <div><strong>File:</strong> {escape(sub['filename'])}</div>
           <div><strong>Submitted:</strong> {escape(sub['created_at'].replace('T', ' ')[:19])}</div>
           <div><strong>Grade:</strong> {grade_display} / {float(sub.get('grade_max', 100)):.2f}</div>
+          {student_comment_html}
         </div>
         <div class="m-grade-actions">
           <a class="m-btn ghost" href="{view_url}" target="_blank">View</a>
@@ -608,6 +640,7 @@ def _faculty_submission_card(course: dict, section: dict, item: dict, sub: dict)
             data-grade="{escape(str(sub.get('grade') if sub.get('grade') is not None else ''))}"
             data-grade-max="{escape(str(sub.get('grade_max',100)))}"
             data-feedback-pdf="{escape(sub.get('feedback_pdf') or f'feedback_{sub["filename"]}')}"
+            data-feedback-comment="{escape(sub.get('feedback_comment') or '')}"
             data-action-label="{action_label}"
             onclick="openGradeModal(this)"
           >{action_label}</button>
@@ -645,6 +678,7 @@ def _faculty_submission_page(user: dict, course: dict, section: dict, item: dict
               <input name="grade_max" id="gradeMaxInput" placeholder="Max grade" min="0" step="0.01" required>
             </div>
             <input name="feedback_pdf" id="feedbackPdfInput" placeholder="Feedback PDF name">
+            <textarea name="feedback_comment" id="feedbackCommentInput" rows="3" placeholder="Optional feedback comment for the student"></textarea>
             <div class="m-grade-modal-actions" id="gradeModalActions">
               <button class="m-btn m-remove" type="submit" id="gradeRemoveBtn" onclick="setGradeAction('remove')">Remove grade</button>
               <button class="m-btn" type="submit" id="gradeSaveBtn" onclick="setGradeAction('save')">Save</button>
@@ -662,11 +696,12 @@ def _faculty_submission_page(user: dict, course: dict, section: dict, item: dict
         const gradeValue = document.getElementById('gradeInput').value;
         const gradeMaxValue = document.getElementById('gradeMaxInput').value;
         const feedbackValue = document.getElementById('feedbackPdfInput').value;
+        const feedbackCommentValue = document.getElementById('feedbackCommentInput').value;
         const saveBtn = document.getElementById('gradeSaveBtn');
         const removeBtn = document.getElementById('gradeRemoveBtn');
         const actions = document.getElementById('gradeModalActions');
         const isReaccess = gradeModalOriginal && gradeModalOriginal.mode === 'reaccess';
-        const hasChanges = !gradeModalOriginal || gradeValue !== gradeModalOriginal.grade || gradeMaxValue !== gradeModalOriginal.gradeMax || feedbackValue !== gradeModalOriginal.feedbackPdf;
+        const hasChanges = !gradeModalOriginal || gradeValue !== gradeModalOriginal.grade || gradeMaxValue !== gradeModalOriginal.gradeMax || feedbackValue !== gradeModalOriginal.feedbackPdf || feedbackCommentValue !== gradeModalOriginal.feedbackComment;
         const gradeNum = gradeValue === '' ? null : Number(gradeValue);
         const gradeMaxNum = gradeMaxValue === '' ? null : Number(gradeMaxValue);
         const invalidPair = gradeNum !== null && gradeMaxNum !== null && !Number.isNaN(gradeNum) && !Number.isNaN(gradeMaxNum) && gradeNum > gradeMaxNum;
@@ -696,6 +731,7 @@ def _faculty_submission_page(user: dict, course: dict, section: dict, item: dict
         document.getElementById('gradeInput').value = button.dataset.grade || '';
         document.getElementById('gradeMaxInput').value = button.dataset.gradeMax || '100';
         document.getElementById('feedbackPdfInput').value = button.dataset.feedbackPdf || '';
+        document.getElementById('feedbackCommentInput').value = button.dataset.feedbackComment || '';
         document.getElementById('gradeActionType').value = 'save';
         document.getElementById('gradeModalTitle').textContent = (button.dataset.actionLabel || 'Grade') + ' submission';
         document.getElementById('gradeModalMeta').textContent = (button.dataset.studentName || '') + ' (' + (button.dataset.studentUsername || '') + ' / ' + (button.dataset.registerNumber || '') + ')';
@@ -703,7 +739,8 @@ def _faculty_submission_page(user: dict, course: dict, section: dict, item: dict
           mode: button.dataset.actionLabel === 'Re-access' ? 'reaccess' : 'grade',
           grade: button.dataset.grade || '',
           gradeMax: button.dataset.gradeMax || '100',
-          feedbackPdf: button.dataset.feedbackPdf || ''
+          feedbackPdf: button.dataset.feedbackPdf || '',
+          feedbackComment: button.dataset.feedbackComment || ''
         }};
         updateGradeModalButtons();
         document.getElementById('gradeModal').classList.add('open');
@@ -712,7 +749,7 @@ def _faculty_submission_page(user: dict, course: dict, section: dict, item: dict
         document.getElementById('gradeModal').classList.remove('open');
       }}
       document.addEventListener('DOMContentLoaded', function() {{
-        ['gradeInput', 'gradeMaxInput', 'feedbackPdfInput'].forEach(function(id) {{
+        ['gradeInput', 'gradeMaxInput', 'feedbackPdfInput', 'feedbackCommentInput'].forEach(function(id) {{
           const el = document.getElementById(id);
           if (el) {{
             el.addEventListener('input', updateGradeModalButtons);
@@ -906,6 +943,7 @@ async def lms_faculty_grade_submission(
     grade: float = Form(0),
     grade_max: float = Form(100),
     feedback_pdf: str = Form(""),
+    feedback_comment: str = Form(""),
 ):
     user, redirect = _require_user(request)
     if redirect:
@@ -923,8 +961,45 @@ async def lms_faculty_grade_submission(
             grade_max=grade_max,
             graded_by=user.get("fullname", user["username"]),
             feedback_pdf=feedback_pdf or None,
+            feedback_comment=feedback_comment or None,
         )
     return RedirectResponse(url=f"/lms/faculty/course/{course_code}/{section_slug}/{item_slug}", status_code=302)
+
+
+@router.post("/course/{course_code}/{section_slug}/{item_slug}/comment")
+async def lms_student_save_submission_comment(
+    course_code: str,
+    section_slug: str,
+    item_slug: str,
+    request: Request,
+    submission_comment: str = Form(""),
+):
+    user, redirect = _require_user(request)
+    if redirect:
+        return redirect
+    if _is_faculty(user):
+        return RedirectResponse(url=f"/lms/faculty/course/{course_code}/{section_slug}/{item_slug}", status_code=302)
+    course = mock_lms_service.get_course(course_code)
+    section, _item = _find_item(section_slug, item_slug)
+    if not course or not section:
+        raise HTTPException(status_code=404, detail="Item not found")
+    exam_session = _label_for_section(section["slug"])
+    submissions = mock_lms_service.get_submissions_for_course(course["course_code"], exam_session=exam_session)
+    latest = next(
+        (
+            s for s in reversed(submissions)
+            if s.get("student_username") == user["username"]
+            and s.get("register_number") == user.get("register_number")
+        ),
+        None,
+    )
+    if latest and (submission_comment or "").strip():
+        mock_lms_service.add_submission_comment(
+            submission_id=str(latest["submission_id"]),
+            author_username=user["username"],
+            comment=submission_comment,
+        )
+    return RedirectResponse(url=f"/lms/course/{course_code}/{section_slug}/{item_slug}", status_code=302)
 
 
 @router.get("/dashboard")
