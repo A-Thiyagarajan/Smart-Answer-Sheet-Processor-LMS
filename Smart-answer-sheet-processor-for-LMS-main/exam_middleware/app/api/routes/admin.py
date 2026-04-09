@@ -21,7 +21,7 @@ from app.schemas import (
     AuditLogResponse,
     SystemStatsResponse,
 )
-from app.services.artifact_service import ArtifactService, SubjectMappingService, AuditService, compose_subject_session_key, split_subject_session_key
+from app.services.artifact_service import ArtifactService, SubjectMappingService, AuditService, compose_subject_session_key, split_subject_session_key, normalize_exam_session
 from app.services.submission_service import SubmissionService
 from app.services.moodle_client import MoodleClient, MoodleAPIError
 from app.api.routes.auth import get_current_staff
@@ -430,8 +430,8 @@ async def edit_artifact_metadata(
     current_staff: StaffUser = Depends(get_current_staff)
 ):
     """
-    Allow staff to edit parsed metadata of an artifact (reg no, subject code)
-    Body: { "parsed_reg_no": Optional[str], "parsed_subject_code": Optional[str] }
+    Allow staff to edit parsed metadata of an artifact (reg no, subject code, CIA session)
+    Body: { "parsed_reg_no": Optional[str], "parsed_subject_code": Optional[str], "exam_session": Optional[str] }
     """
     artifact_service = ArtifactService(db)
     audit_service = AuditService(db)
@@ -442,12 +442,15 @@ async def edit_artifact_metadata(
 
     parsed_reg = payload.get("parsed_reg_no")
     parsed_sub = payload.get("parsed_subject_code")
+    requested_exam_session = payload.get("exam_session")
     original_fname = payload.get("original_filename")
     _, current_exam_session = split_subject_session_key(artifact.parsed_subject_code)
+    target_exam_session = normalize_exam_session(requested_exam_session) if requested_exam_session is not None else current_exam_session
 
     # Determine the target values after edit (use existing if not provided)
     new_parsed_reg = parsed_reg if parsed_reg is not None else artifact.parsed_reg_no
-    new_parsed_sub = compose_subject_session_key(parsed_sub, current_exam_session) if parsed_sub is not None else artifact.parsed_subject_code
+    base_subject_code = parsed_sub if parsed_sub is not None else split_subject_session_key(artifact.parsed_subject_code)[0]
+    new_parsed_sub = compose_subject_session_key(base_subject_code, target_exam_session) if base_subject_code is not None else artifact.parsed_subject_code
 
     # If both values are present, ensure uniqueness of the (parsed_reg_no, parsed_subject_code) pair
     if new_parsed_reg and new_parsed_sub:
@@ -488,6 +491,9 @@ async def edit_artifact_metadata(
     if parsed_sub and compose_subject_session_key(parsed_sub, current_exam_session) != artifact.parsed_subject_code:
         changes["parsed_subject_code"] = {"old": split_subject_session_key(artifact.parsed_subject_code)[0], "new": parsed_sub}
 
+    if target_exam_session != current_exam_session:
+        changes["exam_session"] = {"old": current_exam_session, "new": target_exam_session}
+
     if original_fname and original_fname != artifact.original_filename:
         changes["original_filename"] = {"old": artifact.original_filename, "new": original_fname}
 
@@ -525,7 +531,7 @@ async def edit_artifact_metadata(
             file_hash=artifact.file_hash,
             parsed_reg_no=target_reg,
             parsed_subject_code=target_sub,
-            exam_session=current_exam_session,
+            exam_session=target_exam_session,
             file_size_bytes=artifact.file_size_bytes,
             mime_type=artifact.mime_type,
             uploaded_by_staff_id=current_staff.id,

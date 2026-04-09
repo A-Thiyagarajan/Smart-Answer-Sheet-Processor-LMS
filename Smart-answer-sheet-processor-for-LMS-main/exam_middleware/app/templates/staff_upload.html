@@ -1799,6 +1799,14 @@
                     <label class="form-label">Parsed Subject Code</label>
                     <input id="editParsedSub" class="form-control" placeholder="Subject code">
                 </div>
+                <div class="mb-3">
+                    <label class="form-label">CIA Session</label>
+                    <select id="editExamSession" class="form-select">
+                        <option value="CIA-I">CIA I</option>
+                        <option value="CIA-II">CIA II</option>
+                        <option value="CIA-III">CIA III</option>
+                    </select>
+                </div>
                 <div class="text-end">
                     <button class="btn btn-secondary me-2" onclick="viewReports('${artifactUuid}','${artifactId}')">Back to reports</button>
                     <button class="btn btn-primary" onclick="submitArtifactEdit('${artifactUuid}','${artifactId}')">Save Changes</button>
@@ -1812,6 +1820,7 @@
                     const a = await res.json();
                     document.getElementById('editParsedReg').value = a.parsed_reg_no || '';
                     document.getElementById('editParsedSub').value = a.parsed_subject_code || '';
+                    document.getElementById('editExamSession').value = a.exam_session || 'CIA-I';
                     document.getElementById('editOriginalFilename').value = a.original_filename || a.raw_filename || '';
                 }
             } catch (e) {
@@ -1822,6 +1831,7 @@
         async function submitArtifactEdit(artifactUuid, artifactId) {
             const reg = document.getElementById('editParsedReg').value.trim();
             const sub = document.getElementById('editParsedSub').value.trim();
+            const examSession = document.getElementById('editExamSession').value;
             const orig = document.getElementById('editOriginalFilename').value.trim();
             try {
                 const res = await fetch(`/admin/artifacts/${encodeURIComponent(artifactUuid)}/edit`, {
@@ -1830,7 +1840,7 @@
                         'Authorization': `Bearer ${authToken}`,
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ parsed_reg_no: reg || null, parsed_subject_code: sub || null, original_filename: orig || null })
+                    body: JSON.stringify({ parsed_reg_no: reg || null, parsed_subject_code: sub || null, exam_session: examSession || null, original_filename: orig || null })
                 });
                 const data = await res.json();
                 if (res.ok) {
@@ -1859,6 +1869,7 @@
                 const payload = {
                     parsed_reg_no: suggestedReg || null,
                     parsed_subject_code: suggestedSub || null,
+                    exam_session: null,
                     original_filename: null
                 };
 

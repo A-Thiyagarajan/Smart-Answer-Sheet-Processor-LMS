@@ -424,6 +424,7 @@
             if (!artifact) return jsonResponse({ detail: 'Artifact not found' }, 404);
             artifact.parsed_reg_no = body?.parsed_reg_no ? normalizeReg(body.parsed_reg_no) : artifact.parsed_reg_no;
             artifact.parsed_subject_code = body?.parsed_subject_code ? normalizeSubject(body.parsed_subject_code) : artifact.parsed_subject_code;
+            artifact.exam_session = body?.exam_session || artifact.exam_session || 'CIA-I';
             artifact.original_filename = body?.original_filename || artifact.original_filename;
             artifact.workflow_status = 'PENDING';
             artifact.submit_timestamp = null;
